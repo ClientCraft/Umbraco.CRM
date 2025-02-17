@@ -1,0 +1,15 @@
+{
+    "$schema": "../umbraco-package-schema.json",
+    "name": "ClientCraft",
+    "id": "ClientCraft",
+    "version": "0.1.0",
+    "allowTelemetry": true,
+    "extensions": [
+        {
+            "name": "ClientCraft.entrypoint",
+            "alias": "ClientCraft.EntryPoint",
+            "type": "backofficeEntryPoint",
+            "js": "/app_plugins/ClientCraft/assets.js"
+        }
+    ]
+}
