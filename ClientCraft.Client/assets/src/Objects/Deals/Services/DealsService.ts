@@ -18,9 +18,10 @@ import {
     getDealsV2,
     getDealV2,
     updateDealV2,
-    getDealNames
+    getDealNames, DealStatusModel
 } from "../../../api/laravel-api-client";
 import {DealTableItem} from "../Elements/root-deals-workspace.element.ts";
+import {LeadStatuses} from "../../Leads/Pages/root-leads-workspace.element.ts";
 
 
 export interface IDealsService {
@@ -35,6 +36,8 @@ export interface IDealsService {
     createDeal(deal: DealModel): Promise<(UmbDataSourceResponse<AxiosResponse<unknown> | AxiosError<unknown>>) | (AxiosError<unknown, any> | AxiosResponse<unknown>)>;
 
     deleteDeal(id: string): Promise<(UmbDataSourceResponse<AxiosResponse<unknown> | AxiosError<unknown>>) | (AxiosError<unknown, any> | AxiosResponse<unknown>)>;
+
+    getLeadStatuses(): Promise<DealStatusModel[]>;
 }
 
 export class DealsService implements IDealsService {
@@ -57,9 +60,9 @@ export class DealsService implements IDealsService {
      * @returns {data: Deals[], headers: {name: string, }
      * */
     async getDealsTable(): Promise<(UmbDataSourceResponse<AxiosResponse<unknown> | AxiosError<unknown>>) | (AxiosError<unknown, any> | AxiosResponse<unknown>)> {
-        return this.#host ? await tryExecuteAndNotify(this.#host, getDealsV2()) : await getDealsV2();
+        return this.#host ? await tryExecuteAndNotify(this.#host, getDealsV2({query: {include: 'status'}})) : await getDealsV2({query: {include: 'status'}});
     }
-
+    
     async getDealNames():  Promise<(UmbDataSourceResponse<AxiosResponse<unknown> | AxiosError<unknown>>) | (AxiosError<unknown, any> | AxiosResponse<unknown>)> {
         const response = this.#host ? await tryExecuteAndNotify(this.#host, getDealNames()) : await getDealNames();
 
@@ -167,6 +170,17 @@ export class DealsService implements IDealsService {
         }
 
         return response;
+    }
+
+    async getLeadStatuses(): Promise<LeadStatuses[]> {
+        const response = this.#host ? await tryExecuteAndNotify(this.#host, getLeadStatuses()) : await getLeadStatuses();
+        // @ts-ignore
+        if (BaseException.IsAxiosError(response?.data?.name)) {
+            return [];
+        }
+
+        // @ts-ignore
+        return response.data?.data;
     }
 
     /////////////

@@ -67,7 +67,7 @@ export class CreateOrEditObjectDealsWorkspaceElement extends UmbElementMixin(Lit
 
         // Duplicated ID: 3547951 // This indicates the ID of the duplicated code. Search for this id in order to find places where code is duplicated
         // TODO: abstract that out of here??? Maybe a getter (we have repeated logic for this)
-        const currentDeal = await this._dealsContext?.service.getDeal(
+        const currentDeal = await this._dealsContext?.service.deals.getDeal(
             this._dealsContext?.currentRoute?.params.id
         );
 
@@ -88,9 +88,9 @@ export class CreateOrEditObjectDealsWorkspaceElement extends UmbElementMixin(Lit
         const m = new FormData(i) as DealModel;
 
         if (this.isEditingDeal() && this._storeDealForm.deal.id) {
-            await this._dealsContext?.service.updateDeal(this._storeDealForm.deal.id.toString(), m)
+            await this._dealsContext?.service.deals.updateDeal(this._storeDealForm.deal.id.toString(), m)
         } else {
-            await this._dealsContext?.service.createDeal(m);
+            await this._dealsContext?.service.deals.createDeal(m);
             this._storeDealReset?.click();
         }
 

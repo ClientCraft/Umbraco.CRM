@@ -14,6 +14,8 @@ const manifests: Array<UmbExtensionManifest> = [
     ...dashboardManifests,
     ...objectsManifests
 ];
+
+console.log(manifests)
  
 export const onInit: UmbEntryPointOnInit = (_host, extensionRegistry) => {
     // Create logic to use a different URL in production. Maybe retrieve it from the umbraco backoffice to allow using other backend clients.

@@ -559,6 +559,93 @@ export type UserModel = {
  */
 export type source = 'umbraco' | 'web';
 
+export type GetAccountDealsData = {
+    path: {
+        /**
+         * The ID of the account
+         */
+        account: number;
+    };
+};
+
+export type GetAccountDealsResponse = (Array<DealModel>);
+
+export type GetAccountDealsError = unknown;
+
+export type CreateAccountDealData = {
+    /**
+     * Deal data
+     */
+    body: DealModel;
+    path: {
+        /**
+         * The ID of the account
+         */
+        account: number;
+    };
+};
+
+export type CreateAccountDealResponse = (DealModel);
+
+export type CreateAccountDealError = unknown;
+
+export type GetAccountDealData = {
+    path: {
+        /**
+         * The ID of the account
+         */
+        account: number;
+        /**
+         * The ID of the deal
+         */
+        deal: number;
+    };
+};
+
+export type GetAccountDealResponse = (DealModel);
+
+export type GetAccountDealError = unknown;
+
+export type UpdateAccountDealData = {
+    /**
+     * Updated deal data
+     */
+    body: {
+        content: string;
+    };
+    path: {
+        /**
+         * The ID of the account
+         */
+        account: number;
+        /**
+         * The ID of the deal
+         */
+        deal: number;
+    };
+};
+
+export type UpdateAccountDealResponse = (DealModel);
+
+export type UpdateAccountDealError = unknown;
+
+export type DeleteAccountDealData = {
+    path: {
+        /**
+         * The ID of the account
+         */
+        account: number;
+        /**
+         * The ID of the deal
+         */
+        deal: number;
+    };
+};
+
+export type DeleteAccountDealResponse = (void);
+
+export type DeleteAccountDealError = unknown;
+
 export type GetAccountNotesData = {
     path: {
         /**
@@ -888,6 +975,54 @@ export type GetContactNamesResponse = ({
 });
 
 export type GetContactNamesError = (unknown);
+
+export type GetDealStatusesResponse = (Array<DealStatusModel>);
+
+export type GetDealStatusesError = unknown;
+
+export type CreateDealStatusData = {
+    /**
+     * Status data
+     */
+    body: DealStatusModel;
+};
+
+export type CreateDealStatusResponse = (DealStatusModel);
+
+export type CreateDealStatusError = unknown;
+
+export type UpdateDealStatusData = {
+    /**
+     * Updated status data
+     */
+    body: {
+        color?: 'default' | 'danger' | 'positive' | 'warning';
+        label?: string;
+    };
+    path: {
+        /**
+         * The ID of the status
+         */
+        status: number;
+    };
+};
+
+export type UpdateDealStatusResponse = (DealStatusModel);
+
+export type UpdateDealStatusError = unknown;
+
+export type DeleteDealStatusData = {
+    path: {
+        /**
+         * The ID of the status
+         */
+        status: number;
+    };
+};
+
+export type DeleteDealStatusResponse = (void);
+
+export type DeleteDealStatusError = unknown;
 
 export type CreateDealV2Data = {
     /**

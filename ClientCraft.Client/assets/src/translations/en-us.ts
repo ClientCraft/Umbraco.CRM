@@ -3,5 +3,6 @@
         accounts: 'Accounts',
         leads: 'Leads',
         contacts: 'Contacts',
+        deals: 'Deals'
     }
 };

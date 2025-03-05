@@ -32,7 +32,7 @@ export class DeleteLeadsModal extends
         if (this.data?.deleteItemId) {
             this._deletingDeal = true;
 
-            const deleteResult = await this._dealsContext?.service.deleteDeal(parseInt(this.data?.deleteItemId));
+            const deleteResult = await this._dealsContext?.service.deals.deleteDeal(parseInt(this.data?.deleteItemId));
             console.log(deleteResult);
             this._deletingDeal = false;
         }
