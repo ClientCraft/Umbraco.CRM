@@ -5,6 +5,7 @@ import {CLIENTCRAFT_OBJECT_DEALS_WORKSPACE_CONTEXT_TOKEN} from "./object-deals-w
 import {DealsService} from "../Services/DealsService.ts";
 import { IRoutingInfo } from "@umbraco-cms/backoffice/external/router-slot";
 import {CLIENTCRAFT_CREATE_DEALS_WORKSPACE_PATH_PATTERN} from "../paths.ts";
+import {getDealStatuses} from "../../../api/laravel-api-client";
 
 class UmbObjectDealsWorkspaceContext extends UmbControllerBase implements UmbRoutableWorkspaceContext {
     // #repository: TimeManagementRespository;
@@ -14,7 +15,12 @@ class UmbObjectDealsWorkspaceContext extends UmbControllerBase implements UmbRou
     public currentRoute?: IRoutingInfo['match'];
     constructor(host: UmbControllerHost) {
         super(host);
-        this.service = new DealsService(host);
+        this.service = {
+            deals: new DealsService(host),
+            dealStatus: {
+                getDealStatuses,
+            }
+        }
         this.provideContext(CLIENTCRAFT_OBJECT_DEALS_WORKSPACE_CONTEXT_TOKEN, this);
         // this.#repository = new TimeManagementRespository(this);
         this.routes.setRoutes([
