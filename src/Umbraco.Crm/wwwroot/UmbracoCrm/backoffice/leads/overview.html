@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="/App_Plugins/UmbracoCrm/backoffice/leads/overview.css">
+
+<div class="umb-panel" id="leads-overview">
+    <div class="umb-panel-body" ng-controller="Umbraco.Crm.Leads.OverviewController">
+        <section>
+            <input type="search"  placeholder="Search for leads" aria-label="Search" />
+            <div >
+                <button ng-repeat="button in buttons track by $index" type="button" ng-click="button.action()" ng-disabled="button.disabled">{{ button.label }}</button>
+            </div>
+        </section>
+    </div>
+</div>
