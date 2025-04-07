@@ -1,0 +1,14 @@
+{
+    "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json", 
+    "AuthorDetails": {
+      "Name": "Arthur Nassar",
+      "ImageUrl": "https://github.com/ClientCraft.png"
+    },
+    "Category": "",
+    "Description": "",
+    "LicenseTypes": [ "Free" ],
+    "IssueTrackerUrl": "https://github.com/ClientCraft/Umbraco.Crm/issues",
+    "PackageType": "Package",
+    "Tags": [],
+    "Title": "Umbraco .Crm "
+  }
