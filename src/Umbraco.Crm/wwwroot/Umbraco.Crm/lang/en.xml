@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
-    <area alias="Umbraco.Crm">
+  <area alias="sections">
+    <key alias="Umbraco.Crm">CRM</key>
+  </area>
+  <area alias="Umbraco.Crm">
+  </area>
+  <area alias="treeHeaders">
+    <key alias="favouritesGroup">Favourites</key>
+  </area>
+    <area alias="treeHeaders">
+      <key alias="crmItemsGroup">Items</key>
     </area>
 </language>

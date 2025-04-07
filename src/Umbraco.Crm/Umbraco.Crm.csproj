@@ -23,8 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.0.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.7.2" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.7.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +32,13 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\Trees\AccountsTreeController.cs" />
+    <Compile Include="wwwroot\Trees\ContactsTreeController.cs" />
+    <Compile Include="wwwroot\Trees\DealsTreeController.cs" />
+    <Compile Include="wwwroot\Trees\LeadsTreeController.cs" />
   </ItemGroup>
 
 </Project>
