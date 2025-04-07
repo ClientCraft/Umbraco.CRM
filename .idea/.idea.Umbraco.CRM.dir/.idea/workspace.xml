@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42c93ba6-105d-4a97-a3d9-ea1446a60b39" name="Changes" comment="clean" />
+    <list default="true" id="42c93ba6-105d-4a97-a3d9-ea1446a60b39" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Umbraco.Crm/CrmComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Umbraco.CRM.dir/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Umbraco.Crm/Umbraco.CrmComposer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Umbraco.Crm/Umbraco.CrmManifestFilter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Umbraco.Crm/CrmManifestFilter.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +17,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Umbraco.Crm/Umbraco.CrmComposer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Umbraco.Crm/Umbraco.CrmManifestFilter.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo"><![CDATA[{
@@ -25,7 +34,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "v13",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -49,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743970675430</updated>
-      <workItem from="1743970677394" duration="891000" />
+      <workItem from="1743970677394" duration="1800000" />
     </task>
     <task id="LOCAL-00001" summary="clean">
       <option name="closed" value="true" />
@@ -59,7 +68,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743970928445</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="new proj">
+      <option name="closed" value="true" />
+      <created>1744030077432</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744030077432</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -70,6 +87,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="clean" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean" />
+    <MESSAGE value="new proj" />
+    <option name="LAST_COMMIT_MESSAGE" value="new proj" />
   </component>
 </project>
