@@ -354,3 +354,6 @@ MigrationBackup/
 
 # Rider
 src/.idea
+
+# Database
+src/Umbraco.Crm.TestSite/umbraco/Data/
