@@ -4,11 +4,11 @@
       "Name": "Arthur Nassar",
       "ImageUrl": "https://github.com/ClientCraft.png"
     },
-    "Category": "",
+    "Category": "Campaign & Marketing",
     "Description": "",
     "LicenseTypes": [ "Free" ],
     "IssueTrackerUrl": "https://github.com/ClientCraft/Umbraco.Crm/issues",
-    "PackageType": "Package",
+    "PackageType": "Integration",
     "Tags": [],
-    "Title": "Umbraco .Crm "
+    "Title": "Umbraco Crm "
   }
