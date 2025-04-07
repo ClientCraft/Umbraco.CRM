@@ -479,3 +479,4 @@ appsettings-schema.json
 
 # Test Site App_Plugins packages folder (exclude here as in Umbraco.Crm project)
 /App_Plugins/Umbraco.Crm/
+/umbraco/Data/Umbraco.sqlite.db
