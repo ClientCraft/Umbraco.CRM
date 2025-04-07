@@ -7,8 +7,8 @@
     <ContentTargetFolders>.</ContentTargetFolders>
     <Product>Umbraco.Community.Umbraco.Crm</Product>
     <PackageId>Umbraco.Community.Umbraco.Crm</PackageId>
-    <Title>Umbraco.Crm</Title>
-    <Description>...</Description>
+    <Title>Umbraco Crm</Title>
+    <Description>CRM Data hub for Umbraco</Description>
     <PackageTags>umbraco;umbraco-marketplace</PackageTags>
     <RootNamespace>Umbraco.Community.Umbraco.Crm</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
