@@ -33,7 +33,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", fun
 
   // Fetch Leads Data
   $http
-    .get("http://foo.localhost:8000/lead?include=status,notes,owner,owner.photo,photo,deputies,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false&page=1")
+    .get("http://foo.client-craft.com/lead?include=status,notes,owner,owner.photo,photo,deputies,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false&page=1")
     .then(function (response) {
       vm.items = response.data.data.items;
       vm.options = {
