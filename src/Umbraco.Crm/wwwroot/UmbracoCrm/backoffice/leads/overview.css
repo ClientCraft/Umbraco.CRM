@@ -11,21 +11,19 @@
 
     .umb-panel-body{
         top: 0;
-        padding: 0px 24px;
+        padding: 24px;
 
         section {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 32px 0px ;
+            margin-bottom: 16px;
 
             input[type="search"] {
-                width: 50%;
-                min-width: 300px;
-                max-width: 450px;
+                width: min(45%, 450px);
                 margin: 0;
             }
-            
+
             div{
                 height: 100%;
                 display: flex;
@@ -41,7 +39,7 @@
                     border: none;
                     cursor: pointer;
                     background-color: #fcfcfc;
-                    
+
                     &:first-child{
                         background-color: green;
                         color: white;
@@ -51,4 +49,68 @@
             }
         }
     }
+}
+.umb-table-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 2px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.umb-table-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 12px;
+  font-size: 12px;
+  background-color: #f0f0f0; /* Default fallback */
+  color: #333; /* Default text color */
+}
+
+/* Symbolic looks based on UUI palette */
+.umb-table-pill--default {
+  background-color: #1b264f; /* --uui-color-default (space-cadet) */
+  color: #fff; /* --uui-color-default-contrast */
+}
+
+.umb-table-pill--positive,
+.umb-table-pill--success { /* Alias success to positive */
+  background-color: #0b8152; /* --uui-color-positive (forest-green) */
+  color: #fff; /* --uui-color-positive-contrast */
+}
+
+.umb-table-pill--warning {
+  background-color: #fbd142; /* --uui-color-warning (bright yellow) */
+  color: #000; /* --uui-color-warning-contrast */
+}
+
+.umb-table-pill--danger {
+  background-color: #d42054; /* --uui-color-danger (maroon-flush) */
+  color: #fff; /* --uui-color-danger-contrast */
+}
+
+/* Optional: Add a primary variant for completeness */
+.umb-table-pill--primary {
+  background-color: #3544b1; /* --uui-color-selected (violet-blue) */
+  color: #fff; /* --uui-color-selected-contrast */
+}
+
+/* Avatar styles (unchanged) */
+.umb-table-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.umb-table-avatar-group img {
+  display: inline-block;
+  margin-left: -8px; /* Overlap effect */
+}
+
+.umb-table-avatar-group img:first-child {
+  margin-left: 0;
 }
