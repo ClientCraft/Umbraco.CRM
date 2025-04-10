@@ -1,4 +1,4 @@
-angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", function ($scope, $http) {
+angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", function ($scope, $http, editorService, appState) {
   var vm = this;
 
   // Initial Setup
@@ -9,7 +9,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", fun
       label: "Create Lead",
       icon: "icon-plus",
       action: function () {
-        alert("Create Lead clicked");
+        vm.openCreateLeadDrawer();
       },
       isDisabled: false
     },
@@ -70,5 +70,23 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", fun
 
   vm.sort = function (field, allow, isSystem) {
     alert("Sorting by " + field);
+  };
+
+  vm.openCreateLeadDrawer = function () {
+    $scope.model = {
+      view: "/App_Plugins/UmbracoCrm/backoffice/leads/create.html",
+      animating: true,
+    };
+    editorService.open({
+      title: "Create Lead Drawer",
+      view: "/App_Plugins/UmbracoCrm/backoffice/leads/create.html",
+      size: "small", // Options: small, medium, large
+      submit: function(model) {
+        editorService.close();
+      },
+      close: function() {
+        editorService.close();
+      }
+    });
   };
 });

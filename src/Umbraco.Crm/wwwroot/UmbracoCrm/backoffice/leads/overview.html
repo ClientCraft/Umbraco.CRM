@@ -5,7 +5,7 @@
     <section>
       <input type="search" placeholder="Search for leads" aria-label="Search"/>
       <div>
-        <button ng-repeat="button in vm.buttons track by $index" type="button" ng-click="vm.button.action()"
+        <button ng-repeat="button in vm.buttons track by $index" type="button" ng-click="button.action()"
                 ng-disabled="vm.button.disabled">{{ button.label }}
         </button>
       </div>
@@ -81,7 +81,10 @@
                   </span>
                   <!-- Avatar for Owner -->
                   <span ng-if="column.alias === 'owner'">
-                    <img ng-if="item[column.alias].photo.file_path" class="umb-table-avatar" ng-src="{{ item[column.alias].photo || '/umbraco/images/umbraco.png' }}" alt="{{ item[column.alias].name }}" />
+                    <img ng-if="item[column.alias].photo.file_path" class="umb-table-avatar" ng-src="{{item[column.alias].photo.file_path}}" alt="{{ item[column.alias].name }}" />
+                  </span>
+                   <span ng-if="column.alias === 'photo'">
+                    <img ng-if="item[column.alias].file_path" class="umb-table-avatar" ng-src="{{item[column.alias].file_path}}" alt="{{ item[column.alias].name }}" />
                   </span>
                   <!-- Avatar Group for Deputies -->
                   <span ng-if="column.alias === 'deputies'">
@@ -90,7 +93,7 @@
                     </span>
                   </span>
                   <!-- Default Fallback for Other Properties -->
-                  <span ng-if="column.alias !== 'tags' && column.alias !== 'status' && column.alias !== 'owner' && column.alias !== 'deputies'">
+                  <span ng-if="column.alias !== 'photo' && column.alias !== 'tags' && column.alias !== 'status' && column.alias !== 'owner' && column.alias !== 'deputies'">
                     <div ng-if="!column.isSensitive">{{ item[column.alias] }}</div>
                     <em ng-show="column.isSensitive" class="muted">
                       <localize key="content_isSensitiveValue_short"></localize>

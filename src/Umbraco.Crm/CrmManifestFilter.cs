@@ -26,13 +26,16 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/contacts/overview.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/deals/overview.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/overview.controller.js",
-                
+                "/App_Plugins/UmbracoCrm/backoffice/leads/create.controller.js",
+
             },
             Stylesheets = new string[]
             {
                 // List any Stylesheet files
                 // Urls should start '/App_Plugins/Umbraco.Crm/' not '/wwwroot/Umbraco.Crm/', e.g.
                 // "/App_Plugins/Umbraco.Crm/Styles/styles.css"
+                "/App_Plugins/UmbracoCrm/backoffice/leads/overview.css",
+                "/App_Plugins/UmbracoCrm/backoffice/leads/create.css",
             },
             Sections =
             [
