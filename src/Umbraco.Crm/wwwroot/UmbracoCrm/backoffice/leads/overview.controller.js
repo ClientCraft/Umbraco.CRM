@@ -1,4 +1,4 @@
-angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", function ($scope, $http, editorService, appState) {
+angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", function ($scope, $http, editorService, $location) {
   var vm = this;
 
   // Initial Setup
@@ -33,7 +33,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", fun
 
   // Fetch Leads Data
   $http
-    .get("https://foo.client-craft.com/lead?include=status,notes,owner,owner.photo,photo,deputies,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false&page=1")
+    .get("http://foo.localhost:8000/lead?include=status,notes,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false&page=1")
     .then(function (response) {
       vm.items = response.data.data.items;
       vm.options = {
@@ -53,7 +53,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", fun
   };
 
   vm.clickItem = function (item) {
-    alert("Clicked: " + item.name);
+    $location.path("/Umbraco.Crm/leads/view/" + item.id);
   };
 
   vm.selectAll = function ($event) {

@@ -1,0 +1,83 @@
+<div class="umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Leads.CreateController as vm">
+  <div class="umb-editor-wrapper">
+    <!-- Header -->
+    <div class="umb-editor-header">
+      <h3 class="umb-editor-header__title">
+        <localize key="lead_create_title">Edit Lead</localize>
+      </h3>
+      <button type="button" class="umb-editor-header__close" ng-click="vm.close()">
+        <i aria-hidden="true" class="umb-icon umb-icon-multiply"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="umb-editor-body">
+      <form name="leadForm" ng-submit="vm.submit()" novalidate>
+        <div class="editor-panels-container">
+          <umb-box>
+            <umb-box-content>
+              <div class="umb-control-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" ng-model="vm.model.name" required />
+              </div>
+              <div class="umb-control-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" ng-model="vm.model.company" />
+              </div>
+              <div class="umb-control-group">
+                <label for="role">Role</label>
+                <input type="text" id="role" ng-model="vm.model.role" />
+              </div>
+              <div class="umb-control-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" ng-model="vm.model.phone" />
+              </div>
+              <div class="umb-control-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" ng-model="vm.model.email" required />
+              </div>
+              <div class="umb-control-group">
+                <label for="facebook_url">Facebook URL</label>
+                <input type="url" id="facebook_url" ng-model="vm.model.facebook_url" />
+              </div>
+              <div class="umb-control-group">
+                <label for="instagram_url">Instagram URL</label>
+                <input type="url" id="instagram_url" ng-model="vm.model.instagram_url" />
+              </div>
+              <div class="umb-control-group">
+                <label for="linkedin_url">LinkedIn URL</label>
+                <input type="url" id="linkedin_url" ng-model="vm.model.linkedin_url" />
+              </div>
+              <div class="umb-control-group">
+                <label for="lead-status-id">Status</label>
+                <select id="lead-status-id" ng-model="vm.model.status.id" required>
+                  <option value="" disabled>Select a status</option>
+                  <option ng-repeat="status in vm.leadStatuses" ng-value="status.id">{{status.name}}</option>
+                </select>
+              </div>
+            </umb-box-content>
+          </umb-box>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="umb-editor-footer">
+      <div class="umb-editor-footer__buttons">
+        <umb-button
+          type="button"
+          button-style="link"
+          label="Cancel"
+          action="vm.close()">
+        </umb-button>
+        <umb-button
+          type="submit"
+          button-style="success"
+          label="Save"
+          state="vm.submitState"
+          disabled="leadForm.$invalid">
+        </umb-button>
+      </div>
+    </div>
+  </div>
+</div>

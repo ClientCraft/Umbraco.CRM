@@ -8,18 +8,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", funct
     { id: 4, name: "Closed" }
   ];
 
-  vm.model = {
-    name: "",
-    company: "",
-    role: "",
-    phone: "",
-    email: "",
-    lead_status_id: null,
-    facebook_url: "",
-    instagram_url: "",
-    linkedin_url: "",
-    _method: "PUT"
-  };
+  vm.model = $scope.model.data;
 
   vm.submit = submit;
   vm.close = close;

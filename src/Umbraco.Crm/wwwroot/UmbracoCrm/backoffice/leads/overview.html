@@ -26,12 +26,12 @@
                 </label>
               </div>
               <div class="umb-table-cell umb-table__name">
-                <a class="umb-table-head__link sortable" href="#" ng-click="vm.sort('name', true, true)" prevent-default>
+                <div class="umb-table-head__link sortable" ng-click="vm.sort('name', true, true)" prevent-default>
                   <localize key="general_name">Name</localize>
                   <i class="umb-table-head__icon icon" ng-class="{'icon-navigation-up': vm.isSortDirection('name', 'asc'), 'icon-navigation-down': vm.isSortDirection('name', 'desc')}"></i>
-                </a>
+                </div>
               </div>
-              <div class="umb-table-cell" ng-repeat="column in vm.options.includeProperties" ng-if="column.alias !== 'name'">
+              <div class="umb-table-cell umb-table__{{column.alias}}" ng-repeat="column in vm.options.includeProperties" ng-if="column.alias !== 'name'">
                 <a class="umb-table-head__link" title="Sort by {{ column.header }}" href="#"
                    ng-click="vm.sort(column.alias, column.allowSorting, column.isSystem)"
                    ng-class="{'sortable': column.allowSorting}" prevent-default>
@@ -57,7 +57,7 @@
                 <i class="umb-table-body__icon umb-table-body__checkicon icon-check"></i>
               </div>
               <div class="umb-table-cell umb-table__name">
-                <a title="{{ item.name }}" class="umb-table-body__link" href=""
+                <a title="{{ item.name }}" class="umb-table-body__link"
                    ng-click="vm.clickItem(item, $event)"
                    ng-bind="item.name"></a>
               </div>
@@ -89,7 +89,10 @@
                   <!-- Avatar Group for Deputies -->
                   <span ng-if="column.alias === 'deputies'">
                     <span class="umb-table-avatar-group">
-                      <img class="umb-table-avatar" ng-repeat="deputy in item[column.alias]" ng-src="{{ deputy.photo || '/umbraco/images/umbraco.png' }}" alt="{{ deputy.name }}" />
+                      <span ng-repeat="deputy in item[column.alias]">
+                        <div ng-if="!deputy.photo.file_path" class="umb-table-avatar avatar-1">{{ vm.nameToAcronym(deputy.name) }}</div>
+                        <img ng-if="deputy.photo.file_path" class="umb-table-avatar" ng-src="{{ deputy.photo.file_path }}" alt="{{ deputy.name }}" />
+                      </span>
                     </span>
                   </span>
                   <!-- Default Fallback for Other Properties -->

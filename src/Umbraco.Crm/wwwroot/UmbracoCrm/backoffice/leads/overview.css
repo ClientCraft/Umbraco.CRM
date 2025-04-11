@@ -99,6 +99,10 @@
 
 /* Avatar styles (unchanged) */
 .umb-table-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -113,4 +117,9 @@
 
 .umb-table-avatar-group img:first-child {
   margin-left: 0;
+}
+
+.umb-table__deputies {
+  flex: 1 1 10%;
+  max-width: 300px;
 }

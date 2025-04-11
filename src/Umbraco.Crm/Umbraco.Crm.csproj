@@ -41,4 +41,30 @@
     <Compile Include="wwwroot\Trees\LeadsTreeController.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\overview.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\overview.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\overview.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\overview.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\create.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\create.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\create.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\edit.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\edit.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\edit.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\overview.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\view.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\view.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\accounts\view.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\create.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\create.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\create.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\edit.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\edit.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\edit.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\view.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\view.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\UmbracoCrm\backoffice\deals\view.html" />
+  </ItemGroup>
+
 </Project>

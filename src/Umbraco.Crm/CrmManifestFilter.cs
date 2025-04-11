@@ -13,30 +13,30 @@ internal class CrmManifestFilter : IManifestFilter
             PackageName = "Umbraco.Crm",
             Version = assembly.GetName()?.Version?.ToString(3) ?? "0.1.0",
             AllowPackageTelemetry = true,
-            Scripts = new string[]
-            {
-                    // List any Script files
+            Scripts =
+            [
+                // List any Script files
                 // Urls should start '/App_Plugins/Umbraco.Crm/' not '/wwwroot/Umbraco.Crm/', e.g.
                 "/App_Plugins/Umbraco.Crm/app/app.component.js",
                 "/App_Plugins/Umbraco.Crm/app/components/lead/list/lead-list.component.js",
                 "/App_Plugins/Umbraco.Crm/app/components/deal/list/deal-list.component.js",
                 "/App_Plugins/Umbraco.Crm/app/components/contact/list/contact-list.component.js",
                 "/App_Plugins/Umbraco.Crm/app/components/account/list/account-list.component.js",
-                "/App_Plugins/UmbracoCrm/backoffice/accounts/overview.controller.js",
-                "/App_Plugins/UmbracoCrm/backoffice/contacts/overview.controller.js",
-                "/App_Plugins/UmbracoCrm/backoffice/deals/overview.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/overview.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/create.controller.js",
-
-            },
-            Stylesheets = new string[]
-            {
+                "/App_Plugins/UmbracoCrm/backoffice/leads/edit.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/leads/view.controller.js"
+            ],
+            Stylesheets =
+            [
                 // List any Stylesheet files
                 // Urls should start '/App_Plugins/Umbraco.Crm/' not '/wwwroot/Umbraco.Crm/', e.g.
                 // "/App_Plugins/Umbraco.Crm/Styles/styles.css"
                 "/App_Plugins/UmbracoCrm/backoffice/leads/overview.css",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/create.css",
-            },
+                "/App_Plugins/UmbracoCrm/backoffice/leads/edit.css",
+                "/App_Plugins/UmbracoCrm/backoffice/leads/view.css",
+            ],
             Sections =
             [
                 new ManifestSection
