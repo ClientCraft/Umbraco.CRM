@@ -1,10 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-}
-
 body {
   background-color: #f5f7fa;
   color: #333;
@@ -20,7 +13,7 @@ body {
 .header {
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 0 0 10px 0;
   border-bottom: 1px solid #e1e5eb;
 }
 
@@ -76,19 +69,18 @@ body {
   top: 0;
   height: fit-content;
   flex: 3;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .panel-section {
   padding: 15px;
-  border-bottom: 1px solid #e1e5eb;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
-.panel-section:last-child {
-  border-bottom: none;
-}
 
 .profile-section {
   height: fit-content;
@@ -104,8 +96,13 @@ body {
   object-fit: cover;
 }
 
+.umb-table-avatar-group {
+  display: flex;
+  font-size: 14px;
+  color: #817f85;
+}
+
 .umb-table-avatar-group * {
-  display: inline-block;
   margin-left: -8px; /* Overlap effect */
 }
 
@@ -368,7 +365,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
 }
 
 .section-title {
@@ -376,6 +372,12 @@ body {
   font-size: 14px;
   margin: 0;
   color: #333;
+}
+
+.section-buttons {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
 }
 
 .section-action {

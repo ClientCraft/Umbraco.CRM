@@ -67,24 +67,31 @@
             <div class="metric-label">Lead Owner</div>
             <div class="metric-value">
               <div ng-if="vm.lead.owner" class="owner-avatars">
-                <div ng-if="!vm.lead.owner.photo.file_path" class="avatar avatar-1">{{ vm.nameToAcronym(vm.lead.owner.name) }}</div>
-                <img ng-if="vm.lead.owner.photo.file_path" class="umb-table-avatar" ng-src="{{vm.lead.owner.photo.file_path}}" alt="{{vm.lead.owner.photo.file_name}}" />
+                <div ng-if="!vm.lead.owner.photo.file_path" class="avatar avatar-1">{{
+                  vm.nameToAcronym(vm.lead.owner.name) }}
+                </div>
+                <img ng-if="vm.lead.owner.photo.file_path" class="umb-table-avatar"
+                     ng-src="{{vm.lead.owner.photo.file_path}}" alt="{{vm.lead.owner.photo.file_name}}"/>
               </div>
-              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.lead && !vm.lead.owner">No owner assigned</div>
+              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.lead && !vm.lead.owner">No owner assigned
+              </div>
             </div>
           </div>
 
           <div class="metric">
             <div class="metric-label">Lead Deputies</div>
             <div class="metric-value">
-              <div ng-if="vm.lead.deputies.length > 0" class="owner-avatars">
-                <span ng-repeat="deputy in vm.lead.deputies" class="umb-table-avatar-group">
-                  <div ng-if="!deputy.photo.file_path" class="umb-table-avatar avatar-1">{{ vm.nameToAcronym(deputy.name) }}</div>
-                  <img ng-if="deputy.photo.file_path" class="umb-table-avatar" ng-src="{{deputy.photo.file_path}}" alt="{{deputy.photo.file_name}}" />
-                </span>
+               <div class="umb-table-avatar-group" ng-if="vm.lead.deputies.length > 0">
+                  <span ng-repeat="deputy in vm.lead.deputies">
+                    <div ng-if="!deputy.photo.file_path" class="umb-table-avatar avatar-1">{{ vm.nameToAcronym(deputy.name) }}</div>
+                    <img ng-if="deputy.photo.file_path" class="umb-table-avatar"
+                         ng-src="{{ deputy.photo.file_path }}" alt="{{ deputy.name }}"/>
+                  </span>
+               </div>
 
+              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.lead && !vm.lead.deputies.length">No
+                deputies assigned
               </div>
-              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.lead && !vm.lead.deputies.length">No deputies assigned</div>
             </div>
           </div>
         </div>
@@ -282,8 +289,8 @@
         <div class="section-header">
           <h3 class="section-title">Latest Notes</h3>
           <div>
-            <a href="#" class="section-action">Create Note</a>
-            <a href="#" class="section-action">See All</a>
+            <a href="#" ng-click="vm.handleCreateNote($event)" class="section-action">Create Note</a>
+            <a href="#" ng-click="vm.handleSeeAllNotes($event)" class="section-action">See All</a>
           </div>
         </div>
 

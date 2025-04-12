@@ -1,5 +1,5 @@
 angular.module("umbraco")
-  .controller("Umbraco.Crm.Leads.ViewController", function ($scope, $window, $location, $route, $routeParams, $http, editorService) {
+  .controller("Umbraco.Crm.Leads.ViewController", function ($scope, $window, $location, $route, $routeParams, $http, editorService, overlayService) {
     var vm = this;
 
     vm.leadId = $routeParams.id;
@@ -42,13 +42,40 @@ angular.module("umbraco")
       return name.split(" ").map(word => word.charAt(0).toUpperCase()).join("");
     };
 
+    vm.handleSeeAllNotes = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      overlayService.open({
+        view: '/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.html',
+        title: 'See all Notes',
+        description: 'A table to display all notes for an object',
+        closeButtonLabel: 'Close',
+        data: {test: true},
+        hideSubmitButton: true,
+        submit: function (model) {
+
+        },
+        close: function () {
+          overlayService.close();
+        }
+      });
+
+    }
+
+    vm.handleCreateNote = function($event) {
+      alert('CRIAR UM SIDEBAR');
+      $event.preventDefault();
+      $event.stopPropagation();
+    }
+
     //// TABS
+    // TODO: Consolidate this inside a component?
     vm.changeTab = changeTab;
     vm.tabs = [
       { alias: "emails", label: "Emails", active: true },
       { alias: "tasks", label: "Tasks" },
     ];
-
     function changeTab(selectedTab) {
       vm.tabs.forEach(function(tab) {
         tab.active = false;
@@ -57,11 +84,13 @@ angular.module("umbraco")
     }
 
     //// PROGRESS BAR
+    // TODO: Consolidate this inside a component?
     vm.emitClickEvent = function(stage) {
       $scope.$emit('stage-clicked', { stage: stage });
       console.log('Stage clicked:', stage);
     };
 
+    // TODO: We need to get the statuses in async form
     vm.getStageStatus = function(stage) {
       if (stage.id === vm.currentStage.id) {
         return 'current';

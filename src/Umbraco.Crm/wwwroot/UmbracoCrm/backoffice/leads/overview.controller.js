@@ -89,4 +89,9 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.OverviewController", fun
       }
     });
   };
+
+  vm.nameToAcronym = function(name) {
+    if (!name) return '';
+    return name.split(" ").map(word => word.charAt(0).toUpperCase()).join("");
+  };
 });

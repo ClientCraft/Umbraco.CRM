@@ -25,7 +25,8 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/leads/overview.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/create.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/edit.controller.js",
-                "/App_Plugins/UmbracoCrm/backoffice/leads/view.controller.js"
+                "/App_Plugins/UmbracoCrm/backoffice/leads/view.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.controller.js",
             ],
             Stylesheets =
             [
@@ -36,6 +37,7 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/leads/create.css",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/edit.css",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/view.css",
+                "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.css",
             ],
             Sections =
             [

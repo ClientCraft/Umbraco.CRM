@@ -39,6 +39,7 @@
     <Compile Include="wwwroot\Trees\ContactsTreeController.cs" />
     <Compile Include="wwwroot\Trees\DealsTreeController.cs" />
     <Compile Include="wwwroot\Trees\LeadsTreeController.cs" />
+    <Compile Include="wwwroot\UmbracoCrm\NotificationHandlers\UserNotificationHandler.cs" />
   </ItemGroup>
 
   <ItemGroup>

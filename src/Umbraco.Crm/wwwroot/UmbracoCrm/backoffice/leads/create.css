@@ -4,14 +4,8 @@
   width: 100%;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 /* Wrapper to handle the flex layout */
-.umb-editor-wrapper {
+.client-craft.umb-editor-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -19,7 +13,7 @@
 }
 
 /* Header */
-.umb-editor-header {
+.client-craft.umb-editor-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,13 +23,13 @@
   flex-shrink: 0;
 }
 
-.umb-editor-header__title {
+.client-craft.umb-editor-header__title {
   margin: 0;
   font-size: 16px; /* Slightly smaller font */
   font-weight: bold;
 }
 
-.umb-editor-header__close {
+.client-craft.umb-editor-header__close {
   background: none;
   border: none;
   cursor: pointer;
@@ -43,7 +37,7 @@
 }
 
 /* Body */
-.umb-editor-body {
+.client-craft.umb-editor-body {
   flex: 1;
   overflow-y: auto;
   margin-top: 70px;
@@ -52,7 +46,7 @@
 }
 
 /* Ensure the form stretches to fill the body */
-.umb-editor-body form {
+.client-craft.umb-editor-body form {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -64,28 +58,28 @@
 }
 
 /* Add spacing inside umb-box */
-umb-box {
+umb-box.client-craft {
   margin-bottom: 10px; /* Reduced margin */
 }
 
-umb-box-content {
+umb-box-content.client-craft {
   padding: 10px; /* Reduced padding */
 }
 
 /* Form field spacing */
-.umb-control-group {
+.client-craft.umb-control-group {
   margin-bottom: 8px; /* Reduced margin between fields */
 }
 
-.umb-control-group label {
+.client-craft.umb-control-group label {
   display: block;
   margin-bottom: 3px; /* Reduced margin */
   font-size: 14px; /* Smaller font */
   font-weight: normal; /* Less heavy */
 }
 
-.umb-control-group input,
-.umb-control-group select {
+.client-craft.umb-control-group input,
+.client-craft.umb-control-group select {
   width: 100%;
   padding: 6px;
   font-size: 14px;
@@ -96,12 +90,12 @@ umb-box-content {
 }
 
 /* Adjust dropdown specifically */
-umb-dropdown {
+umb-dropdown.client-craft {
   height: 32px; /* Reduced height */
 }
 
 /* Footer */
-.umb-editor-footer {
+.client-craft.umb-editor-footer {
   flex-shrink: 0;
   padding: 10px 15px; /* Reduced padding */
   background: #f8f8f8;
@@ -110,13 +104,13 @@ umb-dropdown {
   justify-content: flex-end;
 }
 
-.umb-editor-footer__buttons {
+.client-craft.umb-editor-footer__buttons {
   display: flex;
   gap: 8px; /* Reduced gap */
 }
 
 /* Ensure buttons are compact */
-umb-button {
+umb-button.client-craft {
   padding: 6px 12px; /* Reduced padding */
   font-size: 14px; /* Smaller font */
 }

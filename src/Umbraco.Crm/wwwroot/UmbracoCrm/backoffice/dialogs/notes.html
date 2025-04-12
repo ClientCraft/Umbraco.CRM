@@ -1,0 +1,11 @@
+﻿<div ng-controller="Umbraco.Crm.Dialogs.NotesController as vm">
+  <div class="flex justify-center flex-column items-center">
+    <div class="note-item" ng-repeat="note in vm.notes track by $index">
+      <div class="note-header">
+        <div>Note by {{note.user.name}}</div>
+        <div>{{note.created_at | date:'short':'UTC'}}</div>
+      </div>
+      <div class="note-content">{{note.content}}</div>
+    </div>
+  </div>
+</div>

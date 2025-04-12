@@ -61,7 +61,7 @@
                    ng-click="vm.clickItem(item, $event)"
                    ng-bind="item.name"></a>
               </div>
-              <div class="umb-table-cell" ng-repeat="column in vm.options.includeProperties" ng-if="column.alias !== 'name'">
+              <div class="umb-table-cell umb-table__{{column.alias}}" ng-repeat="column in vm.options.includeProperties" ng-if="column.alias !== 'name'">
                 <span title="{{column.header}}: {{item[column.alias]}}">
                   <!-- Pills for Tags -->
                   <span ng-if="column.alias === 'tags'">
