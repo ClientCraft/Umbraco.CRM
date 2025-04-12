@@ -1,21 +1,67 @@
 ﻿angular.module("umbraco")
-  .controller("Umbraco.Crm.Dialogs.NotesController", function ($scope, $http) {
+  .controller("Umbraco.Crm.Dialogs.NotesController", function ($scope, $http, $window, $timeout) {
     var vm = this;
-
-    console.log($scope.model);
 
     vm.notes = [];
     vm.next = 'http://foo.localhost:8000/lead/1/note?page=1';
+    vm.loading = false;
 
     vm.fetchNextNotes = function () {
-      if (!vm.next) return;
+      if (!vm.next || vm.loading) return;
 
-      $http.get(vm.next).then(response => {
+      vm.loading = true;
+
+      $http.get(vm.next).then(function(response) {
         vm.notes = [...vm.notes, ...response.data.data];
-        return response.data.links.next; // Return the next page URL
+        vm.next = response.data.links.next;
+        vm.loading = false;
+      }).catch(function(error) {
+        console.error("Error fetching notes:", error);
+        vm.loading = false;
       });
     };
 
-    // Fetch all notes on initialization
+    vm.editNote = function (note) {
+      alert("NOT IMPLEMENTED YET");
+    };
+
+    vm.deleteNote = function (note) {
+      alert("NOT IMPLEMENTED YET");
+    };
+
+    // Initialize with first page of notes
     vm.fetchNextNotes();
+
+    vm.scrollHandler = function() {
+      var scrollPosition = vm.notesContainer.scrollTop + vm.notesContainer.clientHeight;
+      var scrollHeight = vm.notesContainer.scrollHeight;
+
+      // If scrolled to within 200px of the bottom, load more notes
+      if (scrollHeight - scrollPosition < 200 && !vm.loading && vm.next) {
+        vm.fetchNextNotes();
+        $scope.$apply();
+      }
+    }
+
+    // Setup scroll event listener for infinite scrolling
+    function setupScrollListener() {
+      vm.notesContainer = document.querySelector('.notes-container');
+
+      if (!vm.notesContainer) {
+        $timeout(setupScrollListener, 100);
+        return;
+      }
+
+      vm.notesContainer.addEventListener('scroll', vm.scrollHandler );
+    }
+
+    // Set up the scroll listener after DOM is ready
+    $timeout(setupScrollListener, 0);
+
+    // Clean up event listener when scope is destroyed
+    $scope.$on('$destroy', function() {
+      if (vm.notesContainer && vm.scrollHandler) {
+        vm.notesContainer.removeEventListener('scroll', vm.scrollHandler);
+      }
+    });
   });

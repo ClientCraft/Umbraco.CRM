@@ -295,21 +295,18 @@
         </div>
 
         <!-- Note 1 -->
-        <div class="note-item">
+        <div ng-if="vm.lead.notes && vm.lead.notes.length > 0" ng-repeat="note in vm.lead.notes track by $index" class="note-item">
           <div class="note-header">
-            <div>Note by User Name</div>
-            <div>10 Apr 2025, 14:00</div>
+            <div>Note by {{note.user.name}}</div>
+            <span>{{note.created_at | date:'short':'UTC'}}</span>
           </div>
-          <div class="note-content">This is a sample note.</div>
+          <div class="note-content">{{note.content}}</div>
         </div>
-
-        <!-- Note 2 -->
-        <div class="note-item">
-          <div class="note-header">
-            <div>Note by Another User</div>
-            <div>09 Apr 2025, 09:30</div>
-          </div>
-          <div class="note-content">Follow-up required for the lead.</div>
+        <div ng-if="vm.lead.notes && vm.lead.notes.length === 0" class="no-notes">
+          No notes available.
+        </div>
+        <div ng-if="!vm.lead.notes" class="loading-notes">
+          Loading more notes...
         </div>
       </div>
 

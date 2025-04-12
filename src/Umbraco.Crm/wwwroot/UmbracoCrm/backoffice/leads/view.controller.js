@@ -6,9 +6,9 @@ angular.module("umbraco")
 
     // Fetch lead data
     $http
-      .get("http://foo.localhost:8000/lead/" + vm.leadId + "?include=status,notes,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks")
+      .get("http://foo.localhost:8000/lead/" + vm.leadId + "?include=status,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks")
       .then(function (response) {
-        vm.lead = response.data;
+        vm.lead = {...vm.lead, ...response.data};
         vm.ancestors = [
           { name: 'Leads', id: null, link: '/Umbraco.Crm/leads/overview' },
           { name: vm.lead.name, id: vm.leadId }
@@ -24,7 +24,18 @@ angular.module("umbraco")
         vm.currentStage = vm.stages.find(stage => stage.id === vm.lead.status.id) || vm.stages[0];
         vm.title = 'Lead Progress';
 
-        console.log(vm.lead);
+        console.log("LEAD -->", vm.lead);
+      })
+      .catch(function (error) {
+        console.error("Error fetching lead:", error);
+      });
+
+    $http
+      .get("http://foo.localhost:8000/lead/1/note?page=1&per_page=2")
+      .then(function (response) {
+        vm.lead = {...vm.lead, notes: response.data.data};
+
+        console.log("LEAD -->", vm.lead);
       })
       .catch(function (error) {
         console.error("Error fetching lead:", error);
@@ -51,10 +62,21 @@ angular.module("umbraco")
         title: 'See all Notes',
         description: 'A table to display all notes for an object',
         closeButtonLabel: 'Close',
+        submitButtonLabel: 'Create New Note',
         data: {test: true},
-        hideSubmitButton: true,
         submit: function (model) {
-
+          editorService.open({
+            title: "Create Lead Drawer",
+            view: "/App_Plugins/UmbracoCrm/backoffice/leads/edit.html",
+            size: "small", // Options: small, medium, large
+            data: vm.lead,
+            submit: function(model) {
+              editorService.close();
+            },
+            close: function() {
+              editorService.close();
+            }
+          });
         },
         close: function () {
           overlayService.close();
