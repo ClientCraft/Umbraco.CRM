@@ -81,7 +81,13 @@ public class UserNotificationHandler :
                 string avatarUrl = _domainService.GetAll(false)
                     .FirstOrDefault()
                     ?.DomainName ?? string.Empty;
-                avatarUrl += avatarPath ?? string.Empty;
+
+                avatarUrl += avatarPath;
+
+                if (string.IsNullOrEmpty(avatarPath))
+                {
+                    avatarUrl = string.Empty;
+                }
 
                 if (existingUser == null)
                 {

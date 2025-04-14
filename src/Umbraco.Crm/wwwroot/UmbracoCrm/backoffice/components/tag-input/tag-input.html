@@ -1,0 +1,87 @@
+﻿<!-- Umbraco Dropdown with custom styling -->
+<div class="tag-input-container {{$ctrl.selectedTags && $ctrl.selectedTags.length == 0 ? 'empty' : ''}}">
+  <!-- Selected Tags Display -->
+  <div class="selected-tags-container">
+    <div class="selected-tags">
+      <button type="button" class="tag-add-button" ng-click="$ctrl.isDropdownOpen = true">
+        <span class="icon-add"></span>
+      </button>
+      <span class="tag"
+            ng-repeat="tag in $ctrl.selectedTags track by tag.id"
+            ng-style="{'background-color': tag.color}">
+        {{tag.label}}
+        <span class="tag-remove" ng-click="$ctrl.removeTag(tag, $event)">×</span>
+      </span>
+    </div>
+  </div>
+  <umb-dropdown on-close="$ctrl.isDropdownOpen = false" class="tag-input-dropdown">
+    <umb-dropdown-content class="tag-dropdown" ng-if="$ctrl.isDropdownOpen">
+      <div class="tag-search">
+        <input type="text"
+               class="tag-search-input"
+               ng-model="$ctrl.searchText"
+               placeholder="Search">
+        <button type="button"
+                class="clear-search"
+                ng-show="$ctrl.searchText.length > 0"
+                ng-click="$ctrl.clearSearch()">×</button>
+      </div>
+
+      <!-- Selected Tags Section -->
+      <div class="dropdown-section" ng-if="$ctrl.selectedTags.length > 0">
+        <div class="section-header">Selected:</div>
+        <div class="tags-list selected-tags-list">
+          <span class="tag"
+                ng-repeat="tag in $ctrl.selectedTags track by tag.id"
+                ng-style="{'background-color': tag.color}"
+                ng-click="$ctrl.toggleTag(tag)">
+            {{tag.label}}
+            <span class="tag-remove">×</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Global Tags Section -->
+      <div class="dropdown-section" ng-if="$ctrl.getFilteredTags().length > 0">
+        <div class="section-header">Global:</div>
+        <div class="tags-list global-tags-list">
+          <span class="tag"
+                ng-repeat="tag in $ctrl.getFilteredTags() track by tag.id"
+                ng-style="{'background-color': tag.color}"
+                ng-class="{'selected': $ctrl.isTagSelected(tag)}"
+                ng-click="$ctrl.toggleTag(tag)">
+            {{tag.label}}
+            <span class="tag-check" ng-if="$ctrl.isTagSelected(tag)">✓</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Create New Tag Section -->
+      <div class="dropdown-section create-tag-section" ng-if="$ctrl.searchText.length > 0 && $ctrl.isNewTag()">
+        <div class="section-header">Create New:</div>
+        <div class="create-tag-content">
+          <div class="new-tag-preview">
+            <span class="tag" ng-style="{'background-color': $ctrl.newTagColor}">
+              {{$ctrl.searchText}}
+            </span>
+          </div>
+          <div class="color-picker">
+            <div class="color-option"
+                 ng-repeat="color in $ctrl.colors"
+                 ng-style="{'background-color': color.value}"
+                 ng-class="{'selected': $ctrl.newTagColor === color.value}"
+                 ng-click="$ctrl.newTagColor = color.value">
+            </div>
+          </div>
+          <umb-button state="$ctrl.createButtonState" type="button" class="create-tag-button" label="Create Tag" button-style="primary" ng-click="$ctrl.createNewTag()">
+          </umb-button>
+        </div>
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" ng-if="$ctrl.searchText.length > 0 && $ctrl.getFilteredTags().length === 0">
+        No tags match your query
+      </div>
+    </umb-dropdown-content>
+  </umb-dropdown>
+</div>

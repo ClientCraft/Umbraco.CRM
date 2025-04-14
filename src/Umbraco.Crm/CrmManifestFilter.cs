@@ -27,6 +27,11 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/leads/edit.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/view.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/contacts/edit.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/contacts/view.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/notes/create.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/components/tag-input/tag-input.component.js",
+                "/App_Plugins/UmbracoCrm/backoffice/components/avatar-display/avatar-display.component.js",
             ],
             Stylesheets =
             [
@@ -38,6 +43,12 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/leads/edit.css",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/view.css",
                 "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.css",
+                "/App_Plugins/UmbracoCrm/backoffice/contacts/edit.css",
+                "/App_Plugins/UmbracoCrm/backoffice/contacts/view.css",
+                "/App_Plugins/UmbracoCrm/backoffice/notes/create.css",
+                "/App_Plugins/UmbracoCrm/backoffice/components/tag-input/tag-input.css",
+                "/App_Plugins/UmbracoCrm/backoffice/components/avatar-display/avatar-display.css",
+
             ],
             Sections =
             [

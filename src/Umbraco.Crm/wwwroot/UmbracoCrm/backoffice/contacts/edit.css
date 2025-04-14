@@ -1,0 +1,16 @@
+.client-craft.umb-multi-select {
+  min-height: 100px;
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #e9e9eb;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.client-craft.umb-help-text {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  margin-top: 4px;
+}

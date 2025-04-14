@@ -1,18 +1,18 @@
-.view-container {
+.contact-view-container {
  padding: 20px;
   max-height: calc(100vh - 55px);
   display: flex;
   flex-direction: column;
 }
 
-.view-container .header {
+.contact-view-container .header {
   display: flex;
   align-items: center;
   padding: 0 0 10px 0;
   border-bottom: 1px solid #e1e5eb;
 }
 
-.view-container .back-button {
+.contact-view-container .back-button {
   color: #666;
   text-decoration: none;
   display: flex;
@@ -20,14 +20,37 @@
   margin-right: 15px;
 }
 
-.view-container .lead-title {
+.contact-view-container .contact-title {
   margin: 0;
   color: #444;
   font-size: 16px;
   font-weight: 500;
 }
 
-.view-container .edit-button {
+.contact-view-container .umb-table-avatar-group {
+  display: flex;
+  font-size: 14px;
+  color: #817f85;
+}
+
+.contact-view-container .umb-table-avatar-group * {
+  margin-left: -8px; /* Overlap effect */
+}
+
+.contact-view-container .umb-table-avatar-group img:first-child {
+  margin-left: 0;
+}
+
+.contact-view-container .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-view-container .edit-button {
   margin-left: auto;
   background-color: #1a237e;
   color: white;
@@ -39,7 +62,7 @@
   align-items: center;
 }
 
-.view-container .main-content {
+.contact-view-container .main-content {
   display: flex;
   padding-top: 20px;
   gap: 20px;
@@ -51,7 +74,7 @@
   padding-bottom: 20px;
 }
 
-.view-container .left-panel {
+.contact-view-container .left-panel {
   height: 100%;
   flex: 7;
   background: white;
@@ -59,7 +82,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.view-container .right-panel {
+.contact-view-container .right-panel {
   position: sticky;
   top: 0;
   height: fit-content;
@@ -69,7 +92,7 @@
   gap: 10px;
 }
 
-.view-container .panel-section {
+.contact-view-container .panel-section {
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -77,75 +100,75 @@
 }
 
 
-.view-container .profile-section {
+.contact-view-container .profile-section {
   height: fit-content;
   padding: 20px;
   display: flex;
   border-bottom: 1px solid #e1e5eb;
 }
 
-.view-container .profile-image {
+.contact-view-container .profile-image {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.view-container .umb-table-avatar-group {
+.contact-view-container .umb-table-avatar-group {
   display: flex;
   font-size: 14px;
   color: #817f85;
 }
 
-.view-container .umb-table-avatar-group * {
+.contact-view-container .umb-table-avatar-group * {
   margin-left: -8px; /* Overlap effect */
 }
 
-.view-container .umb-table-avatar-group img:first-child {
+.contact-view-container .umb-table-avatar-group img:first-child {
   margin-left: 0;
 }
 
 
-.view-container .profile-info {
+.contact-view-container .profile-info {
   margin-left: 20px;
   flex: 1;
 }
 
-.view-container .profile-name {
+.contact-view-container .profile-name {
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 5px 0;
 }
 
-.view-container .profile-role {
+.contact-view-container .profile-role {
   color: #666;
   margin: 0 0 10px 0;
   font-size: 14px;
 }
 
-.view-container .social-links {
+.contact-view-container .social-links {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
 }
 
-.view-container .social-icon {
+.contact-view-container .social-icon {
   color: #4267B2;
   text-decoration: none;
   font-size: 18px;
 }
 
-.view-container .last-contacted {
+.contact-view-container .last-contacted {
   color: #666;
   font-size: 12px;
 }
 
-.view-container .contact-date {
+.contact-view-container .contact-date {
   color: #666;
   font-weight: 500;
 }
 
-.view-container .contact-info {
+.contact-view-container .contact-info {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -153,36 +176,36 @@
   border-bottom: 1px solid #e1e5eb;
 }
 
-.view-container .info-header {
+.contact-view-container .info-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.view-container .info-title {
+.contact-view-container .info-title {
   font-weight: 600;
   margin: 0;
 }
 
-.view-container .info-column {
+.contact-view-container .info-column {
   flex: 1;
   min-width: 200px;
   margin-right: 20px;
 }
 
-.view-container .info-label {
+.contact-view-container .info-label {
   color: #666;
   font-size: 12px;
   margin-bottom: 4px;
 }
 
-.view-container .info-value {
+.contact-view-container .info-value {
   margin: 0 0 15px 0;
   font-size: 14px;
 }
 
-.view-container .tags-section {
+.contact-view-container .tags-section {
   flex: 1;
   flex-wrap: wrap;
   display: flex;
@@ -192,7 +215,7 @@
   gap: 5px;
 }
 
-.view-container .tag {
+.contact-view-container .tag {
   height: fit-content;
   white-space: nowrap;
   background-color: #1e8e3e;
@@ -203,34 +226,34 @@
   margin-right: 8px;
 }
 
-.view-container .yellow-tag {
+.contact-view-container .yellow-tag {
   background-color: #f9a825;
 }
 
-.view-container .lead-metrics {
+.contact-view-container .contact-metrics {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
 }
 
-.view-container .metric {
+.contact-view-container .metric {
   flex: 1;
   min-width: 140px;
   margin-right: 15px;
 }
 
-.view-container .metric-label {
+.contact-view-container .metric-label {
   color: #666;
   font-size: 12px;
   margin-bottom: 4px;
 }
 
-.view-container .metric-value {
+.contact-view-container .metric-value {
   display: flex;
   align-items: center;
 }
 
-.view-container .score-circle {
+.contact-view-container .score-circle {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -243,32 +266,32 @@
   margin-right: 5px;
 }
 
-.view-container .owner-avatars {
+.contact-view-container .owner-avatars {
   display: flex;
 }
 
-.view-container .avatar-1 {
+.contact-view-container .avatar-1 {
   background-color: #ffcdd2;
 }
 
-.view-container .avatar-2 {
+.contact-view-container .avatar-2 {
   background-color: #e1bee7;
 }
 
-.view-container .avatar-3 {
+.contact-view-container .avatar-3 {
   background-color: #bbdefb;
 }
 
-.view-container .tab-section {
+.contact-view-container .tab-section {
   padding: 20px;
 }
 
-.view-container .tabs {
+.contact-view-container .tabs {
   display: flex;
   border-bottom: 1px solid #e1e5eb;
 }
 
-.view-container .tab {
+.contact-view-container .tab {
   padding: 12px 15px;
   cursor: pointer;
   color: #666;
@@ -276,24 +299,24 @@
   border-bottom: 2px solid transparent;
 }
 
-.view-container .tab.active {
+.contact-view-container .tab.active {
   color: #1a237e;
   border-bottom: 2px solid #1a237e;
   font-weight: 500;
 }
 
-.view-container .email-thread {
+.contact-view-container .email-thread {
   padding: 15px 0;
 }
 
-.view-container .email-header {
+.contact-view-container .email-header {
   display: flex;
   align-items: center;
   padding: 10px 0;
   cursor: pointer;
 }
 
-.view-container .thread-avatar {
+.contact-view-container .thread-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -306,44 +329,44 @@
   margin-right: 15px;
 }
 
-.view-container .thread-info {
+.contact-view-container .thread-info {
   flex: 1;
 }
 
-.view-container .sender-info {
+.contact-view-container .sender-info {
   font-size: 13px;
   margin-bottom: 3px;
 }
 
-.view-container .sender-name {
+.contact-view-container .sender-name {
   font-weight: 500;
   margin-bottom: 2px;
 }
 
-.view-container .recipient {
+.contact-view-container .recipient {
   color: #666;
 }
 
-.view-container .thread-content {
+.contact-view-container .thread-content {
   color: #666;
   font-size: 13px;
   border-bottom: 1px solid #e1e5eb;
   padding-bottom: 15px;
 }
 
-.view-container .thread-date {
+.contact-view-container .thread-date {
   color: #666;
   font-size: 12px;
   margin-left: auto;
 }
 
-.view-container .thread-actions {
+.contact-view-container .thread-actions {
   display: flex;
   gap: 5px;
   margin-left: 10px;
 }
 
-.view-container .thread-action {
+.contact-view-container .thread-action {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -356,55 +379,46 @@
   font-size: 12px;
 }
 
-.view-container .section-header {
+.contact-view-container .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.view-container .section-title {
+.contact-view-container .section-title {
   font-weight: 600;
   font-size: 14px;
   margin: 0;
   color: #333;
 }
 
-.view-container .section-buttons {
+.contact-view-container .section-buttons {
   display: flex;
   gap: 10px;
   white-space: nowrap;
 }
 
-.view-container .avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.view-container .section-action {
+.contact-view-container .section-action {
   color: #1a237e;
   font-size: 12px;
   text-decoration: none;
   margin-left: 10px;
 }
 
-.view-container .section-action:hover {
+.contact-view-container .section-action:hover {
   text-decoration: underline;
 }
 
-.view-container .note-item {
+.contact-view-container .note-item {
   padding: 10px 0;
   border-bottom: 1px solid #e1e5eb;
 }
 
-.view-container .note-item:last-child {
+.contact-view-container .note-item:last-child {
   border-bottom: none;
 }
 
-.view-container .note-header {
+.contact-view-container .note-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
@@ -412,26 +426,26 @@
   color: #666;
 }
 
-.view-container .note-header div:first-child {
+.contact-view-container .note-header div:first-child {
   font-weight: 500;
 }
 
-.view-container .note-content {
+.contact-view-container .note-content {
   font-size: 13px;
   color: #333;
   line-height: 1.4;
 }
 
-.view-container .deal-item {
+.contact-view-container .deal-item {
   padding: 10px 0;
   border-bottom: 1px solid #e1e5eb;
 }
 
-.view-container .deal-item:last-child {
+.contact-view-container .deal-item:last-child {
   border-bottom: none;
 }
 
-.view-container .deal-date {
+.contact-view-container .deal-date {
   font-size: 12px;
   color: #666;
   margin-bottom: 5px;
@@ -440,7 +454,7 @@
   align-items: center;
 }
 
-.view-container .deal-phone {
+.contact-view-container .deal-phone {
   background-color: #1a237e;
   color: #fff;
   font-size: 11px;
@@ -449,24 +463,19 @@
   text-transform: uppercase;
 }
 
-.view-container .deal-title {
+.contact-view-container .deal-title {
   font-weight: 500;
   margin: 5px 0;
   font-size: 13px;
   color: #333;
 }
 
-.view-container .deal-value {
+.contact-view-container .deal-value {
   color: #666;
   font-size: 12px;
 }
 
-.view-container .progress-bar {
-  padding: 15px 20px;
-  border-bottom: 1px solid #e1e5eb;
-}
-
-.view-container .stepper {
+.contact-view-container .stepper {
   color: #ffffff; /* white */
   text-wrap: nowrap;
   display: flex;
@@ -475,7 +484,7 @@
   text-align: center;
 }
 
-.view-container .stepper__item {
+.contact-view-container .stepper__item {
   flex: 100%;
   padding: 10px 30px 10px 30px;
   background: #808080; /* grey */
@@ -483,27 +492,27 @@
   -webkit-clip-path: polygon(20px 50%, 0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%);
 }
 
-.view-container .stepper__item:hover {
+.contact-view-container .stepper__item:hover {
   cursor: pointer;
 }
 
-.view-container .stepper__item.current {
+.contact-view-container .stepper__item.current {
   background: #00a651; /* HEX for --uui-color-positive (green) */
   font-weight: bold;
 }
 
-.view-container .stepper__item.complete {
+.contact-view-container .stepper__item.complete {
   background: #80d3a8; /* HEX approximation for color-mix(in srgb, white 50%, #00a651) */
 }
 
-.view-container .stepper__item:first-child {
+.contact-view-container .stepper__item:first-child {
   border-bottom-left-radius: 2rem;
   border-top-left-radius: 2rem;
   padding-left: 20px;
   -webkit-clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%);
 }
 
-.view-container .stepper__item:last-child {
+.contact-view-container .stepper__item:last-child {
   border-bottom-right-radius: 2rem;
   border-top-right-radius: 2rem;
   padding-left: 30px;
@@ -511,7 +520,7 @@
 }
 
 /* Tabs */
-.view-container .tab-list {
+.contact-view-container .tab-list {
   list-style: none;
   padding: 0;
   display: flex;
@@ -519,25 +528,25 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.view-container .tab-list li {
+.contact-view-container .tab-list li {
   padding: 10px 20px;
   cursor: pointer;
   color: #666;
   font-weight: 500;
 }
 
-.view-container .tab-list li.active {
+.contact-view-container .tab-list li.active {
   color: #000;
   border-bottom: 2px solid #ff6347; /* Tomato color for active tab */
 }
 
-.view-container .tab-content {
+.contact-view-container .tab-content {
   padding: 20px;
   background: #fff;
 }
 
 /* Task Item */
-.view-container .task-item {
+.contact-view-container .task-item {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   margin-bottom: 15px;
@@ -548,55 +557,55 @@
   gap: 10px;
 }
 
-.view-container .task-header {
+.contact-view-container .task-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.view-container .task-title {
+.contact-view-container .task-title {
   font-size: 16px;
   font-weight: bold;
   color: #333;
 }
 
-.view-container .task-meta {
+.contact-view-container .task-meta {
   font-size: 12px;
   color: #666;
 }
 
-.view-container .task-meta span {
+.contact-view-container .task-meta span {
   margin-right: 5px;
 }
 
-.view-container .task-content {
+.contact-view-container .task-content {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.view-container .task-description {
+.contact-view-container .task-description {
   font-size: 14px;
   color: #333;
   margin: 0;
 }
 
-.view-container .task-details {
+.contact-view-container .task-details {
   font-size: 12px;
   color: #666;
 }
 
-.view-container .task-assignee, .view-container .task-type {
+.contact-view-container .task-assignee, .contact-view-container .task-type {
   margin-right: 10px;
 }
 
-.view-container .task-actions {
+.contact-view-container .task-actions {
   display: flex;
   gap: 10px;
   align-self: flex-end;
 }
 
-.view-container .task-action {
+.contact-view-container .task-action {
   cursor: pointer;
   font-size: 16px;
 }

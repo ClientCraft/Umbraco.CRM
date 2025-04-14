@@ -24,7 +24,6 @@ angular.module("umbraco")
         vm.currentStage = vm.stages.find(stage => stage.id === vm.lead.status.id) || vm.stages[0];
         vm.title = 'Lead Progress';
 
-        console.log("LEAD -->", vm.lead);
       })
       .catch(function (error) {
         console.error("Error fetching lead:", error);
@@ -35,7 +34,6 @@ angular.module("umbraco")
       .then(function (response) {
         vm.lead = {...vm.lead, notes: response.data.data};
 
-        console.log("LEAD -->", vm.lead);
       })
       .catch(function (error) {
         console.error("Error fetching lead:", error);
@@ -63,7 +61,7 @@ angular.module("umbraco")
         description: 'A table to display all notes for an object',
         closeButtonLabel: 'Close',
         submitButtonLabel: 'Create New Note',
-        data: {test: true},
+        data: {type: 'lead', id: vm.leadId},
         submit: function (model) {
           editorService.open({
             title: "Create Lead Drawer",
@@ -130,6 +128,7 @@ angular.module("umbraco")
         size: "small", // Options: small, medium, large
         data: vm.lead,
         submit: function(model) {
+
           editorService.close();
         },
         close: function() {

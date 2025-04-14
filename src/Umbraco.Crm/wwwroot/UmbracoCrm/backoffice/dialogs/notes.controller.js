@@ -2,8 +2,8 @@
   .controller("Umbraco.Crm.Dialogs.NotesController", function ($scope, $http, $window, $timeout) {
     var vm = this;
 
-    vm.notes = [];
-    vm.next = 'http://foo.localhost:8000/lead/1/note?page=1';
+    vm.notes = undefined;
+    vm.next = `http://foo.localhost:8000/${$scope.model.data.type}/${$scope.model.data.id}/note?page=1`;
     vm.loading = false;
 
     vm.fetchNextNotes = function () {
@@ -12,6 +12,9 @@
       vm.loading = true;
 
       $http.get(vm.next).then(function(response) {
+        if (!vm.notes) {
+          vm.notes = [];
+        }
         vm.notes = [...vm.notes, ...response.data.data];
         vm.next = response.data.links.next;
         vm.loading = false;

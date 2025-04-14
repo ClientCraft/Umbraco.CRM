@@ -1,0 +1,20 @@
+﻿<div class="owner-avatars" ng-if="$ctrl.object">
+  <div class="avatar-container" ng-style="{ 'width': $ctrl.size + 'px', 'height': $ctrl.size + 'px' }">
+    <div ng-if="!$ctrl.object.photo || !$ctrl.object.photo.file_path" class="avatar avatar-1"
+         ng-style="{ 'width': $ctrl.size + 'px', 'height': $ctrl.size + 'px', 'line-height': $ctrl.size + 'px', 'font-size': ($ctrl.size / 2) + 'px' }">
+      {{ $ctrl.nameToAcronym($ctrl.object.name) }}
+    </div>
+    <img ng-if="$ctrl.object.photo && $ctrl.object.photo.file_path"
+         class="umb-table-avatar"
+         ng-src="{{ $ctrl.object.photo.file_path }}"
+         alt="{{ $ctrl.object.photo.file_name }}"
+         ng-style="{ 'width': $ctrl.size + 'px', 'height': $ctrl.size + 'px' }" />
+    <div ng-if="$ctrl.allowEdit" class="edit-pen" ng-click="$ctrl.triggerPhotoChange($event)">
+      <i class="icon icon-edit"></i>
+    </div>
+  </div>
+  <input type="file" accept="image/*" style="display: none"
+         ng-if="$ctrl.allowEdit"
+         id="photoInput-{{ $ctrl.object.id || $ctrl.$id }}"
+         onchange="angular.element(this).scope().$ctrl.handlePhotoChange(this)" />
+</div>
