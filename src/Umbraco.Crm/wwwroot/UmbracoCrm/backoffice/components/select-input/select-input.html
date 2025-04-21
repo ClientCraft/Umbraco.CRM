@@ -1,0 +1,37 @@
+﻿<div class="client-craft umb-control-group">
+  <label ng-attr-for="{{$ctrl.label | lowercase}}-{{$ctrl.multiple === 'true' ? 'multi' : 'single'}}">{{::$ctrl.label}}</label>
+  <select
+    ng-if="$ctrl.multiple === 'true'"
+    id="{{::$ctrl.label | lowercase}}-multi"
+    ng-model="$ctrl.model"
+    multiple
+    ng-required="$ctrl.required === 'true'"
+    class="client-craft umb-multi-select"
+  >
+    <option value="" ng-value="null" disabled>{{$ctrl.placeholder || "Select an option"}}</option>
+    <option
+      ng-repeat="option in $ctrl.options track by option[$ctrl.optionValue]"
+      ng-value="$ctrl.returnObject ? option : option[$ctrl.optionValue]"
+    >
+      {{::option[$ctrl.optionLabel]}}
+    </option>
+  </select>
+  <select
+    ng-if="$ctrl.multiple !== 'true'"
+    id="{{::$ctrl.label | lowercase}}-single"
+    ng-model="$ctrl.model"
+    ng-required="$ctrl.required === 'true'"
+    class="client-craft"
+  >
+    <option value="" ng-value="null" disabled>{{$ctrl.placeholder || "Select an option"}}</option>
+    <option
+      ng-repeat="option in $ctrl.options track by option[$ctrl.optionValue]"
+      ng-value="$ctrl.returnObject ? option : option[$ctrl.optionValue]"
+    >
+      {{::option[$ctrl.optionLabel]}}
+    </option>
+  </select>
+  <small class="client-craft umb-help-text" ng-if="$ctrl.multiple === 'true'">
+    Hold Ctrl (or Cmd on Mac) to select multiple options
+  </small>
+</div>

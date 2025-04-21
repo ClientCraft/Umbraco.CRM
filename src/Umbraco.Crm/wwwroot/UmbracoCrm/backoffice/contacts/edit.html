@@ -21,13 +21,15 @@
                 <input type="text" id="name" ng-model="vm.model.name" required />
               </div>
 
-              <div class="client-craft umb-control-group">
-                <label for="companies">Companies</label>
-                <select id="companies" ng-model="vm.model.companies" multiple required class="client-craft umb-multi-select">
-                  <option ng-repeat="company in vm.companiesList" ng-value="company">{{company.name}}</option>
-                </select>
-                <small class="client-craft umb-help-text">Hold Ctrl (or Cmd on Mac) to select multiple companies</small>
-              </div>
+              <select-input
+                label="Companies"
+                model="vm.model.companies"
+                options="vm.companiesList"
+                multiple="true"
+                return-object="true"
+                option-label="name">
+              </select-input>
+
               <div class="client-craft umb-control-group">
                 <label for="role">Role</label>
                 <input type="text" id="role" ng-model="vm.model.role" />
@@ -52,6 +54,23 @@
                 <label for="linkedin_url">LinkedIn URL</label>
                 <input type="url" id="linkedin_url" ng-model="vm.model.linkedin_url" />
               </div>
+
+              <select-input
+                label="Owner"
+                model="vm.model.owner"
+                options="vm.userNamesWithoutDeputies"
+                return-object="true"
+                option-label="name">
+              </select-input>
+
+              <select-input
+                label="Deputies"
+                model="vm.model.deputies"
+                options="vm.userNamesWithoutOwner"
+                multiple="true"
+                return-object="true"
+                option-label="name">
+              </select-input>
             </umb-box-content>
           </umb-box>
         </div>

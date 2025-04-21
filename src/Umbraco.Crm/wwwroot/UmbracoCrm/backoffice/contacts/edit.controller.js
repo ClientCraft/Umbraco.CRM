@@ -7,20 +7,43 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", funct
     $http.get('http://foo.localhost:8000/account/names').then(function (response) {
       vm.companiesList = response.data;
 
-      // Normalize vm.model.companies to match vm.companiesList structure
+      // Normalize vm.model.companies
       vm.model.companies = vm.model.companies.map(company => {
         const matchedCompany = vm.companiesList.find(listCompany => listCompany.id === company.id);
-        return matchedCompany || { id: company.id, name: company.name }; // Fallback if no match
+        return matchedCompany || { id: company.id, name: company.name };
       });
     });
   }
+
+  function fetchUserList() {
+    $http.get('http://foo.localhost:8000/user?include=photo').then(function (response) {
+      vm.userNames = response.data.data;
+      updateFilteredLists();
+    });
+  }
+
+  function updateFilteredLists() {
+    // Update filtered lists without using computed properties
+    vm.userNamesWithoutOwner = vm.userNames.filter(user =>
+      !vm.model.owner || user.id !== vm.model.owner.id
+    );
+
+    vm.userNamesWithoutDeputies = vm.userNames.filter(user =>
+      !vm.model.deputies || !vm.model.deputies.some(deputy => deputy.id === user.id)
+    );
+  }
+
+  // Watch for changes in owner and deputies
+  $scope.$watch('model.data.owner', updateFilteredLists);
+  $scope.$watch('model.data.deputies', updateFilteredLists, true);
+
   fetchCompaniesList();
+  fetchUserList();
 
   vm.submit = submit;
   vm.close = close;
 
   function submit() {
-    console.log('SUBMITTING', vm.model);
     $http.post('http://foo.localhost:8000/contact/' + vm.model.id, {
       ...vm.model,
       _method: 'PUT'
@@ -31,7 +54,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", funct
         $scope.model.submit(response.data);
       }
     }, function (error) {
-      notificationsService.error("Error", "Failed to update lead");
+      notificationsService.error("Error", "Failed to update contact");
       vm.submitState = "error";
     });
   }

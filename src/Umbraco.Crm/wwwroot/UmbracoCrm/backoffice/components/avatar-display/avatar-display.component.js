@@ -14,7 +14,6 @@
 
       ctrl.$onInit = function() {
         ctrl.size = ctrl.size || '30';
-        console.log('onInit - object:', ctrl.object, 'allowEdit:', ctrl.allowEdit, 'photoUploadUrl:', ctrl.photoUploadUrl);
       };
 
       ctrl.nameToAcronym = function(name) {
@@ -24,7 +23,6 @@
 
       ctrl.triggerPhotoChange = function(event) {
         event.preventDefault();
-        console.log("triggerPhotoChange");
         const fileInput = $element.find('input[type="file"]')[0];
         if (fileInput) {
           fileInput.click();
@@ -34,18 +32,11 @@
       ctrl.handlePhotoChange = function(fileInput) {
         const file = fileInput.files[0];
         if (!file) {
-          console.log('No file selected');
           return;
         }
 
-        console.log('File MIME type:', file.type);
         const formData = new FormData();
         formData.append('image', file);
-
-        console.log('FormData entries:');
-        for (let [key, value] of formData.entries()) {
-          console.log(`${key}:`, value);
-        }
 
         if (!ctrl.photoUploadUrl) {
           console.error('photoUploadUrl is not provided');
