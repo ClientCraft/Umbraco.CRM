@@ -1,12 +1,18 @@
-<div class="contact-view-container" ng-controller="Umbraco.Crm.Contacts.ViewController as vm">
+<div
+  class="contact-view-container"
+  ng-controller="Umbraco.Crm.Contacts.ViewController as vm"
+>
   <div class="header">
     <umb-breadcrumbs
       ng-if="vm.ancestors && vm.ancestors.length > 0"
       ancestors="vm.ancestors"
       entity-type="content"
-      on-open="clickBreadcrumb(ancestor)">
+      on-open="clickBreadcrumb(ancestor)"
+    >
     </umb-breadcrumbs>
-    <button ng-click="vm.openEditContactDrawer()" class="edit-button">✏️ Edit</button>
+    <button ng-click="vm.openEditContactDrawer()" class="edit-button">
+      ✏️ Edit
+    </button>
   </div>
 
   <div class="main-content">
@@ -16,12 +22,15 @@
           object="vm.contact"
           allow-edit="true"
           size="125"
-          photo-upload-url="{{ 'http://foo.localhost:8000/contact/' + vm.contactId + '/photo' }}"
-          on-success="vm.handlePhotoUploadSuccess(photo)">
+          photo-upload-url="{{ 'https://foo.client-craft.com/contact/' + vm.contactId + '/photo' }}"
+          on-success="vm.handlePhotoUploadSuccess(photo)"
+        >
         </avatar-display>
         <div class="profile-info">
           <h2 class="profile-name">{{vm.contact.name}}</h2>
-          <p class="profile-role">{{vm.contact.role}} at {{vm.contactCompanyNames}}</p>
+          <p class="profile-role">
+            {{vm.contact.role}} at {{vm.contactCompanyNames}}
+          </p>
           <div class="social-links">
             <a href="{{vm.contact.facebook_url}}" class="social-icon">f</a>
             <a href="{{vm.contact.linkedin_url}}" class="social-icon">in</a>
@@ -37,7 +46,8 @@
             tags="vm.contact.tags"
             entity-type="contact"
             entity-id="vm.contactId"
-            on-change="vm.handleTagsChanged(tags)">
+            on-change="vm.handleTagsChanged(tags)"
+          >
           </tag-input>
         </div>
       </div>
@@ -84,16 +94,32 @@
           <div class="metric">
             <div class="metric-label">Contact Deputies</div>
             <div class="metric-value">
-               <div class="umb-table-avatar-group" ng-if="vm.contact.deputies.length > 0">
-                  <span ng-repeat="deputy in vm.contact.deputies">
-                    <div ng-if="!deputy.photo.file_path" class="umb-table-avatar avatar-1">{{ vm.nameToAcronym(deputy.name) }}</div>
-                    <img ng-if="deputy.photo.file_path" class="umb-table-avatar"
-                         ng-src="{{ deputy.photo.file_path }}" alt="{{ deputy.name }}"/>
-                  </span>
-               </div>
+              <div
+                class="umb-table-avatar-group"
+                ng-if="vm.contact.deputies.length > 0"
+              >
+                <span ng-repeat="deputy in vm.contact.deputies">
+                  <div
+                    ng-if="!deputy.photo.file_path"
+                    class="umb-table-avatar avatar-1"
+                  >
+                    {{ vm.nameToAcronym(deputy.name) }}
+                  </div>
+                  <img
+                    ng-if="deputy.photo.file_path"
+                    class="umb-table-avatar"
+                    ng-src="{{ deputy.photo.file_path }}"
+                    alt="{{ deputy.name }}"
+                  />
+                </span>
+              </div>
 
-              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.contact && !vm.contact.deputies.length">No
-                deputies assigned
+              <div
+                style="text-wrap: nowrap"
+                class="metric-label"
+                ng-if="vm.contact && !vm.contact.deputies.length"
+              >
+                No deputies assigned
               </div>
             </div>
           </div>
@@ -102,23 +128,22 @@
 
       <div class="tab-section">
         <ng-form name="tabsForm" val-form-manager>
-
-          <umb-tabs-nav
-            tabs="vm.tabs"
-            on-tab-change="vm.changeTab(tab)">
+          <umb-tabs-nav tabs="vm.tabs" on-tab-change="vm.changeTab(tab)">
           </umb-tabs-nav>
 
           <umb-tab-content
             ng-repeat="tab in vm.tabs"
             ng-show="tab.active"
-            tab="tab">
+            tab="tab"
+          >
             <div ng-if="tab.alias === 'emails'">
-
               <!-- Thread 1 -->
               <details class="email-thread">
                 <summary class="thread-header">
                   <span class="thread-title">Thread #1</span>
-                  <span class="thread-meta">2 messages • Last message: 10 Jun 2025</span>
+                  <span class="thread-meta"
+                    >2 messages • Last message: 10 Jun 2025</span
+                  >
                 </summary>
                 <div class="thread-messages">
                   <!-- Message 1 -->
@@ -138,9 +163,7 @@
                         <div class="thread-action">⋮</div>
                       </div>
                     </div>
-                    <div class="thread-content">
-                      Email thread text 1
-                    </div>
+                    <div class="thread-content">Email thread text 1</div>
                   </div>
                   <!-- Message 2 -->
                   <div class="email-message">
@@ -170,7 +193,9 @@
               <details class="email-thread">
                 <summary class="thread-header">
                   <span class="thread-title">Thread #2</span>
-                  <span class="thread-meta">2 messages • Last message: 9 Jun 2025</span>
+                  <span class="thread-meta"
+                    >2 messages • Last message: 9 Jun 2025</span
+                  >
                 </summary>
                 <div class="thread-messages">
                   <!-- Message 1 -->
@@ -190,9 +215,7 @@
                         <div class="thread-action">⋮</div>
                       </div>
                     </div>
-                    <div class="thread-content">
-                      Email thread text 2
-                    </div>
+                    <div class="thread-content">Email thread text 2</div>
                   </div>
                   <!-- Message 2 -->
                   <div class="email-message">
@@ -217,10 +240,8 @@
                   </div>
                 </div>
               </details>
-
             </div>
             <div ng-if="tab.alias === 'tasks'">
-
               <!-- Task 1 -->
               <div class="task-item">
                 <div class="task-header">
@@ -231,7 +252,9 @@
                   </div>
                 </div>
                 <div class="task-content">
-                  <p class="task-description">Call the client to discuss the deal.</p>
+                  <p class="task-description">
+                    Call the client to discuss the deal.
+                  </p>
                   <div class="task-details">
                     <span class="task-assignee">Assigned to: User Name</span>
                     <span class="task-type">Type: Task</span>
@@ -254,7 +277,9 @@
                   </div>
                 </div>
                 <div class="task-content">
-                  <p class="task-description">Arrange a product demo for the client.</p>
+                  <p class="task-description">
+                    Arrange a product demo for the client.
+                  </p>
                   <div class="task-details">
                     <span class="task-assignee">Assigned to: Another User</span>
                     <span class="task-type">Type: Task</span>
@@ -266,12 +291,9 @@
                   <div class="task-action">🗑️</div>
                 </div>
               </div>
-
             </div>
           </umb-tab-content>
-
         </ng-form>
-
       </div>
     </div>
 
@@ -281,20 +303,37 @@
         <div class="section-header">
           <h3 class="section-title">Latest Notes</h3>
           <div>
-            <a href="#" ng-click="vm.handleCreateNote($event)" class="section-action">Create Note</a>
-            <a href="#" ng-click="vm.handleSeeAllNotes($event)" class="section-action">See All</a>
+            <a
+              href="#"
+              ng-click="vm.handleCreateNote($event)"
+              class="section-action"
+              >Create Note</a
+            >
+            <a
+              href="#"
+              ng-click="vm.handleSeeAllNotes($event)"
+              class="section-action"
+              >See All</a
+            >
           </div>
         </div>
 
         <!-- Note 1 -->
-        <div ng-if="vm.contact.notes && vm.contact.notes.length > 0" ng-repeat="note in vm.contact.notes track by $index" class="note-item">
+        <div
+          ng-if="vm.contact.notes && vm.contact.notes.length > 0"
+          ng-repeat="note in vm.contact.notes track by $index"
+          class="note-item"
+        >
           <div class="note-header">
             <div>Note by {{note.user.name}}</div>
             <span>{{note.created_at | date:'short':'UTC'}}</span>
           </div>
           <div class="note-content">{{note.content}}</div>
         </div>
-        <div ng-if="vm.contact.notes && vm.contact.notes.length === 0" class="no-notes">
+        <div
+          ng-if="vm.contact.notes && vm.contact.notes.length === 0"
+          class="no-notes"
+        >
           No notes available.
         </div>
       </div>
@@ -310,9 +349,11 @@
         </div>
 
         <!-- Deal 1 -->
-        <div ng-if="vm.latestDeals && vm.latestDeals.length > 0"
-             ng-repeat="deal in vm.latestDeals track by $index"
-             class="deal-item">
+        <div
+          ng-if="vm.latestDeals && vm.latestDeals.length > 0"
+          ng-repeat="deal in vm.latestDeals track by $index"
+          class="deal-item"
+        >
           <div class="deal-date">
             Closing Date 10/04/2025
             <span class="deal-phone">Deal Phone</span>
@@ -320,7 +361,10 @@
           <div class="deal-title">Anniversary cake</div>
           <div class="deal-value">$1,000.15</div>
         </div>
-        <div ng-if="vm.latestDeals && vm.latestDeals.length === 0" class="no-deals">
+        <div
+          ng-if="vm.latestDeals && vm.latestDeals.length === 0"
+          class="no-deals"
+        >
           No deals available.
         </div>
       </div>

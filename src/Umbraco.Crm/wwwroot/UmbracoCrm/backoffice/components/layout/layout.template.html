@@ -1,0 +1,23 @@
+<main class="flex">
+  <ul class="col-3 nav flex-column border-end min-vh-100 ">
+    <h4>CRM</h4>
+    <li class="nav-item" ng-click="$ctrl.setComponentInView('leadsList')">
+      Leads
+    </li>
+    <li class="nav-item" ng-click="$ctrl.setComponentInView('contactsList')">
+      Contacts
+    </li>
+    <li class="nav-item" ng-click="$ctrl.setComponentInView('accountsList')">
+      Accounts
+    </li>
+    <li class="nav-item" ng-click="$ctrl.setComponentInView('dealsList')">
+      Deals
+    </li>
+  </ul>
+  <section class="col-9" ng-switch="$ctrl.componentInView">
+    <lead-list ng-switch-when="leadsList"></lead-list>
+    <contact-list ng-switch-when="contactsList" ></contact-list>
+    <account-list ng-switch-when="accountsList"></account-list>
+    <deals-list ng-switch-when="dealsList"></deals-list>
+  </section>
+</main>;

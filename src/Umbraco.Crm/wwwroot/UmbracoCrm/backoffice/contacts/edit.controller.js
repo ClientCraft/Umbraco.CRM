@@ -1,11 +1,13 @@
-angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", function ($scope, $http, notificationsService) {
+angular.module("umbraco").controller("Umbraco.Crm.Contacts.EditController", function ($scope, $http, notificationsService) {
   var vm = this;
 
-  vm.model = $scope.model.data;
+      vm.model = $scope.model.data;
 
-  function fetchCompaniesList() {
-    $http.get('http://foo.localhost:8000/account/names').then(function (response) {
-      vm.companiesList = response.data;
+      function fetchCompaniesList() {
+        $http
+          .get("https://foo.client-craft.com/account/names")
+          .then(function (response) {
+            vm.companiesList = response.data;
 
       // Normalize vm.model.companies
       vm.model.companies = vm.model.companies.map(company => {
@@ -16,7 +18,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", funct
   }
 
   function fetchUserList() {
-    $http.get('http://foo.localhost:8000/user?include=photo').then(function (response) {
+    $http.get('https://foo.localhost:8000/user?include=photo').then(function (response) {
       vm.userNames = response.data.data;
       updateFilteredLists();
     });
@@ -40,11 +42,11 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", funct
   fetchCompaniesList();
   fetchUserList();
 
-  vm.submit = submit;
-  vm.close = close;
+      vm.submit = submit;
+      vm.close = close;
 
   function submit() {
-    $http.post('http://foo.localhost:8000/contact/' + vm.model.id, {
+    $http.post('https://foo.client-craft.com/contact/' + vm.model.id, {
       ...vm.model,
       _method: 'PUT'
     }).then(function (response) {
@@ -59,9 +61,10 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.CreateController", funct
     });
   }
 
-  function close() {
-    if ($scope.model.close) {
-      $scope.model.close();
+      function close() {
+        if ($scope.model.close) {
+          $scope.model.close();
+        }
+      }
     }
-  }
-});
+  );

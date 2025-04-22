@@ -11,7 +11,9 @@
       </div>
     </section>
     <umb-box>
-      <umb-box-header title="Leads"></umb-box-header>
+      <umb-box-header title="Leads">
+        <span>showing {{vm.meta.from}} to {{vm.meta.to}} of {{vm.meta.total}}</span>
+      </umb-box-header>
       <umb-box-content>
         <div class="umb-table" ng-if="vm.items">
           <!-- Table Header -->
@@ -19,10 +21,13 @@
             <div class="umb-table-row">
               <div class="umb-table-cell">
                 <label>
-                  <input class="umb-table__input" type="checkbox"
-                         ng-if="vm.allowSelectAll"
-                         ng-click="vm.selectAll($event)"
-                         ng-checked="vm.isSelectedAll()" />
+                  <input 
+                    class="umb-table__input" 
+                    type="checkbox"
+                    ng-if="vm.allowSelectAll"
+                    ng-click="vm.selectAll($event)"
+                    ng-checked="vm.isSelectedAll()" 
+                  />
                 </label>
               </div>
               <div class="umb-table-cell umb-table__name">
@@ -38,6 +43,9 @@
                   <span ng-bind="column.header"></span>
                   <i class="umb-table-head__icon icon" ng-class="{'icon-navigation-up': vm.isSortDirection(column.alias, 'asc'), 'icon-navigation-down': vm.isSortDirection(column.alias, 'desc')}"></i>
                 </a>
+              </div>
+              <div class="umb-table-cell umb-table__actions">
+                <localize key="general_actions">Actions</localize>
               </div>
             </div>
           </div>
@@ -104,8 +112,45 @@
                   </span>
                 </span>
               </div>
+              <div class="umb-table-cell umb-table-body__actions">
+                <div class="umb-table-body__actions">
+                  <button type="button" class="umb-table-body-action__button" ng-click="vm.openEditLeadDrawer(item)">
+                    <i class="icon icon-edit"></i>
+                  </button>
+                  <button type="button" class="umb-table-body-action__button" ng-click="vm.openDeletLeadDialog(item)">
+                    <i class="icon icon-trash-alt-2"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+        <!--Table Footer -->
+        <div class="client-craft-table-footer">
+          <button 
+            ng-click="vm.btPaginationOnClick(vm.links.first)" 
+            ng-class="{'active': vm.links.first}"
+          >
+            First
+          </button>
+          <button 
+            ng-click="vm.btPaginationOnClick(vm.links.prev)" 
+            ng-class="{'active': vm.links.prev}"
+          >
+            Prev
+          </button>
+          <button 
+            ng-click="vm.btPaginationOnClick(vm.links.next)" 
+            ng-class="{'active' : vm.links.next}"
+          >
+            Next
+          </button>
+          <button 
+            ng-click="vm.btPaginationOnClick(vm.links.last)" 
+            ng-class="{'active': vm.links.last}"
+          >
+            Last
+          </button>
         </div>
 
         <!-- Empty State -->

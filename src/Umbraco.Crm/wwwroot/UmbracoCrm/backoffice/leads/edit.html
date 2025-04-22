@@ -1,4 +1,4 @@
-<div class="client-craft umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Leads.CreateController as vm">
+<div class="client-craft umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Leads.EditController as vm">
   <div class="client-craft umb-editor-wrapper">
     <!-- Header -->
     <div class="client-craft umb-editor-header">
@@ -58,28 +58,29 @@
             </umb-box-content>
           </umb-box>
         </div>
+        
+        <div class="client-craft umb-editor-footer">
+          <div class="client-craft umb-editor-footer__buttons">
+            <umb-button
+              class="client-craft"
+              type="button"
+              button-style="link"
+              label="Cancel"
+              action="vm.close()">
+            </umb-button>
+            <umb-button
+              class="client-craft"
+              type="submit"
+              button-style="success"
+              label="Save"
+              state="vm.submitState"
+              disabled="leadForm.$invalid">
+            </umb-button>
+          </div>
+        </div>
       </form>
     </div>
 
     <!-- Footer -->
-    <div class="client-craft umb-editor-footer">
-      <div class="client-craft umb-editor-footer__buttons">
-        <umb-button
-          class="client-craft"
-          type="button"
-          button-style="link"
-          label="Cancel"
-          action="vm.close()">
-        </umb-button>
-        <umb-button
-          class="client-craft"
-          type="submit"
-          button-style="success"
-          label="Save"
-          state="vm.submitState"
-          disabled="leadForm.$invalid">
-        </umb-button>
-      </div>
-    </div>
   </div>
 </div>

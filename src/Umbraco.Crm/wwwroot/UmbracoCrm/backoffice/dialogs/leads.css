@@ -1,0 +1,73 @@
+.notes-container {
+  max-height: 50vh;
+  overflow-y: auto;
+  margin-right: -15px;
+  padding-right: 15px;
+  position: relative;
+}
+
+.notes-container .note-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e5eb;
+  width: 100%;
+}
+
+.notes-container .note-item:last-child {
+  border-bottom: none;
+}
+
+.notes-container .note-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #666;
+}
+
+.notes-container .note-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notes-container .note-actions span {
+  margin-left: 8px;
+}
+
+.notes-container .btn-edit, .notes-container .btn-delete {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.notes-container .btn-edit {
+  color: #0066cc;
+}
+
+.notes-container .btn-edit:hover {
+  background-color: rgba(0, 102, 204, 0.1);
+}
+
+.notes-container .btn-delete {
+  color: #cc3300;
+}
+
+.notes-container .btn-delete:hover {
+  background-color: rgba(204, 51, 0, 0.1);
+}
+
+.notes-container .icon-edit, .notes-container .icon-trash {
+  margin-right: 3px;
+}
+
+.notes-container .loading-indicator {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #666;
+}

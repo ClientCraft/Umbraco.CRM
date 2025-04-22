@@ -4,19 +4,19 @@ angular.module("umbraco")
 
     vm.contactId = $routeParams.id;
 
-    Object.defineProperty(vm, 'latestNotes', {
-      get: function () {
+    Object.defineProperty(vm, "latestNotes", {
+      get: function  () {
         // Sort notes by created_at in descending order and take the first 3
         if (vm.contact && vm.contact.notes && vm.contact.notes.length) {
           return vm.contact.notes
             .slice() // Create a copy to avoid modifying the original array
-            .sort(function (a, b) {
+            .sort(function  (a, b) {
               return new Date(b.created_at) - new Date(a.created_at);
             })
             .slice(0, 3);
         }
         return []; // Return empty array if no notes exist
-      }
+      },
     });
 
     Object.defineProperty(vm, 'contactCompanyNames', {
