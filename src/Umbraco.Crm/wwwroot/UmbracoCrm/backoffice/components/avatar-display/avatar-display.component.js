@@ -12,50 +12,31 @@
   controller: function ($element, $scope, notificationsService) {
     var ctrl = this;
 
-    ctrl.$onInit = function () {
-      ctrl.size = ctrl.size || "30";
-      console.log(
-        "onInit - object:",
-        ctrl.object,
-        "allowEdit:",
-        ctrl.allowEdit,
-        "photoUploadUrl:",
-        ctrl.photoUploadUrl
-      );
-    };
+      ctrl.$onInit = function() {
+        ctrl.size = ctrl.size || '30';
+      };
 
-    ctrl.nameToAcronym = function (name) {
-      if (!name) return "";
-      return name
-        .split(" ")
-        .map((word) => word.charAt(0).toUpperCase())
-        .join("");
-    };
+      ctrl.nameToAcronym = function(name) {
+        if (!name) return '';
+        return name.split(" ").map(word => word.charAt(0).toUpperCase()).join("");
+      };
 
-    ctrl.triggerPhotoChange = function (event) {
-      event.preventDefault();
-      console.log("triggerPhotoChange");
-      const fileInput = $element.find('input[type="file"]')[0];
-      if (fileInput) {
-        fileInput.click();
-      }
-    };
+      ctrl.triggerPhotoChange = function(event) {
+        event.preventDefault();
+        const fileInput = $element.find('input[type="file"]')[0];
+        if (fileInput) {
+          fileInput.click();
+        }
+      };
 
-    ctrl.handlePhotoChange = function (fileInput) {
-      const file = fileInput.files[0];
-      if (!file) {
-        console.log("No file selected");
-        return;
-      }
+      ctrl.handlePhotoChange = function(fileInput) {
+        const file = fileInput.files[0];
+        if (!file) {
+          return;
+        }
 
-      console.log("File MIME type:", file.type);
-      const formData = new FormData();
-      formData.append("image", file);
-
-      console.log("FormData entries:");
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
+        const formData = new FormData();
+        formData.append('image', file);
 
       if (!ctrl.photoUploadUrl) {
         console.error("photoUploadUrl is not provided");

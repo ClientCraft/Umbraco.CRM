@@ -37,7 +37,7 @@
             <a href="{{vm.contact.instagram_url}}" class="social-icon">@</a>
           </div>
           <div class="last-contacted">
-            Last Contacted <span class="contact-date">August 13, 2024</span>
+            Last Contacted <span class="contact-date">{{vm.contact.last_contacted |  date:'short':'UTC'}}</span>
           </div>
         </div>
         <div class="tags-management">
@@ -59,34 +59,33 @@
 
         <div class="info-column">
           <div class="info-label">Work Email</div>
-          <div class="info-value">fated.limebroken@yahoo.com</div>
+          <div class="info-value">{{vm.contact.email}}</div>
 
           <div class="info-label">Work Address</div>
-          <div class="info-value">fake address, 234 - ST</div>
+          <div class="info-value">{{vm.contact.address ? vm.contact.address.street : ''}} {{vm.contact.address ? vm.contact.address.city : ''}} {{vm.contact.address ? vm.contact.address.country : ''}}</div>
         </div>
 
         <div class="info-column">
           <div class="info-label">Work Phone</div>
-          <div class="info-value">+1 (832) 342-2261</div>
+          <div class="info-value">{{vm.contact.phone}}</div>
         </div>
 
         <div class="contact-metrics">
           <div class="metric">
             <div class="metric-label">Contact Score</div>
             <div class="metric-value">
-              <div class="score-circle">94</div>
+              <div class="score-circle">{{vm.contact.score}}</div>
             </div>
           </div>
 
           <div class="metric">
             <div class="metric-label">Contact Owner</div>
             <div class="metric-value">
-              <avatar-display object="vm.contact.owner"> </avatar-display>
-              <div
-                style="text-wrap: nowrap"
-                class="metric-label"
-                ng-if="vm.contact && !vm.contact.owner"
-              >
+              <avatar-display
+                ng-if="vm.contact && vm.contact.owner"
+                object="vm.contact.owner">
+              </avatar-display>
+              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.contact && !vm.contact.owner">
                 No owner assigned
               </div>
             </div>
@@ -344,7 +343,7 @@
         <div class="section-header">
           <h3 class="section-title">Last Deals</h3>
           <div>
-            <a href="#" class="section-action">Create Deal</a>
+            <a href="#" ng-click="vm.handleCreateDeal($event)" class="section-action">Create Deal</a>
             <a href="#" class="section-action">See All</a>
           </div>
         </div>
