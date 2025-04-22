@@ -9,7 +9,6 @@
         <i aria-hidden="true" class="client-craft umb-icon umb-icon-multiply"></i>
       </button>
     </div>
-
     <!-- Body -->
     <div class="client-craft umb-editor-body">
       <form name="leadForm" ng-submit="vm.submit()" novalidate>
@@ -50,36 +49,36 @@
               </div>
               <div class="client-craft umb-control-group">
                 <label for="lead-status-id">Status</label>
-                <select id="lead-status-id" ng-model="vm.model.lead_status_id">
+                <select id="lead-status-id" ng-model="vm.model.status.id" required>
                   <option value="" disabled>Select a status</option>
-                  <option ng-repeat="status in vm.leadStatuses" value="{{status.id}}">{{status.name}}</option>
+                  <option ng-repeat="status in vm.leadStatuses" ng-value="status.id">{{status.name}}</option>
                 </select>
               </div>
             </umb-box-content>
           </umb-box>
         </div>
-      </form>
-    </div>
 
-    <!-- Footer -->
-    <div class="client-craft umb-editor-footer">
-      <div class="client-craft umb-editor-footer__buttons">
-        <umb-button
-          class="client-craft"
-          type="button"
-          button-style="link"
-          label="Cancel"
-          action="vm.close()">
-        </umb-button>
-        <umb-button
-          class="client-craft"
-          type="submit"
-          button-style="success"
-          label="Save"
-          state="vm.submitState"
-          disabled="leadForm.$invalid">
-        </umb-button>
-      </div>
+        <!-- Footer -->
+        <div class="client-craft umb-editor-footer">
+          <div class="client-craft umb-editor-footer__buttons">
+            <umb-button
+              class="client-craft"
+              type="button"
+              button-style="link"
+              label="Cancel"
+              action="vm.close()">
+            </umb-button>
+            <umb-button
+              class="client-craft"
+              type="submit"
+              button-style="success"
+              label="Save"
+              state="vm.submitState"
+              disabled="leadForm.$invalid">
+            </umb-button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -17,16 +17,12 @@ internal class CrmManifestFilter : IManifestFilter
             [
                 // List any Script files
                 // Urls should start '/App_Plugins/Umbraco.Crm/' not '/wwwroot/Umbraco.Crm/', e.g.
-                "/App_Plugins/Umbraco.Crm/app/app.component.js",
-                "/App_Plugins/Umbraco.Crm/app/components/lead/list/lead-list.component.js",
-                "/App_Plugins/Umbraco.Crm/app/components/deal/list/deal-list.component.js",
-                "/App_Plugins/Umbraco.Crm/app/components/contact/list/contact-list.component.js",
-                "/App_Plugins/Umbraco.Crm/app/components/account/list/account-list.component.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/overview.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/create.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/edit.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/view.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/dialogs/leads.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/contacts/edit.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/contacts/view.controller.js",
                 "/App_Plugins/UmbracoCrm/backoffice/notes/create.controller.js",
@@ -43,6 +39,7 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/leads/edit.css",
                 "/App_Plugins/UmbracoCrm/backoffice/leads/view.css",
                 "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.css",
+                "/App_Plugins/UmbracoCrm/backoffice/dialogs/leads.css",
                 "/App_Plugins/UmbracoCrm/backoffice/contacts/edit.css",
                 "/App_Plugins/UmbracoCrm/backoffice/contacts/view.css",
                 "/App_Plugins/UmbracoCrm/backoffice/notes/create.css",
@@ -61,7 +58,7 @@ internal class CrmManifestFilter : IManifestFilter
             [
                 new ManifestDashboard
                 {
-                    Alias = "Umbraco.Crm.Main.Dashboard", View = "/App_Plugins/Umbraco.Crm/index.html", Sections = ["Umbraco.Crm"], Weight = 10
+                    Alias = "Umbraco.Crm.Main.Dashboard", View = "/App_Plugins/UmbracoCrm/backoffice/index.html", Sections = ["Umbraco.Crm"], Weight = 10
                 }
             ]
         };
