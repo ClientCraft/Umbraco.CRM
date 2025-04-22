@@ -21,13 +21,21 @@
                 <input type="text" id="name" ng-model="vm.model.name" required />
               </div>
 
-              <div class="client-craft umb-control-group">
-                <label for="deal_status_id">Status</label>
-                <select id="deal_status_id" ng-model="vm.model.deal_status_id" required>
-                  <option value="" disabled>Select status</option>
-                  <option ng-repeat="status in vm.dealStatuses" value="{{status.id}}">{{status.label}}</option>
-                </select>
-              </div>
+              <select-input
+                label="Status"
+                model="vm.model.deal_status_id"
+                options="vm.dealStatuses"
+                option-value="id"
+                option-label="label">
+              </select-input>
+
+              <select-input
+                label="Type"
+                model="vm.model.deal_type_id"
+                options="vm.dealTypes"
+                option-value="id"
+                option-label="label">
+              </select-input>
 
               <div class="client-craft umb-control-group">
                 <label for="amount">Amount</label>
@@ -39,31 +47,38 @@
                 <input type="datetime-local" id="close_date" ng-model="vm.model.close_date" required />
               </div>
 
-              <div class="client-craft umb-control-group">
-                <label for="user_id">Owner</label>
-                <select id="user_id" ng-model="vm.model.user_id" required>
-                  <option value="" disabled>Select owner</option>
-                  <option ng-repeat="user in vm.users" value="{{user.id}}">{{user.name}}</option>
-                </select>
-              </div>
+              <select-input
+                label="Owner"
+                model="vm.model.owner_id"
+                options="vm.userNamesWithoutDeputies"
+                option-value="id"
+                option-label="name">
+              </select-input>
 
-              <div class="client-craft umb-control-group">
-                <label for="deal_type_id">Deal Type</label>
-                <select id="deal_type_id" ng-model="vm.model.deal_type_id" required>
-                  <option value="" disabled>Select type</option>
-                  <option ng-repeat="type in vm.dealTypes" value="{{type.id}}">{{type.name}}</option>
-                </select>
-              </div>
+              <select-input
+                label="Deputies"
+                model="vm.model.deputies"
+                options="vm.userNamesWithoutOwner"
+                multiple="true"
+                return-object="true"
+                option-label="name">
+              </select-input>
 
-              <div class="client-craft umb-control-group">
-                <label for="priority">Priority</label>
-                <select id="priority" ng-model="vm.model.priority" required>
-                  <option value="" disabled>Select priority</option>
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
+              <select-input
+                label="Deal Type"
+                model="vm.model.deal_type_id"
+                options="vm.dealTypes"
+                option-value="id"
+                option-label="label">
+              </select-input>
+
+              <select-input
+                label="Priority"
+                model="vm.model.priority"
+                options="vm.dealPriorities"
+                option-value="id"
+                option-label="name">
+              </select-input>
             </umb-box-content>
           </umb-box>
         </div>

@@ -1,11 +1,16 @@
 angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", function ($scope, userService, usersResource, $http, notificationsService) {
   var vm = this;
-
+  fetchUserList();
   // Initialize the model
   vm.model = {
     content: "",
     user_reference: "",
-    contact_id: null
+    contact_id: null,
+    deal_type_id: null,
+    deal_status_id: null,
+    priority: null,
+    owner_id: null,
+    deputies: [],
   };
 
   // Track submission state for the button
@@ -19,28 +24,75 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   // });
 
   vm.model.contact_id = $scope.model.data.id;
+  vm.dealPriorities = [
+    { id: 'low', name: 'Low' },
+    { id: 'medium', name: 'Medium' },
+    { id: 'high', name: 'High' }
+  ];
 
-  $http({
-    method: 'GET',
-    url: 'http://foo.localhost:8000/contact/names',
-    headers: {
-      'Content-Type': 'application/json',
-      'accept': 'application/json'
-    },
-  }).then(function(response) {
-    vm.users = response.data;
-  });
+  function fetchUserList() {
+    $http.get('http://foo.localhost:8000/user?include=photo').then(function (response) {
+      vm.userNames = response.data.data;
+      updateFilteredLists();
+    });
+  }
 
-  $http({
-    method: 'GET',
-    url: 'http://foo.localhost:8000/deal/status',
-    headers: {
-      'Content-Type': 'application/json',
-      'accept': 'application/json'
-    },
-  }).then(function(response) {
-    vm.dealStatuses = response.data;
-  });
+  function updateFilteredLists() {
+    // Update filtered lists without using computed properties
+    vm.userNamesWithoutOwner = vm.userNames?.filter(user =>
+      user.id !== vm.model.owner_id
+    );
+
+    vm.userNamesWithoutDeputies = vm.userNames?.filter(user =>
+      !vm.model.deputies.some(deputy => deputy.id === user.id)
+    );
+  }
+
+  // Watch for changes in owner and deputies
+  $scope.$watch('vm.model.owner_id', updateFilteredLists);
+  $scope.$watch('vm.model.deputies', updateFilteredLists, true);
+
+  const getUserNames = function () {
+    $http({
+      method: 'GET',
+      url: 'http://foo.localhost:8000/user/names',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+      },
+    }).then(function(response) {
+      vm.users = response.data;
+    });
+  };
+  getUserNames();
+
+  const getDealStatuses = function() {
+    $http({
+      method: 'GET',
+      url: 'http://foo.localhost:8000/deal/status',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+      },
+    }).then(function(response) {
+      vm.dealStatuses = response.data;
+    });
+  };
+  getDealStatuses();
+
+  const getDealTypes = function() {
+    $http({
+      method: 'GET',
+      url: 'http://foo.localhost:8000/deal/types',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json'
+      },
+    }).then(function(response) {
+      vm.dealTypes = response.data;
+    });
+  };
+  getDealTypes();
 
   // Setup methods
   vm.submit = submit;
