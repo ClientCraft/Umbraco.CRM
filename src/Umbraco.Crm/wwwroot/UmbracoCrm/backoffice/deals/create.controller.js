@@ -100,42 +100,38 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
 
   function submit() {
     // Set button to loading state
+    console.log('WHY TF IM NOT SUBMITTING');
 
     vm.submitState = "busy";
-    // Validate content is not empty
-    if (!vm.model.content) {
-      notificationsService.error("Error", "Note content cannot be empty");
-      vm.submitState = "error";
-      return;
-    }
-
-    // Prepare API request payload
-    var payload = {
-      content: vm.model.content,
-      user_reference: vm.model.user_reference
-    };
 
     // Make API call
     $http({
       method: 'POST',
-      url: 'http://foo.localhost:8000/contact/' + vm.model.contact_id + '/note',
+      url: 'http://foo.localhost:8000/deal',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
       },
-      data: payload
+      data: vm.model
     }).then(function(response) {
-      // Success
-      notificationsService.success("Success", "Note has been added successfully");
-      vm.submitState = "success";
-
-      // Close or reset
-      if ($scope.model && $scope.model.submit) {
-        $scope.model.submit(response.data);
-      }
+      $http({
+        method: 'POST',
+        url: 'http://foo.localhost:8000/contact/' + vm.model.contact_id + '/deal/' + response.data.id + '/attach',
+      }).then(function() {
+        // Success
+        notificationsService.success("Success", "Deal was successfully created");
+        vm.submitState = "success";
+        if ($scope.model.submit) {
+          $scope.model.submit(response.data);
+        }
+      }, function(error) {
+        // Error attaching note to contact
+        notificationsService.error("Error", "Failed to attach deal to contact: " + (error.data?.message || "Unknown error"));
+        vm.submitState = "error";
+      });
     }, function(error) {
       // Error
-      notificationsService.error("Error", "Failed to add note: " + (error.data?.message || "Unknown error"));
+      notificationsService.error("Error", "Failed to create contact: " + (error.data?.message || "Unknown error"));
       vm.submitState = "error";
     });
   }

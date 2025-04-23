@@ -46,7 +46,7 @@
 
     ctrl.loadGlobalTags = function () {
       $http
-        .get(`https://foo.client-craft.com/${ctrl.entityType}/tag`)
+        .get(`http://foo.localhost:8000/${ctrl.entityType}/tag`)
         .then(function (response) {
           ctrl.globalTags = response.data || [];
           ctrl.selectedTags = ctrl.tags || [];
@@ -90,7 +90,7 @@
         ctrl.selectedTags.splice(tagIndex, 1);
         $http
           .delete(
-            `https://foo.client-craft.com/${ctrl.entityType}/${ctrl.entityId}/tag/${tag.id}/detach`
+            `http://foo.localhost:8000/${ctrl.entityType}/${ctrl.entityId}/tag/${tag.id}/detach`
           )
           .catch(function (error) {
             console.error("Error removing tag:", error);
@@ -102,7 +102,7 @@
         ctrl.selectedTags.push(tag);
         $http
           .post(
-            `https://foo.client-craft.com/${ctrl.entityType}/${ctrl.entityId}/tag/${tag.id}/attach`
+            `http://foo.localhost:8000/${ctrl.entityType}/${ctrl.entityId}/tag/${tag.id}/attach`
           )
           .catch(function (error) {
             console.error("Error adding tag:", error);
@@ -134,7 +134,7 @@
       $scope.$applyAsync();
 
       $http
-        .post(`https://foo.client-craft.com/${ctrl.entityType}/tag`, newTag)
+        .post(`http://foo.localhost:8000/${ctrl.entityType}/tag`, newTag)
         .then(function (response) {
           const createdTag = response.data;
           // Add to global tags
@@ -144,7 +144,7 @@
           // Associate tag with entity
           ctrl.createButtonState = "success";
           return $http.post(
-            `https://foo.client-craft.com/${ctrl.entityType}/${ctrl.entityId}/tag/${createdTag.id}/attach`
+            `http://foo.localhost:8000/${ctrl.entityType}/${ctrl.entityId}/tag/${createdTag.id}/attach`
           );
         })
         .then(function () {
@@ -175,7 +175,7 @@
 
         $http
           .delete(
-            `https://foo.client-craft.com/${ctrl.entityType}/${ctrl.entityId}/tag/${tag.id}/detach`
+            `http://foo.localhost:8000/${ctrl.entityType}/${ctrl.entityId}/tag/${tag.id}/detach`
           )
           .catch(function (error) {
             console.error("Error removing tag:", error);

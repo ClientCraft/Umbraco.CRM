@@ -12,7 +12,7 @@
 
     <!-- Body -->
     <div class="client-craft umb-editor-body">
-      <form name="dealForm" ng-submit="vm.submit()" novalidate>
+      <form name="dealForm" novalidate>
         <div class="editor-panels-container">
           <umb-box class="client-craft">
             <umb-box-content class="client-craft">
@@ -39,7 +39,14 @@
 
               <div class="client-craft umb-control-group">
                 <label for="amount">Amount</label>
-                <input type="number" step="100" id="amount" ng-model="vm.model.amount" required />
+                <input
+                  type="number"
+                  id="amount"
+                  ng-model="vm.model.amount"
+                  step="100.00"
+                  min="0"
+                  max="99999999.99"
+                  required />
               </div>
 
               <div class="client-craft umb-control-group">
@@ -62,14 +69,6 @@
                 multiple="true"
                 return-object="true"
                 option-label="name">
-              </select-input>
-
-              <select-input
-                label="Deal Type"
-                model="vm.model.deal_type_id"
-                options="vm.dealTypes"
-                option-value="id"
-                option-label="label">
               </select-input>
 
               <select-input
@@ -97,11 +96,12 @@
         </umb-button>
         <umb-button
           class="client-craft"
-          type="submit"
+          type="button"
+          action="vm.submit()"
           button-style="success"
           label="Save"
           state="vm.submitState"
-          disabled="dealForm.$invalid">
+          disabled="leadForm.$invalid">
         </umb-button>
       </div>
     </div>

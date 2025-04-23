@@ -14,7 +14,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Leads.EditController", functio
   vm.close = close;
 
   function submit() {
-    $http.post("https://foo.client-craft.com/lead/" + vm.model.id, {
+    $http.post("http://foo.localhost:8000/lead/" + vm.model.id, {
       ...vm.model,
       _method: "PUT"
     }).then(function (response) {

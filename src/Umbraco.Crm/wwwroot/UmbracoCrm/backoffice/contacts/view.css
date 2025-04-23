@@ -74,6 +74,46 @@
   padding-bottom: 20px;
 }
 
+.contact-view-container .deal-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.contact-view-container .deal-pill--default {
+  background-color: #d8d7d9;
+  color: #1b264f;
+}
+
+.contact-view-container .deal-pill--primary {
+  background-color: #1b264f;
+  color: #ffffff;
+}
+
+.contact-view-container .deal-pill--secondary {
+  background-color: #9899a6;
+  color: #ffffff;
+}
+
+.contact-view-container .deal-pill--success {
+  background-color: #1fb572;
+  color: #ffffff;
+}
+
+.contact-view-container .deal-pill--warning {
+  background-color: #f5c1bc;
+  color: #1b264f;
+}
+
+.contact-view-container .deal-pill--danger {
+  background-color: #d42054;
+  color: #ffffff;
+}
+
 .contact-view-container .left-panel {
   height: 100%;
   flex: 7;

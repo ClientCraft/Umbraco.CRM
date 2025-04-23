@@ -1,4 +1,4 @@
-<div class="client-craft umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Leads.CreateController as vm">
+<div class="client-craft umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Contacts.EditController as vm">
   <div class="client-craft umb-editor-wrapper">
     <!-- Header -->
     <div class="client-craft umb-editor-header">
@@ -57,9 +57,9 @@
 
               <select-input
                 label="Owner"
-                model="vm.model.owner"
+                model="vm.model.user_id"
                 options="vm.userNamesWithoutDeputies"
-                return-object="true"
+                option-value="id"
                 option-label="name">
               </select-input>
 

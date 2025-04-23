@@ -120,7 +120,7 @@ angular
           submitButtonLabel: "Yes",
           closeButtonLabel: "Cancel",
           submit: function(){
-            $http.delete(`https://foo.client-craft.com/lead/${item.id}`).then(()=>{
+            $http.delete(`http://foo.localhost:8000/lead/${item.id}`).then(()=>{
               vm.items = vm.items.filter((lead)=>{lead.id !== item.id})
               notificationsService.success(
                 "Success",
@@ -147,7 +147,7 @@ angular
       }
 
       vm.fetchData(
-        "https://foo.client-craft.com/lead?include=status,notes,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false&page=1"
+        "http://foo.localhost:8000/lead?include=status,notes,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false&page=1"
       );
     }
   );

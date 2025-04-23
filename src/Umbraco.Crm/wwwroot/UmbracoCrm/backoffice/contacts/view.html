@@ -22,7 +22,7 @@
           object="vm.contact"
           allow-edit="true"
           size="125"
-          photo-upload-url="{{ 'https://foo.client-craft.com/contact/' + vm.contactId + '/photo' }}"
+          photo-upload-url="{{ 'http://foo.localhost:8000/contact/' + vm.contactId + '/photo' }}"
           on-success="vm.handlePhotoUploadSuccess(photo)"
         >
         </avatar-display>
@@ -338,28 +338,28 @@
         </div>
       </div>
 
-      <!-- Last Deals Section -->
+      <!-- Closest Deals Section -->
       <div class="panel-section">
         <div class="section-header">
-          <h3 class="section-title">Last Deals</h3>
+          <h3 class="section-title">Closest Deals</h3>
           <div>
             <a href="#" ng-click="vm.handleCreateDeal($event)" class="section-action">Create Deal</a>
-            <a href="#" class="section-action">See All</a>
+            <a href="#" ng-click="vm.handleSeeAllDeals($event)" class="section-action">See All</a>
           </div>
         </div>
 
         <!-- Deal 1 -->
         <div
-          ng-if="vm.latestDeals && vm.latestDeals.length > 0"
-          ng-repeat="deal in vm.latestDeals track by $index"
+          ng-if="vm.closestDeals && vm.closestDeals.length > 0"
+          ng-repeat="deal in vm.closestDeals track by $index"
           class="deal-item"
         >
           <div class="deal-date">
-            Closing Date 10/04/2025
-            <span class="deal-phone">Deal Phone</span>
+            Closing Date {{deal.close_date | date:'short':'UTC'}}
+            <span class="deal-pill" ng-class="'deal-pill--' + (deal.status.color || 'default')">{{deal.status.label}}</span>
           </div>
-          <div class="deal-title">Anniversary cake</div>
-          <div class="deal-value">$1,000.15</div>
+          <div class="deal-title">{{deal.name}}</div>
+          <div class="deal-value">{{deal.amount | currency:'€'}}</div>
         </div>
         <div
           ng-if="vm.latestDeals && vm.latestDeals.length === 0"

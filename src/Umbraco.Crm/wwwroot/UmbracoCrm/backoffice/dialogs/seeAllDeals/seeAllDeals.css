@@ -1,0 +1,125 @@
+﻿.deals-container {
+  max-height: 50vh;
+  overflow-y: auto;
+  margin-right: -15px;
+  padding-right: 15px;
+  position: relative;
+}
+
+.deals-container .deal-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e5eb;
+  width: 100%;
+}
+
+.deals-container .deal-item:last-child {
+  border-bottom: none;
+}
+
+.deals-container .deal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #666;
+}
+
+.deals-container .deal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deals-container .deal-actions span {
+  margin-left: 8px;
+}
+
+.deals-container .btn-edit, .deals-container .btn-delete {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.deals-container .btn-edit {
+  color: #0066cc;
+}
+
+.deals-container .btn-edit:hover {
+  background-color: rgba(0, 102, 204, 0.1);
+}
+
+.deals-container .btn-delete {
+  color: #cc3300;
+}
+
+.deals-container .deal-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deals-container .btn-delete:hover {
+  background-color: rgba(204, 51, 0, 0.1);
+}
+
+.deals-container .icon-edit, .deals-container .icon-trash {
+  margin-right: 3px;
+}
+
+.deals-container .loading-indicator {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #666;
+}
+
+
+.deals-container .deal-item:last-child {
+  border-bottom: none;
+}
+
+.deals-container .deal-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e5eb;
+}
+
+.deals-container .deal-date {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deals-container .deal-pill--default {
+  background-color: #d8d7d9;
+  color: #1b264f;
+}
+
+.deals-container .deal-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.deals-container .deal-title {
+  font-weight: 500;
+  margin: 5px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.deals-container .deal-value {
+  color: #666;
+  font-size: 12px;
+}

@@ -49,7 +49,7 @@ angular
         $http({
           method: "POST",
           url:
-            "https://foo.client-craft.com/contact/" +
+            "http://foo.localhost:8000/contact/" +
             vm.model.contact_id +
             "/note",
           headers: {

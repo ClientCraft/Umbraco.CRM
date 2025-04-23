@@ -27,7 +27,7 @@ public class UserNotificationHandler :
     private readonly ILogger<UserNotificationHandler> _logger;
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonOptions;
-    private const string BaseApiUrl = "https://foo.client-craft.com/";
+    private const string BaseApiUrl = "http://foo.localhost:8000/";
     private static readonly ConcurrentDictionary<string, bool> _processingUsers = new();
 
     private readonly AppCaches _appCaches;

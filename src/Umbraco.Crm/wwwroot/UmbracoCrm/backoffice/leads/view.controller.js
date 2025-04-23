@@ -19,7 +19,7 @@ angular
       // Fetch lead data
       $http
         .get(
-          "https://foo.client-craft.com/lead/" +
+          "http://foo.localhost:8000/lead/" +
             vm.leadId +
             "?include=status,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks"
         )
@@ -47,7 +47,7 @@ angular
         });
 
       $http
-        .get("https://foo.client-craft.com/lead/1/note?page=1&per_page=2")
+        .get("http://foo.localhost:8000/lead/1/note?page=1&per_page=2")
         .then(function (response) {
           vm.lead = { ...vm.lead, notes: response.data.data };
         })
@@ -75,7 +75,7 @@ angular
         $event.stopPropagation();
 
         overlayService.open({
-          view: "/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.html",
+          view: "/App_Plugins/UmbracoCrm/backoffice/dialogs/seeAllNotes/seeAllNotes.html",
           title: "See all Notes",
           description: "A table to display all notes for an object",
           closeButtonLabel: "Close",

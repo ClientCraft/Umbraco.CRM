@@ -6,7 +6,7 @@
     object: "<", // One-way binding for the object (e.g., vm.contact.owner)
     allowEdit: "<", // Boolean to enable photo editing
     size: "@", // Size in pixels (e.g., "80")
-    photoUploadUrl: "@", // URL for photo upload (e.g., 'https://foo.client-craft.com/contact/1/photo')
+    photoUploadUrl: "@", // URL for photo upload (e.g., 'http://foo.localhost:8000/contact/1/photo')
     onSuccess: "&", // Event emitter for successful upload response
   },
   controller: function ($element, $scope, notificationsService) {

@@ -6,7 +6,7 @@
       var vm = this;
 
       vm.notes = undefined;
-      vm.next = `https://foo.client-craft.com/${$scope.model.data.type}/${$scope.model.data.id}/note?page=1`;
+      vm.next = `http://foo.localhost:8000/${$scope.model.data.type}/${$scope.model.data.id}/note?page=1`;
       vm.loading = false;
 
       vm.fetchNextNotes = function () {

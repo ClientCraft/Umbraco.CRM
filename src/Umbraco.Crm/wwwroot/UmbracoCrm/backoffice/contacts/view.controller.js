@@ -28,6 +28,15 @@ angular.module("umbraco")
       }
     });
 
+    Object.defineProperty(vm, 'closestDeals', {
+      get: function () {
+        if (vm.contact && vm.contact.deals && vm.contact.deals.length) {
+          return vm.contact.deals.sort((a, b) => new Date(a.close_date) - new Date(b.close_date)).slice(0, 3);
+        }
+        return [];
+      }
+    });
+
     vm.handlePhotoUploadSuccess = function (photo) {
       console.log('Photo upload success:', photo);
       vm.contact.photo = photo; // Update the photo
@@ -41,7 +50,7 @@ angular.module("umbraco")
     // Fetch contact data
     let fetchContact = function () {
       $http
-        .get("http://foo.localhost:8000/contact/" + vm.contactId + "?include=companies,deals,owner,deputies,tags,photo,address")
+        .get("http://foo.localhost:8000/contact/" + vm.contactId + "?include=companies,deals,deals.status,owner,deputies,tags,photo,address")
         .then(function (response) {
           vm.contact = {...vm.contact, ...response.data};
 
@@ -72,18 +81,6 @@ angular.module("umbraco")
     }
     fetchLatestNotes();
 
-    let fetchLatestDeals = function () {
-      $http
-        .get(`http://foo.localhost:8000/contact/${vm.contactId}/note?page=1&per_page=3`)
-        .then(function (response) {
-          vm.contact = {...vm.contact, notes: response.data.data};
-        })
-        .catch(function (error) {
-          console.error("Error fetching contact:", error);
-        });
-    }
-    fetchLatestDeals();
-
     // Breadcrumb navigation
     $scope.clickBreadcrumb = function (ancestor) {
       if (!ancestor?.link) return;
@@ -101,25 +98,36 @@ angular.module("umbraco")
       $event.stopPropagation();
 
       overlayService.open({
-        view: '/App_Plugins/UmbracoCrm/backoffice/dialogs/notes.html',
+        view: '/App_Plugins/UmbracoCrm/backoffice/dialogs/seeAllNotes/seeAllNotes.html',
         title: 'See all Notes',
         description: 'A table to display all notes for an object',
         closeButtonLabel: 'Close',
         submitButtonLabel: 'Create New Note',
+        submitButtonStyle: "primary",
         data: {type: 'contact', id: vm.contactId},
         submit: function (model) {
-          editorService.open({
-            title: "Create Lead Drawer",
-            view: "/App_Plugins/UmbracoCrm/backoffice/contacts/edit.html",
-            size: "small", // Options: small, medium, large
-            data: vm.contact,
-            submit: function (model) {
-              editorService.close();
-            },
-            close: function () {
-              editorService.close();
-            }
-          });
+          vm.handleCreateNote();
+        },
+        close: function () {
+          overlayService.close();
+        }
+      });
+
+    }
+
+    vm.handleSeeAllDeals = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      overlayService.open({
+        view: '/App_Plugins/UmbracoCrm/backoffice/dialogs/seeAllDeals/seeAllDeals.html',
+        title: 'See all Deals',
+        description: 'A table to display all deals for an object',
+        closeButtonLabel: 'Close',
+        submitButtonLabel: 'Create New Deal',
+        data: {type: 'contact', id: vm.contactId},
+        submit: function (model) {
+          vm.handleCreateDeal();
         },
         close: function () {
           overlayService.close();
@@ -129,8 +137,10 @@ angular.module("umbraco")
     }
 
     vm.handleCreateNote = function ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
+      if ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
 
       editorService.open({
         title: "Create Note Drawer",
@@ -148,16 +158,18 @@ angular.module("umbraco")
     }
 
     vm.handleCreateDeal = function ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
+      if ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
 
       editorService.open({
         title: "Create Deal Drawer",
         view: "/App_Plugins/UmbracoCrm/backoffice/deals/create.html",
         size: "small", // Options: small, medium, large
         data: vm.contact,
-        submit: function (model) {
-          fetchLatestDeals();
+        submit: function () {
+          fetchContact();
           editorService.close();
         },
         close: function () {

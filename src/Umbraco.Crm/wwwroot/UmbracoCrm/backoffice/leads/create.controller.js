@@ -30,7 +30,7 @@ angular
 
       function submit() {
         $http
-          .post("https://foo.client-craft.com/lead", {
+          .post("http://foo.localhost:8000/lead", {
             ...vm.model,
             _method: "POST",
           })
