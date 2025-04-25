@@ -138,157 +138,59 @@
           >
             <div ng-if="tab.alias === 'emails'">
               <!-- Thread 1 -->
-              <details class="email-thread">
+              <details class="email-thread" ng-repeat="thread in vm.contact.emailThreads">
                 <summary class="thread-header">
-                  <span class="thread-title">Thread #1</span>
+                  <span class="thread-title">Subject {{thread.subject}}</span>
                   <span class="thread-meta"
-                    >2 messages • Last message: 10 Jun 2025</span
+                    >{{thread.messages.length}} messages • Last message: {{thread.messages[0].sent_at | date:'short':'UTC'}}</span
                   >
                 </summary>
-                <div class="thread-messages">
-                  <!-- Message 1 -->
-                  <div class="email-message">
-                    <div class="email-header">
-                      <div class="thread-avatar">SU</div>
-                      <div class="thread-info">
-                        <div class="sender-info">
-                          <div class="sender-name">Sending User Name</div>
-                          <div class="recipient">To: Jerome Bell</div>
-                        </div>
-                      </div>
-                      <div class="thread-date">10 Jun 2025 at 12:00 PM</div>
-                      <div class="thread-actions">
-                        <div class="thread-action">👁️</div>
-                        <div class="thread-action">↩️</div>
-                        <div class="thread-action">⋮</div>
+                <div class="email-message" ng-repeat="message in thread.messages track by message.id">
+                  <div class="email-header">
+                    <avatar-display
+                      class="thread-avatar"
+                      object="message.sender">
+                    </avatar-display>
+                    <div class="thread-info">
+                      <div class="sender-info">
+                        <div class="sender-name">{{ message.sender.name || 'Sending User Name' }}</div>
+                        <div class="recipient">To: {{ message.recipient_name || 'Jerome Bell' }}</div>
                       </div>
                     </div>
-                    <div class="thread-content">Email thread text 1</div>
-                  </div>
-                  <!-- Message 2 -->
-                  <div class="email-message">
-                    <div class="email-header">
-                      <div class="thread-avatar">JB</div>
-                      <div class="thread-info">
-                        <div class="sender-info">
-                          <div class="sender-name">Jerome Bell</div>
-                          <div class="recipient">To: Sending User Name</div>
-                        </div>
-                      </div>
-                      <div class="thread-date">10 Jun 2025 at 12:05 PM</div>
-                      <div class="thread-actions">
-                        <div class="thread-action">👁️</div>
-                        <div class="thread-action">↩️</div>
-                        <div class="thread-action">⋮</div>
-                      </div>
-                    </div>
-                    <div class="thread-content">
-                      Response to email thread text 1
+                    <div class="thread-date">{{ message.sent_at | date:'d MMM yyyy \'at\' h:mm a' }}</div>
+                    <div class="thread-actions">
+                      <div class="thread-action">👁️</div>
+                      <div class="thread-action">↩️</div>
+                      <div class="thread-action">⋮</div>
                     </div>
                   </div>
-                </div>
-              </details>
-
-              <!-- Thread 2 -->
-              <details class="email-thread">
-                <summary class="thread-header">
-                  <span class="thread-title">Thread #2</span>
-                  <span class="thread-meta"
-                    >2 messages • Last message: 9 Jun 2025</span
-                  >
-                </summary>
-                <div class="thread-messages">
-                  <!-- Message 1 -->
-                  <div class="email-message">
-                    <div class="email-header">
-                      <div class="thread-avatar">SU</div>
-                      <div class="thread-info">
-                        <div class="sender-info">
-                          <div class="sender-name">Sending User Name</div>
-                          <div class="recipient">To: Jerome Bell</div>
-                        </div>
-                      </div>
-                      <div class="thread-date">9 Jun 2025 at 10:00 AM</div>
-                      <div class="thread-actions">
-                        <div class="thread-action">👁️</div>
-                        <div class="thread-action">↩️</div>
-                        <div class="thread-action">⋮</div>
-                      </div>
-                    </div>
-                    <div class="thread-content">Email thread text 2</div>
-                  </div>
-                  <!-- Message 2 -->
-                  <div class="email-message">
-                    <div class="email-header">
-                      <div class="thread-avatar">JB</div>
-                      <div class="thread-info">
-                        <div class="sender-info">
-                          <div class="sender-name">Jerome Bell</div>
-                          <div class="recipient">To: Sending User Name</div>
-                        </div>
-                      </div>
-                      <div class="thread-date">9 Jun 2025 at 10:10 AM</div>
-                      <div class="thread-actions">
-                        <div class="thread-action">👁️</div>
-                        <div class="thread-action">↩️</div>
-                        <div class="thread-action">⋮</div>
-                      </div>
-                    </div>
-                    <div class="thread-content">
-                      Response to email thread text 2
-                    </div>
-                  </div>
+                  <div class="thread-content" ng-bind-html="message.body"></div>
                 </div>
               </details>
             </div>
             <div ng-if="tab.alias === 'tasks'">
               <!-- Task 1 -->
-              <div class="task-item">
+              <div class="task-item" ng-repeat="task in vm.contact.tasks">
                 <div class="task-header">
-                  <div class="task-title">Follow up with client</div>
+                  <div class="task-title">{{task.title}}</div>
                   <div class="task-meta">
-                    <span>Due: 15 Oct 2023 at 12:00 PM</span> •
-                    <span>Created: 01 Oct 2023 at 09:00 AM</span>
+                    <span>Due: {{task.due_date | date:'short':'UTC'}}</span> •
+                    <span>Created: {{task.created_at | date:'short':'UTC'}}</span>
                   </div>
                 </div>
                 <div class="task-content">
                   <p class="task-description">
-                    Call the client to discuss the deal.
+                    {{task.description}}
                   </p>
                   <div class="task-details">
-                    <span class="task-assignee">Assigned to: User Name</span>
-                    <span class="task-type">Type: Task</span>
+                    <span class="task-assignee">Assigned to: {{task.user ? task.user.name : 'None'}}</span>
+                    <span class="task-type">Type: {{task.task_type.label}}</span>
                   </div>
                 </div>
                 <div class="task-actions">
-                  <div class="task-action">✔️</div>
-                  <div class="task-action">✏️</div>
-                  <div class="task-action">🗑️</div>
-                </div>
-              </div>
-
-              <!-- Task 2 -->
-              <div class="task-item">
-                <div class="task-header">
-                  <div class="task-title">Schedule product demo</div>
-                  <div class="task-meta">
-                    <span>Due: 20 Oct 2023 at 02:00 PM</span> •
-                    <span>Created: 02 Oct 2023 at 10:00 AM</span>
-                  </div>
-                </div>
-                <div class="task-content">
-                  <p class="task-description">
-                    Arrange a product demo for the client.
-                  </p>
-                  <div class="task-details">
-                    <span class="task-assignee">Assigned to: Another User</span>
-                    <span class="task-type">Type: Task</span>
-                  </div>
-                </div>
-                <div class="task-actions">
-                  <div class="task-action">✔️</div>
-                  <div class="task-action">✏️</div>
-                  <div class="task-action">🗑️</div>
+                  <div class="task-action" ng-click="vm.markAsDone(task)">✔️</div>
+                  <div class="task-action" ng-click="vm.editTask(task)">✏️</div>
+                  <div class="task-action" ng-click="vm.deleteTask(task)">🗑️</div>
                 </div>
               </div>
             </div>

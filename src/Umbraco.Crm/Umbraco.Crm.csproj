@@ -7,12 +7,12 @@
     <ContentTargetFolders>.</ContentTargetFolders>
     <Product>Umbraco.Community.Umbraco.Crm</Product>
     <PackageId>Umbraco.Community.Umbraco.Crm</PackageId>
-    <Title>Umbraco Crm</Title>
-    <Description>[ALPHA] CRM Data hub for Umbraco - Not ready for production use</Description>
+    <Title>Umbraco CRM</Title>
+    <Description>CRM Data hub for Umbraco - Not ready for production use</Description>
     <PackageTags>umbraco;umbraco-marketplace</PackageTags>
     <RootNamespace>Umbraco.Community.Umbraco.Crm</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>13.0.1-alpha</Version>
+    <Version>13.0.2</Version>
     <Authors>Arthur Nassar</Authors>
     <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © Arthur Nassar</Copyright>
     <PackageProjectUrl>https://github.com/ClientCraft/Umbraco.Crm</PackageProjectUrl>

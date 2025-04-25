@@ -47,10 +47,22 @@ angular.module("umbraco")
       console.log('Tags updated:', tags);
     };
 
+    vm.markAsDone = function (task) {
+      alert('Marking task as done: ' + JSON.stringify(task));
+    }
+
+    vm.editTask = function (task) {
+      alert('Editing task: ' + JSON.stringify(task));
+    }
+
+    vm.deleteTask = function (task) {
+      alert('Deleting task: ' + JSON.stringify(task));
+    }
+
     // Fetch contact data
     let fetchContact = function () {
       $http
-        .get("http://foo.localhost:8000/contact/" + vm.contactId + "?include=companies,deals,deals.status,owner,deputies,tags,photo,address")
+        .get("http://foo.localhost:8000/contact/" + vm.contactId + "?include=companies,deals,tasks,tasks.user,tasks.taskType,deals.status,owner,deputies,tags,photo,address,emailThreads.messages.sender,emailThreads.messages.toRecipients")
         .then(function (response) {
           vm.contact = {...vm.contact, ...response.data};
 
@@ -102,7 +114,7 @@ angular.module("umbraco")
         title: 'See all Notes',
         description: 'A table to display all notes for an object',
         closeButtonLabel: 'Close',
-        submitButtonLabel: 'Create New Note',
+        hideSubmitButton: true,
         submitButtonStyle: "primary",
         data: {type: 'contact', id: vm.contactId},
         submit: function (model) {
@@ -124,11 +136,8 @@ angular.module("umbraco")
         title: 'See all Deals',
         description: 'A table to display all deals for an object',
         closeButtonLabel: 'Close',
-        submitButtonLabel: 'Create New Deal',
+        hideSubmitButton: true,
         data: {type: 'contact', id: vm.contactId},
-        submit: function (model) {
-          vm.handleCreateDeal();
-        },
         close: function () {
           overlayService.close();
         }

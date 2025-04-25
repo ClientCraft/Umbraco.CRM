@@ -79,7 +79,7 @@ angular
           title: "See all Notes",
           description: "A table to display all notes for an object",
           closeButtonLabel: "Close",
-          submitButtonLabel: "Create New Note",
+          hideSubmitButton: true,
           data: { type: "lead", id: vm.leadId },
           submit: function (model) {
             editorService.open({
