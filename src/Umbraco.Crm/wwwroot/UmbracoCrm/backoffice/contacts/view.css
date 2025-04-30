@@ -349,11 +349,25 @@
   padding: 15px 0;
 }
 
+.contact-view-container .email-message:first-of-type {
+  border-top: 1px solid #e1e5eb;
+  margin-top: 15px;
+}
+
+.contact-view-container .email-message {
+  border-bottom: 1px solid #e1e5eb;
+  padding: 15px 0;
+}
+
 .contact-view-container .email-header {
   display: flex;
   align-items: center;
   padding: 10px 0;
   cursor: pointer;
+}
+
+.contact-view-container .btn--transparent .btn {
+  background: transparent;
 }
 
 .contact-view-container .thread-avatar {
@@ -381,8 +395,6 @@
 .contact-view-container .thread-content {
   color: #666;
   font-size: 13px;
-  border-bottom: 1px solid #e1e5eb;
-  padding-bottom: 15px;
 }
 
 .contact-view-container .thread-date {

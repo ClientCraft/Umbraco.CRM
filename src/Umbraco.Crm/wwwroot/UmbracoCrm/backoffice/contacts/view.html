@@ -137,7 +137,7 @@
             tab="tab"
           >
             <div ng-if="tab.alias === 'emails'">
-              <!-- Thread 1 -->
+              <!-- Email Threads -->
               <details class="email-thread" ng-repeat="thread in vm.contact.emailThreads">
                 <summary class="thread-header">
                   <span class="thread-title">Subject {{thread.subject}}</span>
@@ -168,18 +168,35 @@
                 </div>
               </details>
             </div>
-            <div ng-if="tab.alias === 'tasks'">
-              <!-- Task 1 -->
-              <div class="task-item" ng-repeat="task in vm.contact.tasks">
+            <div ng-if="tab.alias === 'tasks'" style="min-height: 200px;">
+              <div style="display: flex; flex-direction: row-reverse; margin-bottom: 15px;">
+                <umb-toggle
+                  checked="vm.showCompletedTasks"
+                  on-click="vm.toggleShowCompletedTasks()"
+                  show-labels="true"
+                  label-on="Hide Completed"
+                  label-off="Show Completed"
+                  label-position="right"
+                  hide-icons="true">
+                </umb-toggle>
+              </div>
+              <div style="position: relative; min-height: 200px;" ng-if="vm.isLoadingTasks">
+                <umb-load-indicator>
+                </umb-load-indicator>
+              </div>
+              <!-- Task Items -->
+              <div class="task-item" ng-if="vm.contact.tasks && vm.contact.tasks.length" ng-repeat="task in vm.contact.tasks"
+                   ng-if="!vm.isLoadingTasks && (task.completed_at === null || vm.showCompletedTasks)">
                 <div class="task-header">
-                  <div class="task-title">{{task.title}}</div>
+                  <div class="task-title" ng-class="{'completed-task': task.completed_at !== null}">{{task.title}}</div>
                   <div class="task-meta">
-                    <span>Due: {{task.due_date | date:'short':'UTC'}}</span> •
+                    <span ng-if="task.completed_at === null">Due: {{task.due_date | date:'short':'UTC'}} •</span>
+                    <span ng-if="task.completed_at !== null">Completed at: {{task.completed_at | date:'short':'UTC'}} •</span>
                     <span>Created: {{task.created_at | date:'short':'UTC'}}</span>
                   </div>
                 </div>
                 <div class="task-content">
-                  <p class="task-description">
+                  <p class="task-description" ng-class="{'completed-task': task.completed_at !== null}">
                     {{task.description}}
                   </p>
                   <div class="task-details">
@@ -188,10 +205,17 @@
                   </div>
                 </div>
                 <div class="task-actions">
-                  <div class="task-action" ng-click="vm.markAsDone(task)">✔️</div>
-                  <div class="task-action" ng-click="vm.editTask(task)">✏️</div>
-                  <div class="task-action" ng-click="vm.deleteTask(task)">🗑️</div>
+                  <umb-button ng-if="task.completed_at === null" class="btn--transparent" state="vm.markAsDoneButtonLoading === task.id ? 'busy' : 'init'" action="vm.markAsDone(task)" label="✔️" title="Mark as Complete"></umb-button>
+                  <umb-button ng-if="task.completed_at !== null" class="btn--transparent" state="vm.markAsIncompleteButtonLoading === task.id ? 'busy' : 'init'" action="vm.markAsIncomplete(task)" label="↩️" title="Mark as Incomplete"></umb-button>
+                  <umb-button class="btn--transparent" action="vm.openEditTaskDrawer(task)" state="vm.editTaskButtonLoading === task.id ? 'busy' : 'init'" label="✏️" title="Edit Task"></umb-button>
+                  <umb-button class="btn--transparent" action="vm.deleteTask(task)" state="vm.deleteTaskButtonLoading === task.id ? 'busy' : 'init'" label="🗑️" title="Delete Task"></umb-button>
                 </div>
+              </div>
+              <div class="no-tasks" ng-if="vm.contact.tasks && vm.contact.tasks.length === 0 && !vm.isLoadingTasks" style="position: relative;">
+                <umb-empty-state
+                  position="center">
+                  No tasks available.
+                </umb-empty-state>
               </div>
             </div>
           </umb-tab-content>
@@ -220,7 +244,6 @@
           </div>
         </div>
 
-        <!-- Note 1 -->
         <div
           ng-if="vm.contact.notes && vm.contact.notes.length > 0"
           ng-repeat="note in vm.contact.notes track by $index"

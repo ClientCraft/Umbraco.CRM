@@ -5,12 +5,12 @@ angular.module("umbraco")
     vm.contactId = $routeParams.id;
 
     Object.defineProperty(vm, "latestNotes", {
-      get: function  () {
+      get: function () {
         // Sort notes by created_at in descending order and take the first 3
         if (vm.contact && vm.contact.notes && vm.contact.notes.length) {
           return vm.contact.notes
             .slice() // Create a copy to avoid modifying the original array
-            .sort(function  (a, b) {
+            .sort(function (a, b) {
               return new Date(b.created_at) - new Date(a.created_at);
             })
             .slice(0, 3);
@@ -47,22 +47,47 @@ angular.module("umbraco")
       console.log('Tags updated:', tags);
     };
 
+    vm.markAsDoneButtonLoading = null;
     vm.markAsDone = function (task) {
-      alert('Marking task as done: ' + JSON.stringify(task));
+      vm.markAsDoneButtonLoading = task.id;
+
+      $http.post(`http://foo.localhost:8000/contact/${vm.contact.id}/task/${task.id}/complete`)
+        .then(async function (response) {
+          if (response.data.success) {
+            fetchContactTasks(true);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error marking task as done:", error);
+        });
     }
 
-    vm.editTask = function (task) {
-      alert('Editing task: ' + JSON.stringify(task));
+    vm.markAsIncompleteButtonLoading = null;
+    vm.markAsIncomplete = function (task) {
+      vm.markAsIncompleteButtonLoading = task.id;
+
+      $http.post(`http://foo.localhost:8000/contact/${vm.contact.id}/task/${task.id}/uncomplete`)
+        .then(async function (response) {
+          if (response.data.success) {
+            fetchContactTasks(true);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error marking task as done:", error);
+        });
     }
 
+    vm.deleteTaskButtonLoading = null;
     vm.deleteTask = function (task) {
+      vm.deleteTaskButtonLoading = task.id;
+
       alert('Deleting task: ' + JSON.stringify(task));
     }
 
     // Fetch contact data
     let fetchContact = function () {
       $http
-        .get("http://foo.localhost:8000/contact/" + vm.contactId + "?include=companies,deals,tasks,tasks.user,tasks.taskType,deals.status,owner,deputies,tags,photo,address,emailThreads.messages.sender,emailThreads.messages.toRecipients")
+        .get("http://foo.localhost:8000/contact/" + vm.contactId + "?include=companies,deals,deals.status,owner,deputies,tags,photo,address,emailThreads.messages.sender,emailThreads.messages.toRecipients&includeCompletedTasks=true")
         .then(function (response) {
           vm.contact = {...vm.contact, ...response.data};
 
@@ -80,6 +105,57 @@ angular.module("umbraco")
         });
     }
     fetchContact();
+
+    vm.showCompletedTasks = false;
+    vm.toggleShowCompletedTasks = function () {
+      delete vm.contact.tasks;
+      vm.showCompletedTasks = !vm.showCompletedTasks;
+      fetchContactTasks();
+    }
+
+    let resetTaskButtonLoading = function () {
+      vm.markAsDoneButtonLoading = null;
+      vm.markAsIncompleteButtonLoading = null;
+      vm.editTaskButtonLoading = null;
+      vm.deleteTaskButtonLoading = null;
+    }
+    let fetchContactTasks = function (noLoading = false) {
+      if (!noLoading) {
+        vm.isLoadingTasks = true;
+      }
+
+      $http
+        .get(`http://foo.localhost:8000/contact/${vm.contactId}/task?include=user,taskType&includeCompletedTasks=${vm.showCompletedTasks}`)
+        .then(function (response) {
+          vm.contact = {...vm.contact, tasks: response.data.data};
+          resetTaskButtonLoading();
+        })
+        .catch(function (error) {
+          console.error("Error fetching contact tasks:", error);
+        })
+        .finally(function () {
+          vm.isLoadingTasks = false;
+        });
+    }
+
+    vm.openEditTaskDrawer = function (task) {
+      editorService.open({
+        title: "Edit Task Drawer",
+        view: "/App_Plugins/UmbracoCrm/backoffice/sidebars/editTask/edit.html",
+        size: "small",
+        data: {
+          contactId: vm.contact.id,
+          task: task
+        },
+        submit: function () {
+          fetchContactTasks(true);
+          editorService.close();
+        },
+        close: function () {
+          editorService.close();
+        }
+      });
+    };
 
     let fetchLatestNotes = function () {
       $http
@@ -196,6 +272,10 @@ angular.module("umbraco")
     ];
 
     function changeTab(selectedTab) {
+      if (selectedTab.alias === "tasks" && !vm.contact.tasks) {
+        fetchContactTasks();
+      }
+
       vm.tabs.forEach(function (tab) {
         tab.active = false;
       });

@@ -31,6 +31,7 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/components/tag-input/tag-input.component.js",
                 "/App_Plugins/UmbracoCrm/backoffice/components/avatar-display/avatar-display.component.js",
                 "/App_Plugins/UmbracoCrm/backoffice/components/select-input/select-input.component.js",
+                "/App_Plugins/UmbracoCrm/backoffice/sidebars/editTask/edit.controller.js"
             ],
             Stylesheets =
             [
