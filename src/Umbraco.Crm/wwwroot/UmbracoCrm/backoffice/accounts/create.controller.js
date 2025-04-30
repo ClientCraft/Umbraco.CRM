@@ -1,7 +1,6 @@
 angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", function ($scope, userService, usersResource, $http, notificationsService) {
   var vm = this;
-  
-  //fetchUserList();
+  fetchUserList();
   // Initialize the model
   vm.model = {
     content: "",
@@ -24,7 +23,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   //   });
   // });
 
-  //vm.model.contact_id = $scope.model.data.id;
+  vm.model.contact_id = $scope.model.data.id;
   vm.dealPriorities = [
     { id: 'low', name: 'Low' },
     { id: 'medium', name: 'Medium' },
@@ -34,8 +33,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   function fetchUserList() {
     $http.get('https://foo.client-craft.com/user?include=photo').then(function (response) {
       vm.userNames = response.data.data;
-      console.log(vm.userNames);
-      //updateFilteredLists();
+      updateFilteredLists();
     });
   }
 
@@ -66,7 +64,6 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
       vm.users = response.data;
     });
   };
-  
   getUserNames();
 
   const getDealStatuses = function() {

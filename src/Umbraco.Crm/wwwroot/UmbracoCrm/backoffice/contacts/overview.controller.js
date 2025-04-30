@@ -1,23 +1,22 @@
 angular
   .module("umbraco")
   .controller(
-    "Umbraco.Crm.Leads.OverviewController",
-    function ($scope, $http, editorService, $location, overlayService, notificationsService) {
+    "Umbraco.Crm.Contacts.OverviewController",
+    function ($scope, $http, editorService, $location, overlayService) {
       var vm = this;
-      
+      const baseUrl =
+        "https://foo.client-craft.com/contact";
+      const includes ="?include=companies%2Cdeals%2Cowner%2Cdeputies%2Caddress%2Cnotes%2Ctags%2Cphoto%2CemailThreads%2CemailMessages&filter%5Binclude_account_deals%5D=true"
+
       // Initial Setup
-      const baseUrl = "https://foo.client-craft.com/lead";
-      const includes =
-        "?include=status,notes,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false";
-      
-      vm.title = "Leads";
+      vm.title = "Contacts";
       vm.allowSelectAll = true;
       vm.buttons = [
         {
-          label: "Create Lead",
+          label: "Create Contact",
           icon: "icon-plus",
           action: function () {
-            vm.openCreateLeadDrawer();
+            vm.openCreateContactDrawer();
           },
           isDisabled: false,
         },
@@ -25,7 +24,7 @@ angular
           label: "Import from file",
           icon: "icon-cloud-upload",
           action: function () {
-            alert("Import Leads clicked");
+            alert("Import contacts clicked");
           },
           isDisabled: false,
         },
@@ -33,25 +32,22 @@ angular
           label: "Export to file",
           icon: "icon-cloud-download",
           action: function () {
-            alert("Export Leads clicked");
+            alert("Export contacts clicked");
           },
           isDisabled: false,
         },
       ];
-      vm.items = []
-      vm.links = []
-      vm.meta = {}
+      vm.items = [];
+      vm.links = [];
+      vm.meta = {};
       vm.isLoading = true;
 
-      
       // Table Event Handlers
       vm.selectItem = function (item, $index, $event) {
         //alert("Selected: " + item.name);
       };
 
-      vm.clickItem = function (item){
-
-      }
+      vm.clickItem = function (item) {};
 
       vm.selectAll = function ($event) {
         //alert("Select All toggled");
@@ -70,7 +66,7 @@ angular
       };
 
       // Crud Operations
-      vm.openCreateLeadDrawer = function () {
+      vm.openCreateContactDrawer = function () {
         editorService.open({
           title: "Create Lead Drawer",
           view: "/App_Plugins/UmbracoCrm/backoffice/leads/create.html",
@@ -81,7 +77,7 @@ angular
         });
       };
 
-      vm.openEditLeadDrawer = function (item) {
+      vm.openEditContactDrawer = function (item) {
         editorService.open({
           title: "Edit Lead Drawer",
           view: "/App_Plugins/UmbracoCrm/backoffice/leads/edit.html",
@@ -98,22 +94,21 @@ angular
         });
       };
 
-      vm.openDeletLeadDialog = function (item) {
+      vm.openDeletContactDialog = function (item) {
         overlayService.confirmDelete({
           title: "Warning",
           content:
-            "Are you sure you want to delete this lead? This action cannot be undone.",
+            "Are you sure you want to delete this contact? This action cannot be undone.",
           size: "small",
           hideCloseButton: false,
           submitButtonLabel: "Yes",
           closeButtonLabel: "Cancel",
-          submit: function(){
-            $http.delete(baseUrl + '/' + item.id).then(()=>{
-              
-              if(vm.items.length <= 1){
-                vm.upDateList(vm.meta.current_page - 1)
-              }else{
-                vm.upDateList(vm.meta.current_page)
+          submit: function () {
+            $http.delete(baseUrl + item.id).then(() => {
+              if (vm.items.length <= 1) {
+                vm.upDateList(vm.meta.current_page - 1);
+              } else {
+                vm.upDateList(vm.meta.current_page);
               }
 
               notificationsService.success(
@@ -121,26 +116,27 @@ angular
                 "Lead has been deleted successfully"
               );
             });
-            overlayService.close()
+            overlayService.close();
           },
-          close: function(){
-            overlayService.close()
-          }
+          close: function () {
+            overlayService.close();
+          },
         });
       };
 
-      vm.openViewLead = function (item) {
-        $location.path("/Umbraco.Crm/leads/view/" + item.id);
+      vm.openViewContact = function (item) {
+        $location.path("/Umbraco.Crm/contacts/view/" + item.id);
       };
 
       // Pagination Handlers
-      vm.onPaginationHandler = function (link){
-        vm.fetchData(link)
-      }
+      vm.onPaginationHandler = function (link) {
+        vm.fetchData(link);
+      };
 
       // utility functions
-      vm.fetchData = function(address){
-        $http.get(address)
+      vm.fetchData = function (address) {
+        $http
+          .get(address)
           .then(function (response) {
             vm.items = response.data.data.items;
             vm.options = {
@@ -150,14 +146,14 @@ angular
                 sortable: x.sortable,
               })),
             };
-            vm.links = response.data.links
-            vm.meta = response.data.meta
+            vm.links = response.data.links;
+            vm.meta = response.data.meta;
             vm.isLoading = false;
           })
           .catch(function (error) {
             console.error("Error fetching leads:", error);
           });
-      }
+      };
 
       vm.nameToAcronym = function (name) {
         if (!name) return "";
@@ -167,9 +163,9 @@ angular
           .join("");
       };
 
-      vm.upDateList = (page)=>{
-        vm.fetchData(baseUrl + includes + `&page=${page}`);
-      }
+      vm.upDateList = (page) => {
+        vm.fetchData(baseUrl + `&page=${page}`);
+      };
 
       // Initial Data Fetch
       vm.fetchData(baseUrl + includes + `&page=1`);

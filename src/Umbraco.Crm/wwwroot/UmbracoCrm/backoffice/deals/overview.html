@@ -1,17 +1,22 @@
-<link rel="stylesheet" href="/App_Plugins/UmbracoCrm/backoffice/leads/overview.css">
+<link rel="stylesheet" href="/App_Plugins/UmbracoCrm/backoffice/deals/overview.css">
 
-<div class="umb-panel" id="leads-overview">
-  <div class="umb-panel-body" ng-controller="Umbraco.Crm.Leads.OverviewController as vm">
+<div class="umb-panel" id="deals-overview">
+  <div class="umb-panel-body" ng-controller="Umbraco.Crm.Deals.OverviewController as vm">
     <section>
-      <input type="search" placeholder="Search for leads" aria-label="Search"/>
+      <input type="search" placeholder="Search for deals" aria-label="Search"/>
       <div>
-        <button ng-repeat="button in vm.buttons track by $index" type="button" ng-click="button.action()"
-                ng-disabled="vm.button.disabled">{{ button.label }}
+        <button 
+          ng-repeat="button in vm.buttons track by $index" 
+          type="button" 
+          ng-click="button.action()"
+          ng-disabled="vm.button.disabled"
+        >
+          {{ button.label }}
         </button>
       </div>
     </section>
     <umb-box>
-      <umb-box-header title="Leads">
+      <umb-box-header title="Deals">
         <span ng-if="vm.items.length > 0">showing {{vm.meta.from}} to {{vm.meta.to}} of {{vm.meta.total}}</span>
       </umb-box-header>
       <umb-box-content>
@@ -29,7 +34,6 @@
           on-select-item="vm.selectItem(item, index, $event)"
           on-pagination="vm.onPaginationHandler(link)"
           on-edit-item="vm.openEditLeadDrawer(item)"
-          on-view-item="vm.openViewLead(item)"
           on-delete-item="vm.openDeletLeadDialog(item)">
         </clc-table>
       </umb-box-content>

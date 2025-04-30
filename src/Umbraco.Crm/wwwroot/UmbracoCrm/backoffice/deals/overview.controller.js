@@ -1,23 +1,21 @@
 angular
   .module("umbraco")
   .controller(
-    "Umbraco.Crm.Leads.OverviewController",
-    function ($scope, $http, editorService, $location, overlayService, notificationsService) {
+    "Umbraco.Crm.Deals.OverviewController",
+    function ($scope, $http, editorService, $location, overlayService) {
       var vm = this;
+      const baseUrl = "https://foo.client-craft.com/deal";
+      const includes = "?include=type%2Cstatus%2Cowner%2Cdeputies%2Cnotes%2Ctags";      
       
       // Initial Setup
-      const baseUrl = "https://foo.client-craft.com/lead";
-      const includes =
-        "?include=status,notes,owner,owner.photo,photo,deputies,deputies.photo,tags,tasks&includeConvertedLeads=false&includeCompletedTasks=false";
-      
-      vm.title = "Leads";
+      vm.title = "Deals";
       vm.allowSelectAll = true;
       vm.buttons = [
         {
-          label: "Create Lead",
+          label: "Create deal",
           icon: "icon-plus",
           action: function () {
-            vm.openCreateLeadDrawer();
+            vm.openCreateDealDrawer();
           },
           isDisabled: false,
         },
@@ -25,7 +23,7 @@ angular
           label: "Import from file",
           icon: "icon-cloud-upload",
           action: function () {
-            alert("Import Leads clicked");
+            alert("Import Deals clicked");
           },
           isDisabled: false,
         },
@@ -33,7 +31,7 @@ angular
           label: "Export to file",
           icon: "icon-cloud-download",
           action: function () {
-            alert("Export Leads clicked");
+            alert("Export Deals clicked");
           },
           isDisabled: false,
         },
@@ -43,15 +41,12 @@ angular
       vm.meta = {}
       vm.isLoading = true;
 
-      
       // Table Event Handlers
       vm.selectItem = function (item, $index, $event) {
         //alert("Selected: " + item.name);
       };
 
-      vm.clickItem = function (item){
-
-      }
+      vm.clickItem = function (item) {};
 
       vm.selectAll = function ($event) {
         //alert("Select All toggled");
@@ -70,10 +65,10 @@ angular
       };
 
       // Crud Operations
-      vm.openCreateLeadDrawer = function () {
+      vm.openCreateDealDrawer = function () {
         editorService.open({
-          title: "Create Lead Drawer",
-          view: "/App_Plugins/UmbracoCrm/backoffice/leads/create.html",
+          title: "Create Deal Drawer",
+          view: "/App_Plugins/UmbracoCrm/backoffice/deals/create.html",
           size: "small", // Options: small, medium, large
           submit: function (model) {
             vm.upDateList(vm.meta.current_page);
@@ -81,10 +76,10 @@ angular
         });
       };
 
-      vm.openEditLeadDrawer = function (item) {
+      vm.openEditDealDrawer = function (item) {
         editorService.open({
-          title: "Edit Lead Drawer",
-          view: "/App_Plugins/UmbracoCrm/backoffice/leads/edit.html",
+          title: "Edit Deal Drawer",
+          view: "/App_Plugins/UmbracoCrm/backoffice/deals/edit.html",
           size: "small", // Options: small, medium, large,
           data: { ...item },
           submit: function (model) {
@@ -98,22 +93,21 @@ angular
         });
       };
 
-      vm.openDeletLeadDialog = function (item) {
+      vm.openDeletDealDialog = function (item) {
         overlayService.confirmDelete({
           title: "Warning",
           content:
-            "Are you sure you want to delete this lead? This action cannot be undone.",
+            "Are you sure you want to delete this deal? This action cannot be undone.",
           size: "small",
           hideCloseButton: false,
           submitButtonLabel: "Yes",
           closeButtonLabel: "Cancel",
-          submit: function(){
-            $http.delete(baseUrl + '/' + item.id).then(()=>{
-              
-              if(vm.items.length <= 1){
-                vm.upDateList(vm.meta.current_page - 1)
-              }else{
-                vm.upDateList(vm.meta.current_page)
+          submit: function () {
+            $http.delete(baseUrl + item.id).then(() => {
+              if (vm.items.length <= 1) {
+                vm.upDateList(vm.meta.current_page - 1);
+              } else {
+                vm.upDateList(vm.meta.current_page);
               }
 
               notificationsService.success(
@@ -121,26 +115,27 @@ angular
                 "Lead has been deleted successfully"
               );
             });
-            overlayService.close()
+            overlayService.close();
           },
-          close: function(){
-            overlayService.close()
-          }
+          close: function () {
+            overlayService.close();
+          },
         });
       };
 
-      vm.openViewLead = function (item) {
-        $location.path("/Umbraco.Crm/leads/view/" + item.id);
+      vm.openViewDeal = function (item) {
+        $location.path("/Umbraco.Crm/deals/view/" + item.id);
       };
 
       // Pagination Handlers
-      vm.onPaginationHandler = function (link){
-        vm.fetchData(link)
-      }
+      vm.onPaginationHandler = function (link) {
+        vm.fetchData(link);
+      };
 
       // utility functions
-      vm.fetchData = function(address){
-        $http.get(address)
+      vm.fetchData = function (address) {
+        $http
+          .get(address)
           .then(function (response) {
             vm.items = response.data.data.items;
             vm.options = {
@@ -150,14 +145,14 @@ angular
                 sortable: x.sortable,
               })),
             };
-            vm.links = response.data.links
-            vm.meta = response.data.meta
+            vm.links = response.data.links;
+            vm.meta = response.data.meta;
             vm.isLoading = false;
           })
           .catch(function (error) {
             console.error("Error fetching leads:", error);
           });
-      }
+      };
 
       vm.nameToAcronym = function (name) {
         if (!name) return "";
@@ -167,9 +162,9 @@ angular
           .join("");
       };
 
-      vm.upDateList = (page)=>{
-        vm.fetchData(baseUrl + includes + `&page=${page}`);
-      }
+      vm.upDateList = (page) => {
+        vm.fetchData(baseUrl + `&page=${page}`);
+      };
 
       // Initial Data Fetch
       vm.fetchData(baseUrl + includes + `&page=1`);

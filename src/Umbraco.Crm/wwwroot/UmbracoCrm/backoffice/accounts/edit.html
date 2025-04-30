@@ -1,9 +1,9 @@
-<div class="client-craft umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Contacts.CreateController as vm">
+<div class="client-craft umb-editor umb-infinite-editor" ng-controller="Umbraco.Crm.Deals.EditController as vm">
   <div class="client-craft umb-editor-wrapper">
     <!-- Header -->
     <div class="client-craft umb-editor-header">
       <h3 class="client-craft umb-editor-header__title">
-        <localize key="lead_create_title">Edit Contact</localize>
+        <localize key="deal_create_title">Edit Deal</localize>
       </h3>
       <button type="button" class="client-craft umb-editor-header__close" ng-click="vm.close()">
         <i aria-hidden="true" class="client-craft umb-icon umb-icon-multiply"></i>
@@ -12,54 +12,46 @@
 
     <!-- Body -->
     <div class="client-craft umb-editor-body">
-      <form name="leadForm" novalidate>
+      <form name="dealForm" ng-submit="vm.submit()" novalidate>
         <div class="editor-panels-container">
           <umb-box class="client-craft">
             <umb-box-content class="client-craft">
               <div class="client-craft umb-control-group">
-                <label for="name">Name</label>
+                <label for="name">Deal Name</label>
                 <input type="text" id="name" ng-model="vm.model.name" required />
               </div>
 
               <select-input
-                label="Companies"
-                model="vm.model.companies"
-                options="vm.companiesList"
-                multiple="true"
-                return-object="true"
-                option-label="name">
+                label="Status"
+                model="vm.model.deal_status_id"
+                options="vm.dealStatuses"
+                option-value="id"
+                option-label="label">
+              </select-input>
+
+              <select-input
+                label="Type"
+                model="vm.model.deal_type_id"
+                options="vm.dealTypes"
+                option-value="id"
+                option-label="label">
               </select-input>
 
               <div class="client-craft umb-control-group">
-                <label for="role">Role</label>
-                <input type="text" id="role" ng-model="vm.model.role" />
+                <label for="amount">Amount</label>
+                <input type="number" step="100" id="amount" ng-model="vm.model.amount" required />
               </div>
+
               <div class="client-craft umb-control-group">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" ng-model="vm.model.phone" />
-              </div>
-              <div class="client-craft umb-control-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" ng-model="vm.model.email" required />
-              </div>
-              <div class="client-craft umb-control-group">
-                <label for="facebook_url">Facebook URL</label>
-                <input type="url" id="facebook_url" ng-model="vm.model.facebook_url" />
-              </div>
-              <div class="client-craft umb-control-group">
-                <label for="instagram_url">Instagram URL</label>
-                <input type="url" id="instagram_url" ng-model="vm.model.instagram_url" />
-              </div>
-              <div class="client-craft umb-control-group">
-                <label for="linkedin_url">LinkedIn URL</label>
-                <input type="url" id="linkedin_url" ng-model="vm.model.linkedin_url" />
+                <label for="close_date">Close Date</label>
+                <input type="datetime-local" id="close_date" ng-model="vm.model.close_date" required />
               </div>
 
               <select-input
                 label="Owner"
-                model="vm.model.owner"
+                model="vm.model.owner_id"
                 options="vm.userNamesWithoutDeputies"
-                return-object="true"
+                option-value="id"
                 option-label="name">
               </select-input>
 
@@ -69,6 +61,22 @@
                 options="vm.userNamesWithoutOwner"
                 multiple="true"
                 return-object="true"
+                option-label="name">
+              </select-input>
+
+              <select-input
+                label="Deal Type"
+                model="vm.model.deal_type_id"
+                options="vm.dealTypes"
+                option-value="id"
+                option-label="label">
+              </select-input>
+
+              <select-input
+                label="Priority"
+                model="vm.model.priority"
+                options="vm.dealPriorities"
+                option-value="id"
                 option-label="name">
               </select-input>
             </umb-box-content>
@@ -89,12 +97,11 @@
         </umb-button>
         <umb-button
           class="client-craft"
-          type="button"
-          action="vm.submit()"
+          type="submit"
           button-style="success"
           label="Save"
           state="vm.submitState"
-          disabled="leadForm.$invalid">
+          disabled="dealForm.$invalid">
         </umb-button>
       </div>
     </div>
