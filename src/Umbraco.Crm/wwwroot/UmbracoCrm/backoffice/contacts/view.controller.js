@@ -77,13 +77,54 @@ angular.module("umbraco")
         });
     }
 
-    vm.deleteTaskButtonLoading = null;
-    vm.deleteTask = function (task) {
+    vm.deleteTask = function(task) {
       vm.deleteTaskButtonLoading = task.id;
+      let buttonState = 'init';
 
-      alert('Deleting task: ' + JSON.stringify(task));
+      let overlay = {
+        title: "Confirm Delete",
+        content: "Are you sure you want to delete this task?",
+        submitButtonState: buttonState,
+        submit: function () {
+          buttonState = 'busy';
+          overlay.submitButtonState = buttonState;
+
+          // Perform the delete action here
+          $http.delete(`http://foo.localhost:8000/contact/${vm.contact.id}/task/${task.id}`)
+            .then(function (response) {
+              notificationsService.success("Success", "Task deleted successfully");
+              fetchContactTasks(true);
+            }, function (error) {
+              notificationsService.error("Error", "Failed to delete task");
+            })
+            .finally(function () {
+              buttonState = 'success';
+              overlayService.close();
+            });
+        },
+        close: function () {
+          overlayService.close(); // Close the overlay if canceled
+        }
+      };
+
+      overlayService.confirmDelete(overlay);
     }
 
+    vm.openCreateTaskSidebar = function () {
+      editorService.open({
+        title: "Create Task Drawer",
+        view: "/App_Plugins/UmbracoCrm/backoffice/sidebars/createTask/create.html",
+        size: "small", // Options: small, medium, large
+        data: vm.contact,
+        submit: function () {
+          fetchContactTasks(true);
+          editorService.close();
+        },
+        close: function () {
+          editorService.close();
+        }
+      });
+    }
     // Fetch contact data
     let fetchContact = function () {
       $http
@@ -119,6 +160,7 @@ angular.module("umbraco")
       vm.editTaskButtonLoading = null;
       vm.deleteTaskButtonLoading = null;
     }
+
     let fetchContactTasks = function (noLoading = false) {
       if (!noLoading) {
         vm.isLoadingTasks = true;

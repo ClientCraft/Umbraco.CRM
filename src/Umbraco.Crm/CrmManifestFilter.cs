@@ -31,7 +31,8 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/components/tag-input/tag-input.component.js",
                 "/App_Plugins/UmbracoCrm/backoffice/components/avatar-display/avatar-display.component.js",
                 "/App_Plugins/UmbracoCrm/backoffice/components/select-input/select-input.component.js",
-                "/App_Plugins/UmbracoCrm/backoffice/sidebars/editTask/edit.controller.js"
+                "/App_Plugins/UmbracoCrm/backoffice/sidebars/editTask/edit.controller.js",
+                "/App_Plugins/UmbracoCrm/backoffice/sidebars/createTask/create.controller.js"
             ],
             Stylesheets =
             [
@@ -51,6 +52,9 @@ internal class CrmManifestFilter : IManifestFilter
                 "/App_Plugins/UmbracoCrm/backoffice/deals/create.css",
                 "/App_Plugins/UmbracoCrm/backoffice/components/tag-input/tag-input.css",
                 "/App_Plugins/UmbracoCrm/backoffice/components/avatar-display/avatar-display.css",
+                "/App_Plugins/UmbracoCrm/backoffice/sidebars/editTask/edit.css",
+                "/App_Plugins/UmbracoCrm/backoffice/sidebars/createTask/create.css",
+
 
             ],
             Sections =

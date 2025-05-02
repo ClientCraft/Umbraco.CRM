@@ -1,9 +1,15 @@
-angular.module("umbraco").controller("Umbraco.Crm.Sidebars.EditTaskController", function ($scope, $http, notificationsService) {
+angular.module("umbraco").controller("Umbraco.Crm.Sidebars.CreateTaskController", function ($scope, $http, notificationsService) {
     var vm = this;
+    console.log('teste');
 
     vm.model = angular.copy($scope.model.data);
-    vm.model.task.user_id = vm.model.task.user.id ?? null;
-    vm.model.task.task_type_id = vm.model.task.task_type?.id ?? null;
+    vm.model.task = {
+      title: "",
+      description: "",
+      due_date: new Date(),
+      user_id: null,
+      task_type_id: null,
+    };
 
     // Initialize date picker configuration
     vm.datePickerConfig = {
@@ -33,16 +39,16 @@ angular.module("umbraco").controller("Umbraco.Crm.Sidebars.EditTaskController", 
 
     function submit() {
       vm.submitState = 'busy';
-      $http.put(`http://foo.localhost:8000/contact/${vm.model.contactId}/task/${vm.model.task.id}`, {
+      $http.post(`http://foo.localhost:8000/contact/${vm.model.id}/task`, {
         ...vm.model.task,
       }).then(function (response) {
-        notificationsService.success("Success", "Task has been updated successfully");
+        notificationsService.success("Success", "Task has been created successfully");
         vm.submitState = "success";
         if ($scope.model.submit) {
           $scope.model.submit(response.data);
         }
       }, function (error) {
-        notificationsService.error("Error", "Failed to update task");
+        notificationsService.error("Error", "Failed to create task");
         vm.submitState = "error";
       });
     }

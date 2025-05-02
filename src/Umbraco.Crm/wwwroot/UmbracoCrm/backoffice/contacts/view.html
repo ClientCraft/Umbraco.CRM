@@ -169,7 +169,8 @@
               </details>
             </div>
             <div ng-if="tab.alias === 'tasks'" style="min-height: 200px;">
-              <div style="display: flex; flex-direction: row-reverse; margin-bottom: 15px;">
+              <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 15px;">
+                <umb-button action="vm.openCreateTaskSidebar()" button-style="primary" label="Create Task" title="Create Task"></umb-button>
                 <umb-toggle
                   checked="vm.showCompletedTasks"
                   on-click="vm.toggleShowCompletedTasks()"
@@ -208,7 +209,7 @@
                   <umb-button ng-if="task.completed_at === null" class="btn--transparent" state="vm.markAsDoneButtonLoading === task.id ? 'busy' : 'init'" action="vm.markAsDone(task)" label="✔️" title="Mark as Complete"></umb-button>
                   <umb-button ng-if="task.completed_at !== null" class="btn--transparent" state="vm.markAsIncompleteButtonLoading === task.id ? 'busy' : 'init'" action="vm.markAsIncomplete(task)" label="↩️" title="Mark as Incomplete"></umb-button>
                   <umb-button class="btn--transparent" action="vm.openEditTaskDrawer(task)" state="vm.editTaskButtonLoading === task.id ? 'busy' : 'init'" label="✏️" title="Edit Task"></umb-button>
-                  <umb-button class="btn--transparent" action="vm.deleteTask(task)" state="vm.deleteTaskButtonLoading === task.id ? 'busy' : 'init'" label="🗑️" title="Delete Task"></umb-button>
+                  <umb-button class="btn--transparent" action="vm.deleteTask(task)" label="🗑️" title="Delete Task"></umb-button>
                 </div>
               </div>
               <div class="no-tasks" ng-if="vm.contact.tasks && vm.contact.tasks.length === 0 && !vm.isLoadingTasks" style="position: relative;">
