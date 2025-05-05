@@ -1,0 +1,86 @@
+<div class="client-craft umb-editor umb-infinite-editor" ng-controller="ClientCraft.uCRM.Sidebars.CreateTaskController as vm">
+  <div class="client-craft umb-editor-wrapper">
+    <!-- Header -->
+    <div class="client-craft umb-editor-header">
+      <h3 class="client-craft umb-editor-header__title">
+        <localize key="lead_create_title">Create Task</localize>
+      </h3>
+      <button type="button" class="client-craft umb-editor-header__close" ng-click="vm.close()">
+        <i aria-hidden="true" class="client-craft umb-icon umb-icon-multiply"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="client-craft umb-editor-body">
+      <form name="leadForm" novalidate>
+        <div class="editor-panels-container">
+          <umb-box class="client-craft">
+            <umb-box-content class="client-craft">
+              <div class="client-craft umb-control-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" ng-model="vm.model.task.title" required />
+              </div>
+
+              <!-- Task Description Field (Missing) -->
+              <div class="client-craft umb-control-group">
+                <label for="description">Description</label>
+                <textarea style="width: 100%; resize: vertical;" id="description" ng-model="vm.model.task.description" rows="4" required></textarea>
+              </div>
+
+              <!-- Task Due Date Field (Missing) -->
+              <div class="client-craft umb-control-group">
+                <label for="due_date">Due Date</label>
+                <div class="datepicker-wrapper">
+                  <umb-date-time-picker
+                    ng-model="vm.model.task.due_date"
+                    options="vm.datePickerConfig"
+                    id="due_date"
+                    required>
+                  </umb-date-time-picker>
+                </div>
+              </div>
+
+              <select-input
+                label="Type"
+                model="vm.model.task.task_type_id"
+                options="vm.taskTypes"
+                option-value="id"
+                option-label="name">
+              </select-input>
+
+              <select-input
+                label="Owner"
+                model="vm.model.task.user_id"
+                options="vm.userNames"
+                option-value="id"
+                option-label="name">
+              </select-input>
+            </umb-box-content>
+          </umb-box>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="client-craft umb-editor-footer">
+      <div class="client-craft umb-editor-footer__buttons">
+        <umb-button
+          class="client-craft"
+          type="button"
+          button-style="link"
+          label="Cancel"
+          action="vm.close()">
+        </umb-button>
+        <umb-button
+          class="client-craft"
+          type="button"
+          action="vm.submit()"
+          button-style="success"
+          label="Save"
+          state="vm.submitState"
+          disabled="leadForm.$invalid">
+        </umb-button>
+      </div>
+    </div>
+  </div>
+</div>

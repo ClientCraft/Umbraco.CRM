@@ -1,0 +1,109 @@
+<div class="client-craft umb-editor umb-infinite-editor" ng-controller="ClientCraft.uCRM.Deals.CreateController as vm">
+  <div class="client-craft umb-editor-wrapper">
+    <!-- Header -->
+    <div class="client-craft umb-editor-header">
+      <h3 class="client-craft umb-editor-header__title">
+        <localize key="deal_create_title">Create Deal</localize>
+      </h3>
+      <button type="button" class="client-craft umb-editor-header__close" ng-click="vm.close()">
+        <i aria-hidden="true" class="client-craft umb-icon umb-icon-multiply"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="client-craft umb-editor-body">
+      <form name="dealForm" novalidate>
+        <div class="editor-panels-container">
+          <umb-box class="client-craft">
+            <umb-box-content class="client-craft">
+              <div class="client-craft umb-control-group">
+                <label for="name">Deal Name</label>
+                <input type="text" id="name" ng-model="vm.model.name" required />
+              </div>
+
+              <select-input
+                label="Status"
+                model="vm.model.deal_status_id"
+                options="vm.dealStatuses"
+                option-value="id"
+                option-label="label">
+              </select-input>
+
+              <select-input
+                label="Type"
+                model="vm.model.deal_type_id"
+                options="vm.dealTypes"
+                option-value="id"
+                option-label="label">
+              </select-input>
+
+              <div class="client-craft umb-control-group">
+                <label for="amount">Amount</label>
+                <input
+                  type="number"
+                  id="amount"
+                  ng-model="vm.model.amount"
+                  step="100.00"
+                  min="0"
+                  max="99999999.99"
+                  required />
+              </div>
+
+              <div class="client-craft umb-control-group">
+                <label for="close_date">Close Date</label>
+                <input type="datetime-local" id="close_date" ng-model="vm.model.close_date" required />
+              </div>
+
+              <select-input
+                label="Owner"
+                model="vm.model.owner_id"
+                options="vm.userNamesWithoutDeputies"
+                option-value="id"
+                option-label="name">
+              </select-input>
+
+              <select-input
+                label="Deputies"
+                model="vm.model.deputies"
+                options="vm.userNamesWithoutOwner"
+                multiple="true"
+                return-object="true"
+                option-label="name">
+              </select-input>
+
+              <select-input
+                label="Priority"
+                model="vm.model.priority"
+                options="vm.dealPriorities"
+                option-value="id"
+                option-label="name">
+              </select-input>
+            </umb-box-content>
+          </umb-box>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="client-craft umb-editor-footer">
+      <div class="client-craft umb-editor-footer__buttons">
+        <umb-button
+          class="client-craft"
+          type="button"
+          button-style="link"
+          label="Cancel"
+          action="vm.close()">
+        </umb-button>
+        <umb-button
+          class="client-craft"
+          type="button"
+          action="vm.submit()"
+          button-style="success"
+          label="Save"
+          state="vm.submitState"
+          disabled="leadForm.$invalid">
+        </umb-button>
+      </div>
+    </div>
+  </div>
+</div>

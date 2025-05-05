@@ -7,7 +7,7 @@
     "Category": "Campaign & Marketing",
     "Description": "[EXPERIMENTAL] This package is in early alpha development and NOT ready for production use. A native CRM integration for Umbraco that will allow connection with various CRM systems.",
     "LicenseTypes": [ "Free" ],
-    "IssueTrackerUrl": "https://github.com/ClientCraft/Umbraco.Crm/issues",
+    "IssueTrackerUrl": "https://github.com/ClientCraft/uCRM/issues",
     "PackageType": "Integration",
     "Tags": ["experimental", "alpha", "work-in-progress"],
     "Title": "Umbraco Crm "

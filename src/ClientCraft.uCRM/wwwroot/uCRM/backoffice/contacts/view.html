@@ -1,0 +1,299 @@
+<div
+  class="contact-view-container"
+  ng-controller="ClientCraft.uCRM.Contacts.ViewController as vm"
+>
+  <div class="header">
+    <umb-breadcrumbs
+      ng-if="vm.ancestors && vm.ancestors.length > 0"
+      ancestors="vm.ancestors"
+      entity-type="content"
+      on-open="clickBreadcrumb(ancestor)"
+    >
+    </umb-breadcrumbs>
+    <button ng-click="vm.openEditContactDrawer()" class="edit-button">
+      ✏️ Edit
+    </button>
+  </div>
+
+  <div class="main-content">
+    <div class="left-panel">
+      <div class="profile-section">
+        <avatar-display
+          object="vm.contact"
+          allow-edit="true"
+          size="125"
+          photo-upload-url="{{ 'http://foo.localhost:8000/contact/' + vm.contactId + '/photo' }}"
+          on-success="vm.handlePhotoUploadSuccess(photo)"
+        >
+        </avatar-display>
+        <div class="profile-info">
+          <h2 class="profile-name">{{vm.contact.name}}</h2>
+          <p class="profile-role">
+            {{vm.contact.role}} at {{vm.contactCompanyNames}}
+          </p>
+          <div class="social-links">
+            <a href="{{vm.contact.facebook_url}}" class="social-icon">f</a>
+            <a href="{{vm.contact.linkedin_url}}" class="social-icon">in</a>
+            <a href="{{vm.contact.instagram_url}}" class="social-icon">@</a>
+          </div>
+          <div class="last-contacted">
+            Last Contacted <span class="contact-date">{{vm.contact.last_contacted |  date:'short':'UTC'}}</span>
+          </div>
+        </div>
+        <div class="tags-management">
+          <h4 class="tag-section-title">Tags</h4>
+          <tag-input
+            tags="vm.contact.tags"
+            entity-type="contact"
+            entity-id="vm.contactId"
+            on-change="vm.handleTagsChanged(tags)"
+          >
+          </tag-input>
+        </div>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-header">
+          <h3 class="info-title">Contact Info</h3>
+        </div>
+
+        <div class="info-column">
+          <div class="info-label">Work Email</div>
+          <div class="info-value">{{vm.contact.email}}</div>
+
+          <div class="info-label">Work Address</div>
+          <div class="info-value">{{vm.contact.address ? vm.contact.address.street : ''}} {{vm.contact.address ? vm.contact.address.city : ''}} {{vm.contact.address ? vm.contact.address.country : ''}}</div>
+        </div>
+
+        <div class="info-column">
+          <div class="info-label">Work Phone</div>
+          <div class="info-value">{{vm.contact.phone}}</div>
+        </div>
+
+        <div class="contact-metrics">
+          <div class="metric">
+            <div class="metric-label">Contact Score</div>
+            <div class="metric-value">
+              <div class="score-circle">{{vm.contact.score}}</div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">Contact Owner</div>
+            <div class="metric-value">
+              <avatar-display
+                ng-if="vm.contact && vm.contact.owner"
+                object="vm.contact.owner">
+              </avatar-display>
+              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.contact && !vm.contact.owner">
+                No owner assigned
+              </div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">Contact Deputies</div>
+            <div class="metric-value">
+              <div
+                class="umb-table-avatar-group"
+                ng-if="vm.contact.deputies.length > 0"
+              >
+                <span ng-repeat="deputy in vm.contact.deputies">
+                  <div
+                    ng-if="!deputy.photo.file_path"
+                    class="umb-table-avatar avatar-1"
+                  >
+                    {{ vm.nameToAcronym(deputy.name) }}
+                  </div>
+                  <img
+                    ng-if="deputy.photo.file_path"
+                    class="umb-table-avatar"
+                    ng-src="{{ deputy.photo.file_path }}"
+                    alt="{{ deputy.name }}"
+                  />
+                </span>
+              </div>
+
+              <div
+                style="text-wrap: nowrap"
+                class="metric-label"
+                ng-if="vm.contact && !vm.contact.deputies.length"
+              >
+                No deputies assigned
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-section">
+        <ng-form name="tabsForm" val-form-manager>
+          <umb-tabs-nav tabs="vm.tabs" on-tab-change="vm.changeTab(tab)">
+          </umb-tabs-nav>
+
+          <umb-tab-content
+            ng-repeat="tab in vm.tabs"
+            ng-show="tab.active"
+            tab="tab"
+          >
+            <div ng-if="tab.alias === 'emails'">
+              <!-- Email Threads -->
+              <details class="email-thread" ng-repeat="thread in vm.contact.emailThreads">
+                <summary class="thread-header">
+                  <span class="thread-title">Subject {{thread.subject}}</span>
+                  <span class="thread-meta"
+                    >{{thread.messages.length}} messages • Last message: {{thread.messages[0].sent_at | date:'short':'UTC'}}</span
+                  >
+                </summary>
+                <div class="email-message" ng-repeat="message in thread.messages track by message.id">
+                  <div class="email-header">
+                    <avatar-display
+                      class="thread-avatar"
+                      object="message.sender">
+                    </avatar-display>
+                    <div class="thread-info">
+                      <div class="sender-info">
+                        <div class="sender-name">{{ message.sender.name || 'Sending User Name' }}</div>
+                        <div class="recipient">To: {{ message.recipient_name || 'Jerome Bell' }}</div>
+                      </div>
+                    </div>
+                    <div class="thread-date">{{ message.sent_at | date:'d MMM yyyy \'at\' h:mm a' }}</div>
+                    <div class="thread-actions">
+                      <div class="thread-action">👁️</div>
+                      <div class="thread-action">↩️</div>
+                      <div class="thread-action">⋮</div>
+                    </div>
+                  </div>
+                  <div class="thread-content" ng-bind-html="message.body"></div>
+                </div>
+              </details>
+            </div>
+            <div ng-if="tab.alias === 'tasks'" style="min-height: 200px;">
+              <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 15px;">
+                <umb-button action="vm.openCreateTaskSidebar()" button-style="primary" label="Create Task" title="Create Task"></umb-button>
+                <umb-toggle
+                  checked="vm.showCompletedTasks"
+                  on-click="vm.toggleShowCompletedTasks()"
+                  show-labels="true"
+                  label-on="Hide Completed"
+                  label-off="Show Completed"
+                  label-position="right"
+                  hide-icons="true">
+                </umb-toggle>
+              </div>
+              <div style="position: relative; min-height: 200px;" ng-if="vm.isLoadingTasks">
+                <umb-load-indicator>
+                </umb-load-indicator>
+              </div>
+              <!-- Task Items -->
+              <div class="task-item" ng-if="vm.contact.tasks && vm.contact.tasks.length" ng-repeat="task in vm.contact.tasks"
+                   ng-if="!vm.isLoadingTasks && (task.completed_at === null || vm.showCompletedTasks)">
+                <div class="task-header">
+                  <div class="task-title" ng-class="{'completed-task': task.completed_at !== null}">{{task.title}}</div>
+                  <div class="task-meta">
+                    <span ng-if="task.completed_at === null">Due: {{task.due_date | date:'short':'UTC'}} •</span>
+                    <span ng-if="task.completed_at !== null">Completed at: {{task.completed_at | date:'short':'UTC'}} •</span>
+                    <span>Created: {{task.created_at | date:'short':'UTC'}}</span>
+                  </div>
+                </div>
+                <div class="task-content">
+                  <p class="task-description" ng-class="{'completed-task': task.completed_at !== null}">
+                    {{task.description}}
+                  </p>
+                  <div class="task-details">
+                    <span class="task-assignee">Assigned to: {{task.user ? task.user.name : 'None'}}</span>
+                    <span class="task-type">Type: {{task.task_type.label}}</span>
+                  </div>
+                </div>
+                <div class="task-actions">
+                  <umb-button ng-if="task.completed_at === null" class="btn--transparent" state="vm.markAsDoneButtonLoading === task.id ? 'busy' : 'init'" action="vm.markAsDone(task)" label="✔️" title="Mark as Complete"></umb-button>
+                  <umb-button ng-if="task.completed_at !== null" class="btn--transparent" state="vm.markAsIncompleteButtonLoading === task.id ? 'busy' : 'init'" action="vm.markAsIncomplete(task)" label="↩️" title="Mark as Incomplete"></umb-button>
+                  <umb-button class="btn--transparent" action="vm.openEditTaskDrawer(task)" state="vm.editTaskButtonLoading === task.id ? 'busy' : 'init'" label="✏️" title="Edit Task"></umb-button>
+                  <umb-button class="btn--transparent" action="vm.deleteTask(task)" label="🗑️" title="Delete Task"></umb-button>
+                </div>
+              </div>
+              <div class="no-tasks" ng-if="vm.contact.tasks && vm.contact.tasks.length === 0 && !vm.isLoadingTasks" style="position: relative;">
+                <umb-empty-state
+                  position="center">
+                  No tasks available.
+                </umb-empty-state>
+              </div>
+            </div>
+          </umb-tab-content>
+        </ng-form>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <!-- Latest Notes Section -->
+      <div class="panel-section">
+        <div class="section-header">
+          <h3 class="section-title">Latest Notes</h3>
+          <div>
+            <a
+              href="#"
+              ng-click="vm.handleCreateNote($event)"
+              class="section-action"
+              >Create Note</a
+            >
+            <a
+              href="#"
+              ng-click="vm.handleSeeAllNotes($event)"
+              class="section-action"
+              >See All</a
+            >
+          </div>
+        </div>
+
+        <div
+          ng-if="vm.contact.notes && vm.contact.notes.length > 0"
+          ng-repeat="note in vm.contact.notes track by $index"
+          class="note-item"
+        >
+          <div class="note-header">
+            <div>Note by {{note.user.name}}</div>
+            <span>{{note.created_at | date:'short':'UTC'}}</span>
+          </div>
+          <div class="note-content">{{note.content}}</div>
+        </div>
+        <div
+          ng-if="vm.contact.notes && vm.contact.notes.length === 0"
+          class="no-notes"
+        >
+          No notes available.
+        </div>
+      </div>
+
+      <!-- Closest Deals Section -->
+      <div class="panel-section">
+        <div class="section-header">
+          <h3 class="section-title">Closest Deals</h3>
+          <div>
+            <a href="#" ng-click="vm.handleCreateDeal($event)" class="section-action">Create Deal</a>
+            <a href="#" ng-click="vm.handleSeeAllDeals($event)" class="section-action">See All</a>
+          </div>
+        </div>
+
+        <!-- Deal 1 -->
+        <div
+          ng-if="vm.closestDeals && vm.closestDeals.length > 0"
+          ng-repeat="deal in vm.closestDeals track by $index"
+          class="deal-item"
+        >
+          <div class="deal-date">
+            Closing Date {{deal.close_date | date:'short':'UTC'}}
+            <span class="deal-pill" ng-class="'deal-pill--' + (deal.status.color || 'default')">{{deal.status.label}}</span>
+          </div>
+          <div class="deal-title">{{deal.name}}</div>
+          <div class="deal-value">{{deal.amount | currency:'€'}}</div>
+        </div>
+        <div
+          ng-if="vm.latestDeals && vm.latestDeals.length === 0"
+          class="no-deals"
+        >
+          No deals available.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

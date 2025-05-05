@@ -1,0 +1,27 @@
+﻿<div class="notes-container" ng-controller="ClientCraft.uCRM.Dialogs.NotesController as vm">
+  <div class="flex justify-center flex-column items-center">
+    <div ng-if="vm.notes && vm.notes.length > 0" class="note-item" ng-repeat="note in vm.notes track by $index">
+      <div class="note-header">
+        <div>Note by {{note.user.name}}</div>
+        <div class="note-actions">
+          <button class="btn-edit" ng-click="vm.editNote(note)">
+            <i class="icon-edit"></i> Edit
+          </button>
+          <button class="btn-delete" ng-click="vm.deleteNote(note)">
+            <i class="icon-trash"></i> Delete
+          </button>
+          <span>{{note.created_at | date:'short':'UTC'}}</span>
+        </div>
+      </div>
+      <div class="note-content">{{note.content}}</div>
+    </div>
+    <div ng-if="vm.notes && vm.notes.length === 0" class="no-notes">
+      No notes available.
+    </div>
+
+    <!-- Loading indicator -->
+    <div class="loading-indicator" ng-if="vm.loading">
+      Loading more notes...
+    </div>
+  </div>
+</div>

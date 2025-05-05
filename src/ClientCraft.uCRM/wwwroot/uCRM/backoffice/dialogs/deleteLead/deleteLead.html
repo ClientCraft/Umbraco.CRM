@@ -1,0 +1,30 @@
+<div class="dialog-leads-container" ng-controller="ClientCraft.uCRM.Dialogs.LeadsController as vm">
+  <div class="flex justify-center flex-column items-center">
+    <div>
+        <div class="note-header">
+            <h4>Warning</h4>
+        </div>
+        <div class="dialog-lead msg">
+            <p>Are you sure you want to delete this lead?</p>
+            <p>This action cannot be undone.</p>
+        </div>
+        <form class="note-actions">
+            <umb-button
+              class="client-craft"
+              type="button"
+              button-style="link"
+              label="Cancel"
+              action="vm.close()">
+            </umb-button>
+            <umb-button
+              class="client-craft"
+              type="submit"
+              button-style="success"
+              label="Confirm"
+              state="vm.submitState"
+              disabled="leadForm.$invalid">
+            </umb-button>
+        </form>
+    </div>
+  </div>
+</div>

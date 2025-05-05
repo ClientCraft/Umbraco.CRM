@@ -1,0 +1,163 @@
+<link rel="stylesheet" href="/App_Plugins/uCRM/backoffice/leads/overview.css">
+
+<div class="umb-panel" id="leads-overview">
+  <div class="umb-panel-body" ng-controller="ClientCraft.uCRM.Leads.OverviewController as vm">
+    <section>
+      <input type="search" placeholder="Search for leads" aria-label="Search"/>
+      <div>
+        <button ng-repeat="button in vm.buttons track by $index" type="button" ng-click="button.action()"
+                ng-disabled="vm.button.disabled">{{ button.label }}
+        </button>
+      </div>
+    </section>
+    <umb-box>
+      <umb-box-header title="Leads">
+        <span>showing {{vm.meta.from}} to {{vm.meta.to}} of {{vm.meta.total}}</span>
+      </umb-box-header>
+      <umb-box-content>
+        <div class="umb-table" ng-if="vm.items">
+          <!-- Table Header -->
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell">
+                <label>
+                  <input
+                    class="umb-table__input"
+                    type="checkbox"
+                    ng-if="vm.allowSelectAll"
+                    ng-click="vm.selectAll($event)"
+                    ng-checked="vm.isSelectedAll()"
+                  />
+                </label>
+              </div>
+              <div class="umb-table-cell umb-table__name">
+                <div class="umb-table-head__link sortable" ng-click="vm.sort('name', true, true)" prevent-default>
+                  <localize key="general_name">Name</localize>
+                  <i class="umb-table-head__icon icon" ng-class="{'icon-navigation-up': vm.isSortDirection('name', 'asc'), 'icon-navigation-down': vm.isSortDirection('name', 'desc')}"></i>
+                </div>
+              </div>
+              <div class="umb-table-cell umb-table__{{column.alias}}" ng-repeat="column in vm.options.includeProperties" ng-if="column.alias !== 'name'">
+                <a class="umb-table-head__link" title="Sort by {{ column.header }}" href="#"
+                   ng-click="vm.sort(column.alias, column.allowSorting, column.isSystem)"
+                   ng-class="{'sortable': column.allowSorting}" prevent-default>
+                  <span ng-bind="column.header"></span>
+                  <i class="umb-table-head__icon icon" ng-class="{'icon-navigation-up': vm.isSortDirection(column.alias, 'asc'), 'icon-navigation-down': vm.isSortDirection(column.alias, 'desc')}"></i>
+                </a>
+              </div>
+              <div class="umb-table-cell umb-table__actions">
+                <localize key="general_actions">Actions</localize>
+              </div>
+            </div>
+          </div>
+          <!-- Table Body -->
+          <div class="umb-table-body">
+            <div class="umb-table-row"
+                 ng-repeat="item in vm.items"
+                 ng-class="{
+                    '-selected': item.selected,
+                    '-published': item.published,
+                    '-unpublished': !item.published,
+                    'with-unpublished-version': !item.published && item.hasPublishedVersion
+                 }"
+                 ng-click="vm.selectItem(item, $index, $event)">
+              <div class="umb-table-cell" ng-class="{'has-unpublished-version': !item.published && item.hasPublishedVersion}">
+                <i class="umb-table-body__icon umb-table-body__fileicon {{item.icon}}" ng-class="vm.getIcon(item)"></i>
+                <i class="umb-table-body__icon umb-table-body__checkicon icon-check"></i>
+              </div>
+              <div class="umb-table-cell umb-table__name">
+                <a title="{{ item.name }}" class="umb-table-body__link"
+                   ng-click="vm.clickItem(item, $event)"
+                   ng-bind="item.name"></a>
+              </div>
+              <div class="umb-table-cell umb-table__{{column.alias}}" ng-repeat="column in vm.options.includeProperties" ng-if="column.alias !== 'name'">
+                <span title="{{column.header}}: {{item[column.alias]}}">
+                  <!-- Pills for Tags -->
+                  <span ng-if="column.alias === 'tags'">
+                    <span class="umb-table-pill" ng-repeat="tag in item[column.alias]" ng-bind="tag.name || tag"></span>
+                  </span>
+                  <span ng-if="column.alias === 'status'">
+                    <span class="umb-table-pill"
+                          ng-class="{
+                            'umb-table-pill--primary': item[column.alias].color === 'primary',
+                            'umb-table-pill--success': item[column.alias].color === 'success',
+                            'umb-table-pill--warning': item[column.alias].color === 'warning',
+                            'umb-table-pill--danger': item[column.alias].color === 'danger',
+                            'umb-table-pill--secondary': item[column.alias].color === 'secondary',
+                            'umb-table-pill--default': !item[column.alias].color || item[column.alias].color === 'default'
+                          }"
+                          ng-bind="item[column.alias].label"></span>
+                  </span>
+                  <!-- Avatar for Owner -->
+                  <span ng-if="column.alias === 'owner'">
+                    <img ng-if="item[column.alias].photo.file_path" class="umb-table-avatar" ng-src="{{item[column.alias].photo.file_path}}" alt="{{ item[column.alias].name }}" />
+                  </span>
+                   <span ng-if="column.alias === 'photo'">
+                    <img ng-if="item[column.alias].file_path" class="umb-table-avatar" ng-src="{{item[column.alias].file_path}}" alt="{{ item[column.alias].name }}" />
+                  </span>
+                  <!-- Avatar Group for Deputies -->
+                  <span ng-if="column.alias === 'deputies'">
+                    <span class="umb-table-avatar-group">
+                      <span ng-repeat="deputy in item[column.alias]">
+                        <div ng-if="!deputy.photo.file_path" class="umb-table-avatar avatar-1">{{ vm.nameToAcronym(deputy.name) }}</div>
+                        <img ng-if="deputy.photo.file_path" class="umb-table-avatar" ng-src="{{ deputy.photo.file_path }}" alt="{{ deputy.name }}" />
+                      </span>
+                    </span>
+                  </span>
+                  <!-- Default Fallback for Other Properties -->
+                  <span ng-if="column.alias !== 'photo' && column.alias !== 'tags' && column.alias !== 'status' && column.alias !== 'owner' && column.alias !== 'deputies'">
+                    <div ng-if="!column.isSensitive">{{ item[column.alias] }}</div>
+                    <em ng-show="column.isSensitive" class="muted">
+                      <localize key="content_isSensitiveValue_short"></localize>
+                    </em>
+                  </span>
+                </span>
+              </div>
+              <div class="umb-table-cell umb-table-body__actions">
+                <div class="umb-table-body__actions">
+                  <button type="button" class="umb-table-body-action__button" ng-click="vm.openEditLeadDrawer(item)">
+                    <i class="icon icon-edit"></i>
+                  </button>
+                  <button type="button" class="umb-table-body-action__button" ng-click="vm.openDeletLeadDialog(item)">
+                    <i class="icon icon-trash-alt-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Table Footer -->
+        <div class="client-craft-table-footer">
+          <button
+            ng-click="vm.btPaginationOnClick(vm.links.first)"
+            ng-class="{'active': vm.links.first}"
+          >
+            First
+          </button>
+          <button
+            ng-click="vm.btPaginationOnClick(vm.links.prev)"
+            ng-class="{'active': vm.links.prev}"
+          >
+            Prev
+          </button>
+          <button
+            ng-click="vm.btPaginationOnClick(vm.links.next)"
+            ng-class="{'active' : vm.links.next}"
+          >
+            Next
+          </button>
+          <button
+            ng-click="vm.btPaginationOnClick(vm.links.last)"
+            ng-class="{'active': vm.links.last}"
+          >
+            Last
+          </button>
+        </div>
+
+        <!-- Empty State -->
+        <umb-empty-state ng-if="!vm.items" position="center">
+          <localize key="content_listViewNoItems">There are no items to show in the list.</localize>
+        </umb-empty-state>
+      </umb-box-content>
+    </umb-box>
+  </div>
+</div>

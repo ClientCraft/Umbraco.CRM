@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <StaticWebAssetBasePath>App_Plugins</StaticWebAssetBasePath>
+    <ContentTargetFolders>.</ContentTargetFolders>
+    <Product>ClientCraft.uCRM</Product>
+    <PackageId>ClientCraft.uCRM</PackageId>
+    <Title>uCRM</Title>
+    <Description>CRM Data hub for Umbraco - Not ready for production use</Description>
+    <PackageTags>umbraco;umbraco-marketplace</PackageTags>
+    <RootNamespace>ClientCraft.uCRM</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>13.0.2</Version>
+    <Authors>Arthur Nassar</Authors>
+    <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © Arthur Nassar</Copyright>
+    <PackageProjectUrl>https://github.com/ClientCraft/uCRM</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ClientCraft/uCRM</RepositoryUrl>
+    <PackageReadmeFile>README_nuget.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.7.2" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\README_nuget.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\Trees\AccountsTreeController.cs" />
+    <Compile Include="wwwroot\Trees\ContactsTreeController.cs" />
+    <Compile Include="wwwroot\Trees\DealsTreeController.cs" />
+    <Compile Include="wwwroot\Trees\LeadsTreeController.cs" />
+    <Compile Include="wwwroot\uCRM\NotificationHandlers\UserNotificationHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\overview.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\overview.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\overview.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\overview.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\create.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\create.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\create.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\edit.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\edit.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\edit.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\overview.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\view.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\view.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\accounts\view.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\create.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\create.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\create.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\edit.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\edit.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\edit.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\view.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\view.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\uCRM\backoffice\deals\view.html" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,345 @@
+<div class="view-container" ng-controller="ClientCraft.uCRM.Leads.ViewController as vm">
+  <div class="header">
+    <umb-breadcrumbs
+      ng-if="vm.ancestors && vm.ancestors.length > 0"
+      ancestors="vm.ancestors"
+      entity-type="content"
+      on-open="clickBreadcrumb(ancestor)">
+    </umb-breadcrumbs>
+    <button ng-click="vm.openEditLeadDrawer()" class="edit-button">✏️ Edit</button>
+  </div>
+
+  <div class="main-content">
+    <div class="left-panel">
+      <div class="profile-section">
+        <img src="{{vm.lead.photo.file_path}}" alt="Profile" class="profile-image">
+        <div class="profile-info">
+          <h2 class="profile-name">Prof. Garret Fay PhD</h2>
+          <p class="profile-role">Radio Operator at Breitenberg-Ledner</p>
+          <div class="social-links">
+            <a href="#" class="social-icon">f</a>
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">@</a>
+          </div>
+          <div class="last-contacted">
+            Last Contacted <span class="contact-date">August 13, 2024</span>
+          </div>
+        </div>
+        <div class="tags-section">
+          <span class="tag">waiting for reply</span>
+          <span class="tag yellow-tag">to reply</span>
+          <span class="tag">waiting for reply</span>
+          <span class="tag yellow-tag">to reply</span>
+          <span class="tag">waiting for reply</span>
+          <span class="tag yellow-tag">to reply</span>
+          <span class="tag">waiting for reply</span>
+          <span class="tag yellow-tag">to reply</span>
+        </div>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-header">
+          <h3 class="info-title">Contact Info</h3>
+        </div>
+
+        <div class="info-column">
+          <div class="info-label">Work Email</div>
+          <div class="info-value">fated.limebroken@yahoo.com</div>
+
+          <div class="info-label">Work Address</div>
+          <div class="info-value">fake address, 234 - ST</div>
+        </div>
+
+        <div class="info-column">
+          <div class="info-label">Work Phone</div>
+          <div class="info-value">+1 (832) 342-2261</div>
+        </div>
+
+        <div class="lead-metrics">
+          <div class="metric">
+            <div class="metric-label">Lead Score</div>
+            <div class="metric-value">
+              <div class="score-circle">94</div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">Lead Owner</div>
+            <div class="metric-value">
+              <div ng-if="vm.lead.owner" class="owner-avatars">
+                <div ng-if="!vm.lead.owner.photo.file_path" class="avatar avatar-1">{{
+                  vm.nameToAcronym(vm.lead.owner.name) }}
+                </div>
+                <img ng-if="vm.lead.owner.photo.file_path" class="umb-table-avatar"
+                     ng-src="{{vm.lead.owner.photo.file_path}}" alt="{{vm.lead.owner.photo.file_name}}"/>
+              </div>
+              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.lead && !vm.lead.owner">No owner assigned
+              </div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">Lead Deputies</div>
+            <div class="metric-value">
+               <div class="umb-table-avatar-group" ng-if="vm.lead.deputies.length > 0">
+                  <span ng-repeat="deputy in vm.lead.deputies">
+                    <div ng-if="!deputy.photo.file_path" class="umb-table-avatar avatar-1">{{ vm.nameToAcronym(deputy.name) }}</div>
+                    <img ng-if="deputy.photo.file_path" class="umb-table-avatar"
+                         ng-src="{{ deputy.photo.file_path }}" alt="{{ deputy.name }}"/>
+                  </span>
+               </div>
+
+              <div style="text-wrap: nowrap" class="metric-label" ng-if="vm.lead && !vm.lead.deputies.length">No
+                deputies assigned
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="vm.stages" class="progress-bar">
+        <ul class="stepper">
+          <li ng-repeat="stage in vm.stages"
+              ng-click="vm.emitClickEvent(stage)"
+              class="stepper__item"
+              ng-class="vm.getStageStatus(stage)">
+            {{ stage.label }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-section">
+        <ng-form name="tabsForm" val-form-manager>
+
+          <umb-tabs-nav
+            tabs="vm.tabs"
+            on-tab-change="vm.changeTab(tab)">
+          </umb-tabs-nav>
+
+          <umb-tab-content
+            ng-repeat="tab in vm.tabs"
+            ng-show="tab.active"
+            tab="tab">
+            <div ng-if="tab.alias === 'emails'">
+
+              <!-- Thread 1 -->
+              <details class="email-thread">
+                <summary class="thread-header">
+                  <span class="thread-title">Thread #1</span>
+                  <span class="thread-meta">2 messages • Last message: 10 Jun 2025</span>
+                </summary>
+                <div class="thread-messages">
+                  <!-- Message 1 -->
+                  <div class="email-message">
+                    <div class="email-header">
+                      <div class="thread-avatar">SU</div>
+                      <div class="thread-info">
+                        <div class="sender-info">
+                          <div class="sender-name">Sending User Name</div>
+                          <div class="recipient">To: Jerome Bell</div>
+                        </div>
+                      </div>
+                      <div class="thread-date">10 Jun 2025 at 12:00 PM</div>
+                      <div class="thread-actions">
+                        <div class="thread-action">👁️</div>
+                        <div class="thread-action">↩️</div>
+                        <div class="thread-action">⋮</div>
+                      </div>
+                    </div>
+                    <div class="thread-content">
+                      Email thread text 1
+                    </div>
+                  </div>
+                  <!-- Message 2 -->
+                  <div class="email-message">
+                    <div class="email-header">
+                      <div class="thread-avatar">JB</div>
+                      <div class="thread-info">
+                        <div class="sender-info">
+                          <div class="sender-name">Jerome Bell</div>
+                          <div class="recipient">To: Sending User Name</div>
+                        </div>
+                      </div>
+                      <div class="thread-date">10 Jun 2025 at 12:05 PM</div>
+                      <div class="thread-actions">
+                        <div class="thread-action">👁️</div>
+                        <div class="thread-action">↩️</div>
+                        <div class="thread-action">⋮</div>
+                      </div>
+                    </div>
+                    <div class="thread-content">
+                      Response to email thread text 1
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Thread 2 -->
+              <details class="email-thread">
+                <summary class="thread-header">
+                  <span class="thread-title">Thread #2</span>
+                  <span class="thread-meta">2 messages • Last message: 9 Jun 2025</span>
+                </summary>
+                <div class="thread-messages">
+                  <!-- Message 1 -->
+                  <div class="email-message">
+                    <div class="email-header">
+                      <div class="thread-avatar">SU</div>
+                      <div class="thread-info">
+                        <div class="sender-info">
+                          <div class="sender-name">Sending User Name</div>
+                          <div class="recipient">To: Jerome Bell</div>
+                        </div>
+                      </div>
+                      <div class="thread-date">9 Jun 2025 at 10:00 AM</div>
+                      <div class="thread-actions">
+                        <div class="thread-action">👁️</div>
+                        <div class="thread-action">↩️</div>
+                        <div class="thread-action">⋮</div>
+                      </div>
+                    </div>
+                    <div class="thread-content">
+                      Email thread text 2
+                    </div>
+                  </div>
+                  <!-- Message 2 -->
+                  <div class="email-message">
+                    <div class="email-header">
+                      <div class="thread-avatar">JB</div>
+                      <div class="thread-info">
+                        <div class="sender-info">
+                          <div class="sender-name">Jerome Bell</div>
+                          <div class="recipient">To: Sending User Name</div>
+                        </div>
+                      </div>
+                      <div class="thread-date">9 Jun 2025 at 10:10 AM</div>
+                      <div class="thread-actions">
+                        <div class="thread-action">👁️</div>
+                        <div class="thread-action">↩️</div>
+                        <div class="thread-action">⋮</div>
+                      </div>
+                    </div>
+                    <div class="thread-content">
+                      Response to email thread text 2
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+            </div>
+            <div ng-if="tab.alias === 'tasks'">
+
+              <!-- Task 1 -->
+              <div class="task-item">
+                <div class="task-header">
+                  <div class="task-title">Follow up with client</div>
+                  <div class="task-meta">
+                    <span>Due: 15 Oct 2023 at 12:00 PM</span> •
+                    <span>Created: 01 Oct 2023 at 09:00 AM</span>
+                  </div>
+                </div>
+                <div class="task-content">
+                  <p class="task-description">Call the client to discuss the deal.</p>
+                  <div class="task-details">
+                    <span class="task-assignee">Assigned to: User Name</span>
+                    <span class="task-type">Type: Task</span>
+                  </div>
+                </div>
+                <div class="task-actions">
+                  <div class="task-action">✔️</div>
+                  <div class="task-action">✏️</div>
+                  <div class="task-action">🗑️</div>
+                </div>
+              </div>
+
+              <!-- Task 2 -->
+              <div class="task-item">
+                <div class="task-header">
+                  <div class="task-title">Schedule product demo</div>
+                  <div class="task-meta">
+                    <span>Due: 20 Oct 2023 at 02:00 PM</span> •
+                    <span>Created: 02 Oct 2023 at 10:00 AM</span>
+                  </div>
+                </div>
+                <div class="task-content">
+                  <p class="task-description">Arrange a product demo for the client.</p>
+                  <div class="task-details">
+                    <span class="task-assignee">Assigned to: Another User</span>
+                    <span class="task-type">Type: Task</span>
+                  </div>
+                </div>
+                <div class="task-actions">
+                  <div class="task-action">✔️</div>
+                  <div class="task-action">✏️</div>
+                  <div class="task-action">🗑️</div>
+                </div>
+              </div>
+
+            </div>
+          </umb-tab-content>
+
+        </ng-form>
+
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <!-- Latest Notes Section -->
+      <div class="panel-section">
+        <div class="section-header">
+          <h3 class="section-title">Latest Notes</h3>
+          <div>
+            <a href="#" ng-click="vm.handleCreateNote($event)" class="section-action">Create Note</a>
+            <a href="#" ng-click="vm.handleSeeAllNotes($event)" class="section-action">See All</a>
+          </div>
+        </div>
+
+        <!-- Note 1 -->
+        <div ng-if="vm.lead.notes && vm.lead.notes.length > 0" ng-repeat="note in vm.lead.notes track by $index" class="note-item">
+          <div class="note-header">
+            <div>Note by {{note.user.name}}</div>
+            <span>{{note.created_at | date:'short':'UTC'}}</span>
+          </div>
+          <div class="note-content">{{note.content}}</div>
+        </div>
+        <div ng-if="vm.lead.notes && vm.lead.notes.length === 0" class="no-notes">
+          No notes available.
+        </div>
+        <div ng-if="!vm.lead.notes" class="loading-notes">
+          Loading more notes...
+        </div>
+      </div>
+
+      <!-- Last Deals Section -->
+      <div class="panel-section">
+        <div class="section-header">
+          <h3 class="section-title">Last Deals</h3>
+          <div>
+            <a href="#" class="section-action">Create Deal</a>
+            <a href="#" class="section-action">See All</a>
+          </div>
+        </div>
+
+        <!-- Deal 1 -->
+        <div class="deal-item">
+          <div class="deal-date">
+            Closing Date 10/04/2025
+            <span class="deal-phone">Deal Phone</span>
+          </div>
+          <div class="deal-title">Anniversary cake</div>
+          <div class="deal-value">$1,000.15</div>
+        </div>
+
+        <!-- Deal 2 -->
+        <div class="deal-item">
+          <div class="deal-date">
+            Closing Date 15/04/2025
+            <span class="deal-phone">Deal Phone</span>
+          </div>
+          <div class="deal-title">Corporate event catering</div>
+          <div class="deal-value">$2,500.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
