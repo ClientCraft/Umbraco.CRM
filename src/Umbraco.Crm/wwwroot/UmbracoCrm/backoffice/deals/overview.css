@@ -1,0 +1,169 @@
+#deals-overview{
+    background-color: #e4e4e4;
+
+    .umb-panel-body{
+        top: 0;
+        padding: 24px;
+
+        section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+
+            input[type="search"] {
+                width: min(45%, 450px);
+                margin: 0;
+            }
+
+            div{
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+                gap: 16px;
+
+                button{
+                    text-align: center;
+                    padding: 6px 12px;
+                    border-radius: 4px;
+                    outline: none;
+                    border: none;
+                    cursor: pointer;
+                    background-color: #fcfcfc;
+
+                    &:first-child{
+                        background-color: green;
+                        color: white;
+                    }
+                }
+
+            }
+        }
+    }
+}
+.umb-table-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 2px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.umb-table-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 12px;
+  font-size: 12px;
+  background-color: #f0f0f0; /* Default fallback */
+  color: #333; /* Default text color */
+}
+
+/* Symbolic looks based on UUI palette */
+.umb-table-pill--default {
+  background-color: #1b264f; /* --uui-color-default (space-cadet) */
+  color: #fff; /* --uui-color-default-contrast */
+}
+
+.umb-table-pill--positive,
+.umb-table-pill--success { /* Alias success to positive */
+  background-color: #0b8152; /* --uui-color-positive (forest-green) */
+  color: #fff; /* --uui-color-positive-contrast */
+}
+
+.umb-table-pill--warning {
+  background-color: #fbd142; /* --uui-color-warning (bright yellow) */
+  color: #000; /* --uui-color-warning-contrast */
+}
+
+.umb-table-pill--danger {
+  background-color: #d42054; /* --uui-color-danger (maroon-flush) */
+  color: #fff; /* --uui-color-danger-contrast */
+}
+
+/* Optional: Add a primary variant for completeness */
+.umb-table-pill--primary {
+  background-color: #3544b1; /* --uui-color-selected (violet-blue) */
+  color: #fff; /* --uui-color-selected-contrast */
+}
+
+/* Avatar styles (unchanged) */
+.umb-table-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.umb-table-avatar-group img {
+  display: inline-block;
+  margin-left: -8px; /* Overlap effect */
+}
+
+.umb-table-avatar-group img:first-child {
+  margin-left: 0;
+}
+
+.umb-table__deputies {
+  flex: 1 1 10%;
+  max-width: 300px;
+}
+
+.umb-table-body__actions{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+}
+.umb-table-body-action__button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  .icon-edit{
+    color:#0b8152;
+  }
+
+  .icon-trash-alt-2{
+    color:#d42054;
+  }
+}
+
+.client-craft-table-footer{
+  display:flex;
+  width: 100%;
+  padding: 16px 0px 0px;
+  justify-content: end;
+  gap: 4px;
+
+  button{
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #7a7a7a;
+    border-radius: 4px;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+
+    &.active{
+      background-color: #333;
+    }
+  }
+}

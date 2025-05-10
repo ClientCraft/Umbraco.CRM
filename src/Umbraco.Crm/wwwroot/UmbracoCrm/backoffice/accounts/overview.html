@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/App_Plugins/UmbracoCrm/backoffice/accounts/overview.css">
+
+<div class="umb-panel" id="accounts-overview">
+  <div class="umb-panel-body" ng-controller="Umbraco.Crm.Accounts.OverviewController as vm">
+    <section>
+      <input type="search" placeholder="Search for accounts" aria-label="Search"/>
+      <div>
+        <button 
+          ng-repeat="button in vm.buttons track by $index" 
+          type="button" 
+          ng-click="button.action()"
+          ng-disabled="vm.button.disabled"
+        >
+          {{ button.label }}
+        </button>
+      </div>
+    </section>
+    <umb-box>
+      <umb-box-header title="Accounts">
+        <span ng-if="vm.items.length > 0">showing {{vm.meta.from}} to {{vm.meta.to}} of {{vm.meta.total}}</span>
+      </umb-box-header>
+      <umb-box-content>
+        <div ng-if="vm.isLoading" style="position: relative;">
+          <umb-load-indicator></umb-load-indicator>
+        </div>
+        <clc-table
+          ng-if="!vm.isLoading"
+          items="vm.items"
+          columns="vm.options.includeProperties"
+          links="vm.links"
+          is-sort-direction="vm.isSortDirection(columnAlias, direction)"
+          on-sort="vm.sort(column, $event)"
+          on-click-item="vm.clickItem(item)"
+          on-select-item="vm.selectItem(item, index, $event)"
+          on-pagination="vm.onPaginationHandler(link)"
+          on-edit-item="vm.openEditAccountDrawer(item)"
+          on-view-item="vm.openViewAccount(item)"
+          on-delete-item="vm.openDeletAccountDialog(item)">
+        </clc-table>
+      </umb-box-content>
+    </umb-box>
+  </div>
+</div>
