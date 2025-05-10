@@ -1,6 +1,7 @@
 angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", function ($scope, userService, usersResource, $http, notificationsService) {
   var vm = this;
-  fetchUserList();
+  
+  //fetchUserList();
   // Initialize the model
   vm.model = {
     content: "",
@@ -23,7 +24,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   //   });
   // });
 
-  vm.model.contact_id = $scope.model.data.id;
+  //vm.model.contact_id = $scope.model.data.id;
   vm.dealPriorities = [
     { id: 'low', name: 'Low' },
     { id: 'medium', name: 'Medium' },
@@ -31,9 +32,10 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   ];
 
   function fetchUserList() {
-    $http.get('http://foo.localhost:8000/user?include=photo').then(function (response) {
+    $http.get('https://foo.client-craft.com/user?include=photo').then(function (response) {
       vm.userNames = response.data.data;
-      updateFilteredLists();
+      console.log(vm.userNames);
+      //updateFilteredLists();
     });
   }
 
@@ -55,7 +57,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   const getUserNames = function () {
     $http({
       method: 'GET',
-      url: 'http://foo.localhost:8000/user/names',
+      url: 'https://foo.client-craft.com/user/names',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
@@ -64,12 +66,13 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
       vm.users = response.data;
     });
   };
+  
   getUserNames();
 
   const getDealStatuses = function() {
     $http({
       method: 'GET',
-      url: 'http://foo.localhost:8000/deal/status',
+      url: 'https://foo.client-craft.com/deal/status',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
@@ -83,7 +86,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
   const getDealTypes = function() {
     $http({
       method: 'GET',
-      url: 'http://foo.localhost:8000/deal/types',
+      url: 'https://foo.client-craft.com/deal/types',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
@@ -118,7 +121,7 @@ angular.module("umbraco").controller("Umbraco.Crm.Deals.CreateController", funct
     // Make API call
     $http({
       method: 'POST',
-      url: 'http://foo.localhost:8000/contact/' + vm.model.contact_id + '/note',
+      url: 'https://foo.client-craft.com/contact/' + vm.model.contact_id + '/note',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
